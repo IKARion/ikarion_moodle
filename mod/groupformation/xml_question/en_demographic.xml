@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="demographic questions">
+    <QUESTIONS VERSION="2017082901">
+        <QUESTION ID="1" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[What is your sex?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[female]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[male]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[no answer]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="2" TYPE="number">
+            <QUESTIONTEXT>
+                <![CDATA[Age]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <MIN>
+                    <![CDATA[0]]>
+                </MIN>
+                <MAX>
+                    <![CDATA[100]]>
+                </MAX>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="3" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[How good are your German skills?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Native speaker]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Very good]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Good]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Average]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bad]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>

@@ -1,0 +1,1269 @@
+/**
+ * Grundlagen in less ildcustom
+ */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('[[font:theme|glyphicons-halflings-regular.eot]]');
+  src: url('[[font:theme|glyphicons-halflings-regular.eot]]?#iefix') format('embedded-opentype'),
+       url('[[font:theme|glyphicons-halflings-regular.woff]]') format('woff'),
+       url('[[font:theme|glyphicons-halflings-regular.ttf]]') format('truetype'),
+       url('[[font:theme|glyphicons-halflings-regular.svg]]') format('svg');
+}
+
+// Buttons
+button, input.form-submit, input[type="button"], input[type="submit"], input[type="reset"] {border-radius:0px;}
+.breadcrumb {border-radius:0px;}
+
+// ------------------------------------------------------------------------------
+// Seitenanpassung
+#side-container {
+	border:@sideborder;
+	margin:@sidemargin;
+	padding:@sidepadding;
+	background-color:@sidebgcolor;
+	width:@sidewidth;
+	max-width:@sidemaxwidth;
+	height:@sideheight;
+}
+#page-wrapper {
+	min-height:550px;
+}
+// ------------------------------------------------------------------------------
+// Navigationsbanner
+.navbar {border-radius:0px; margin-bottom:0px; background-color:@navbarbgcolor; border-left:none; border-right:none;}
+.navbar-brand {
+	background-image:url(@logo); 
+	background-size:@logosize; 
+	background-position:@logopos; 
+	width:@brandbreite; 
+	height:@brandhoehe; 
+	background-repeat:no-repeat;
+	}
+
+.navbar .usermenu .Login, .navbar .usermenu .login {padding:15px 10px 15px 10px; display:block;} // Korrektur!
+
+.navbar-nav {margin:0px;}
+.navbar .dropdown.open {z-index:100000;}
+.navbar #moodle-navbar .nav li {float:left;}
+
+.navbar #moodle-navbar .glyphicon {top:2px; font-size:13px;}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:active {background-color:@navbarbghover;}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav>.open>a:focus {
+	background-color:@navbarbghover;
+}
+.jsenabled .usermenu .moodle-actionmenu a.toggle-display.textmenu:hover {background-color:@navbarbghover;}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {background-color:@brand-bg;}
+.navbar-default .navbar-nav > li > a, .navbar-header a, 
+.navbar a .userbutton, .navbar a .caret {color:@navtext-color;}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {color:@navtext-color;}
+
+.navbar.navbar-default {
+	border:0px;
+	border-top:@navbordertopwidth solid @navbarbordercolor; 
+	border-bottom:@navborderbottomwidth solid @navbarbordercolor; 
+} 
+
+
+.navbar-right {margin-right:0px;}
+#moodle-navbar {
+	& .dropdown {
+		& .dropdown-menu li {
+			width:100%;
+		}
+	}
+	@media (max-width: @screen-sm-min) {
+		float:right;
+		//display:none;
+		//visibility:hidden;
+		.navbar-nav .open .dropdown-menu {
+			background-color:#fff;
+			float:left;
+			position:absolute;
+			border:1px solid rgba(0,0,0,0.15);
+			-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+			-moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+			clear:none;
+		}
+	}
+	@media (max-width: @screen-xs-min) {
+		float:none;
+	}
+}
+.navbar-header .usermenu .login {
+	@media (max-width: @screen-xs-max) {
+		font-size:0px;
+		margin-right:10px;
+		& a {
+			font-size:14px;
+		}
+	}
+}
+.navbar-nav ul.dropdown-menu,  .usermenu .dropdown-menu {
+	border-radius:0px;
+	color:@text-color;
+}
+.navbar-nav ul.dropdown-menu li a{
+	padding:10px 15px;
+}
+.navbar-default .navbbar-nav li.dropdown a.dropdown-toggle, .navbar-nav > li > a {
+	padding:15px;
+}  
+.pagelayout-frontpage #moodle-navbar .dropdown {display:inline; visibility:visible;}
+
+// +++ ---  Anpassung Pixelfehler --- +++
+@media (max-width: @screen-xs-max) {
+	.dropdown .username {display:none;}
+	.usermenu {margin-left:5px;}
+	.usermenu .dropdown-toggle{padding-left:5px; padding-right:5px;}
+	.pull-right.ild-read-messages {float:left!important;}
+}
+@media (max-width: @screen-sm-max) {
+	.usermenu {margin-left:5px;}
+}
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: @brand-bg;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open>a:focus {
+	background-color: @brand-bg;
+}
+
+// ------------------------------------------------------------------------------
+// Dockpanel
+#dockeditempanel .dockeditempanel_hd .commands a.moveto {display:none;}
+#dock .controls {display:none;}
+.block_action .moveto {display:none;}
+	
+.has_dock_top_horizontal #dock {width:100%;height:30px;background-image:none; border:0; position:absolute; top:@doctop;} // top:175px bei navbar 52px
+@media (max-width: @screen-xs-min) {
+	.has_dock_top_horizontal #dock {top:(@doctop + 52px);}
+}
+.has_dock_top_horizontal #dock .buttons_container {background-color:rgba(240,240,240,0.6);}
+.has_dock_top_horizontal #dock .dockeditem_container {
+	height:@dochoehe;
+	margin: 0px auto;
+	padding-left:15px;
+	padding-right:15px;
+	@media (min-width: @screen-lg-min) { width:1170px; }
+	@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { width:970px;}
+	@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { width:750px;}
+	@media (max-width: @screen-xs-max) {width:auto;}
+}
+/** This is the CSS to display the block on the top of the screen */
+body.has_dock #page, body.has_dock .moodleheader  {padding-left:15px;}
+#dockeditempanel .dockeditempanel_hd {display:none;}
+
+#dockeditempanel {padding-left:0px; max-width:300px;}
+
+
+.has_dock_top_horizontal #dock .dockeditem {display:inline-block;}
+.has_dock_top_horizontal #dock .dockeditem .dockedtitle {background-image:none; border-style:solid;border-width: 0; width:auto;
+border-radius:0px; margin:0px 2px 0px 0px;}
+.has_dock_top_horizontal #dock .dockeditem .dockedtitle h2 {margin:0 12px;line-height:20px; font-size:14px; display:block; 
+font-weight:normal; padding:15px; margin:0px;}
+.has_dock_top_horizontal #dock .dockeditem.firstdockitem {margin-left:0px;}
+.has_dock_top_horizontal #dock .dockeditem.firstdockitem .dockedtitle {border:0px;}
+.has_dock_top_horizontal #dock .controls {bottom:auto;right:10px;top:0;width:auto;line-height:30px;}
+.has_dock_top_horizontal #dock #dockeditempanel {position:absolute;}
+
+#dock .dockedtitle:active:hover, #dock .dockedtitle.active:hover, 
+.open > #dock.dropdown-toggle .dockedtitle:hover, #dock .dockedtitle:active:focus, 
+#dock .dockedtitle.active:focus, .open > #dock.dropdown-toggle .dockedtitle:focus, 
+#dock .dockedtitle.focus:active, #dock .dockedtitle.active.focus, 
+.open > #dock.dropdown-toggle .dockedtitle.focus {
+	border:none;
+}
+#dock .dockedtitle:active, #dock .dockedtitle.active {
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	-moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	border:none;
+}
+
+.has_dock_top_horizontal #dock .dockeditem .dockedtitle {
+	background-color:#ffffff;
+	&.activeitem {
+		margin-left:-2px;
+		background-color:@brand-bg;
+		border-left:2px solid @block-border;
+	}
+}
+#dockeditempanel .dockeditempanel_content{
+	border-top:0px;
+	border-radius:0px; 
+	padding:15px; 
+	background-color:@brand-bg;//rgba(240,240,240,0.95)
+	border-left:2px solid @block-border;
+}
+#settingsnav {
+	& hr {
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+}
+
+// ------------------------------------------------------------------------------
+// Pageheader
+.page-context-header {
+	& h1 {
+		font-size:25px;
+	}
+	
+}
+.breadcrumb-button .singlebutton {
+    float: left;
+    margin-left: 4px;
+}
+
+.singlebutton input[type="submit"] {
+	&:hover {
+		background-color:@brand-bg;
+	}
+}
+#block-region-side-top, #block-region-side-footer {float:none;}
+
+// VFH-Anpassung
+.breadcrumb {
+	padding-left:0px;
+	background-color:transparent; //@brand-bg;
+	color:@dimmed-link-color;
+	& a {
+		color:@link-color;
+	}
+}
+// VFH-Anpassung - Ende
+
+// ------------------------------------------------------------------------------
+//Pagefooter
+#page-footer {
+	background-color:@page-footer-bg;
+	border-top:1px solid #e7e7e7;
+}
+
+// ------------------------------------------------------------------------------
+.alert {border-radius:0px;}
+
+
+// ------------------------------------------------------------------------------
+// Page Bereiche
+
+.block {-webkit-box-shadow: none;-moz-box-shadow: none; box-shadow: none;}
+.panel, .userprofile .profile_tree section, .block, .forumpost {
+	border-radius:0px;
+}
+.block .header {
+	border-radius:0px;
+	background-color:none;
+}
+
+#region-main {
+	padding:0px 5px 0px 15px;
+	@media (max-width: @screen-sm-max) {
+		padding:0px 15px 0px 15px;
+	}
+	@media (max-width: @screen-xs-max) {
+		padding:0px;
+	}
+}
+
+#region-main-inner {
+	background-color:@brand-bg; //#f5f5f5
+	padding:25px 25px 5px 25px;
+}
+// Anpassung Kursformat Onetopic
+.format-onetopic #region-main {
+	background-color:transparent;
+	padding:0px 15px;
+}
+.format-onetopic #region-main-inner div[role="main"] {
+	background-color:#fff;
+	margin-bottom: 20px;
+	padding:0 15px 10px 15px;
+}
+
+#page #region-main .course-content ul.topics {
+	li.section { // Kurs Topics
+		background-color:#fff; 
+		padding:15px; 
+		margin-bottom:25px; border:none;
+		&.current {
+			border-left: 2px solid @block-border;
+		}
+		& .left { //  -> .course-content ul.topics li.section .left
+			padding-top: 0px;
+		}
+	}
+} 
+
+
+.panel-default > .panel-heading, .box.message table td.heading, .box.message .messagearea .messagerecent .singlemessage .otheruser, .block .header {
+	background-color:transparent;
+	color:@text-color;
+}
+
+#page .panel, .userprofile .profile_tree section, #page .block, .forumpost {border:none;  background-color:#fff;} // (border-top:2px solid @block-border;) Bereiche im Content
+#block-region-side-post .block {background-color:@brand-bg; border:none; border-top:2px solid @block-border;} // Bloecke Seitenbereich
+
+.userprofile .profile_tree section {
+	padding:0px 15px;
+	margin-bottom:20px;
+}
+.userprofile .profile_tree {
+	@media (max-width: @screen-xs-min){
+		-webkit-column-count: 1; /* Chrome, Safari, Opera */
+		-moz-column-count: 1; /* Firefox */
+		column-count: 1;
+	}
+}
+// ------------------------------------------------------------------------------
+// Blockbereich Post
+.breadcrumb-button {@media (max-width: @screen-sm-max){margin-right:55px; margin-bottom:9px;}}
+.empty-region-side-post .breadcrumb-button {@media (max-width: @screen-sm-max){margin-right:0px;}}
+.block .header .block_action {display:none; visibility:hidden;}
+.block.hidden .content {display:block;}
+
+/*
+#block-region-side-post .block_quickmail.block .header {background-image:url(@icon-show-region); background-size:24px 20px; background-repeat:no-repeat; background-position:4px 7px;}
+#block-region-side-post .block_quickmail.block .header h2 {padding-left: 20px;}
+*/
+
+#post-block-toggle {
+	background-image:url(@icon-show-region);
+	background-size:26px 22px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	cursor:pointer;
+	width:44px; 
+	height:34px; 
+	margin-top:-51px;
+	position:relative;
+	border:1px solid #ccc;
+	background-color:transparent;
+	&:hover, &:focus {
+		background-color:#e6e6e6;
+		border-color:#adadad;
+	}
+	display:none;
+	visibility:hidden;
+	@media (max-width: @screen-sm-max){
+		display:block;
+		visibility:visible;
+	}
+}
+.empty-region-side-post #post-block-toggle{
+	visibility:hidden; display:none;
+}
+#post-block-toggle.button-hide-region {
+	background-image:url(@icon-hide-region);
+	background-size:24px 20px;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#block-region-side-post {
+	@media (min-width: @screen-sm){
+		visibility:visible;
+		display:inline;
+	}
+	@media (max-width: @screen-sm-max){
+		visibility:hidden;
+		display:none;
+		float:none;
+		&.magicEffect {
+			visibility:visible;
+			display:inline;
+		}
+	}
+}
+.magicEffect {
+	@media (max-width: @screen-sm-max){
+		width:95%; max-width:300px; z-index:500; position:absolute; top:0px;  
+		background-color:rgba(180,188,190,0.7); padding-top:15px; right:0px;
+	}
+}
+#block-region-side-post.magicEffect .block {
+	@media (max-width: @screen-sm-max){
+		background-color:#fff;	
+	}
+}
+#block-region-side-post.magicEffect {
+	@media (min-width: @screen-md-min){
+		top:0px !important;
+	}
+}
+
+// ------------------------------------------------------------------------------
+// Bearbeitungsseiten
+#region-main-inner div[role="main"] {
+	overflow-x:auto;
+}
+.pagelayout-admin {
+	& #region-main-inner div[role="main"] {
+		background-color:#ffffff;
+		padding:0px 20px 20px 20px;
+		margin-bottom:20px;
+	}
+	& .mform fieldset.collapsible legend a.fheader {
+		margin-left:0px;
+	}
+}
+.pagelayout-base, .pagelayout-frontpage {
+	& #region-main-inner div[role="main"] {
+		background-color:#ffffff;
+		padding:0px 20px 20px 20px;
+		margin-bottom:20px;
+	}
+	& .mform fieldset.collapsible legend a.fheader {
+		margin-left:0px;
+	}
+}
+.pagelayout-incourse {
+	& #region-main-inner div[role="main"] {
+		background-color:#ffffff;
+		padding:0px 20px 20px 20px;
+		margin-bottom:20px;
+	}
+	& .mform fieldset.collapsible legend a.fheader {
+		margin-left:0px;
+	}
+}
+.path-mod-quiz.pagelayout-incourse {
+	& #region-main-inner div[role="main"] {
+		padding:20px;
+	}
+}
+
+
+.pagelayout-coursecategory, .pagelayout-standard, .pagelayout-report, .path-message  {
+	& #region-main-inner div[role="main"] {
+		overflow-x:auto;
+		background-color:#ffffff;
+		padding:20px 20px 20px 20px;
+		margin-bottom:20px;
+		& #coursesearch{
+			margin-bottom:15px;
+		}
+	}
+	& .mform fieldset.collapsible legend a.fheader {
+		margin-left:0px;
+	}
+}
+
+
+.has_dock.empty-region-side-pre #region-main, .has_dock.empty-region-side-post #region-main {
+	padding:0px 5px 0px 15px;
+	@media (max-width: @screen-sm-max) {
+		padding:0px 15px 0px 15px;
+	}
+	@media (max-width: @screen-xs-max) {
+		padding:0px;
+	}
+}
+// Seite Neuer Zugang (nicht eingeloggt)
+#page-login-signup.notloggedin {
+	& .header-banner {
+		display:block; visibility:visible;
+	}
+	& #region-main-inner div[role="main"]{
+		background-color:#ffffff;
+		padding:0px 20px 20px 20px;
+		margin-bottom:20px;
+	}
+	& .mform fieldset.collapsible legend a.fheader {
+		margin-left:0px;
+	}
+}
+// ------------------------------------------------------------------------------
+// Dashboard-Seite
+.page-header-image img {
+	width:70px; 
+	height:70px;
+	margin-top:15px;
+	margin-bottom:10px;
+}
+
+// ------------------------------------------------------------------------------
+// Farben 
+a {
+	color: @link-color;
+	&:hover {
+		color:@link-hover-color;
+	}
+}
+#copyright {color:rgba(255, 255, 255, 0.6);}
+
+// ------------------------------------------------------------------------------
+// Schrift
+h1, .h1, h2, .h2, h3, .h3 {
+	margin-top:10px;
+	margin-bottom:10px;
+	font-size:20px;
+}
+h1, .h1 {
+	font-size:22px;
+	line-height:1.231;
+}
+h2, .h2 {
+	font-size:20px;
+	line-height:1.231;
+}
+h3, .h3 {
+	font-size:18px;
+	line-height:1.231;
+}
+h4, .h4 {
+	font-size:16px;
+	line-height:1.231;
+}
+.course-content ul.topics li.section .content, .course-content ul.weeks li.section .content {
+	margin-left:10px;
+	margin-right:10px;
+	& ul {
+		margin-top:20px;
+	}
+}
+.editing .course-content ul.topics li.section .content ul, .editing .course-content ul.weeks li.section .content ul {margin-top:0px;}
+ 
+ // ------------------------------------------------------------------------------
+// Block Webkonf - Seite
+.course-content.webkonf {
+	background-color:#fff;
+	margin-bottom:20px;
+	padding:0px 20px 20px 20px;
+	.generaltable h3 { // Anpassung für alten Webkonfblock!
+		font-size:14px;
+		line-height:1.1;
+		margin:0px;
+		padding:0px;
+		font-weight:bold;
+	}
+}
+
+// ------------------------------------------------------------------------------
+// Block Kalender Post
+.block.block_calendar_month .content {
+	padding:10px;
+	h3 {
+		font-size:16px;
+		margin-top:10px;
+	}
+}
+.calendar_event_global{
+	background-color:#a6d1ab;	
+}
+.calendar_event_course{
+	background-color:#dba3c2;	
+}
+.calendar_event_group {
+	background-color:#ebdea6;	
+}
+.calendar_event_user {
+	background-color:#a6b3d1;	
+}
+// ------------------------------------------------------------------------------
+// Kurslisten
+
+// Seite Kurse
+#page #region-main .course_category_tree .category .info {
+	background-color:transparent;
+	border-width:0px;
+	border-radius: 0px 0px 0px 0px;
+	-moz-border-radius: 0px 0px 0px 0px;
+	-webkit-border-radius: 0px 0px 0px 0px;
+	border: 0px solid #000000;
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	-moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	h4.categoryname {
+		font-size:16px;
+	}
+}
+#page .panel {	
+	background-color:@brand-bg;
+	border:0px; border-left:2px solid @block-border;
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	-moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	& .panel-heading {
+		border-radius: 0px 0px 0px 0px;
+		-moz-border-radius: 0px 0px 0px 0px;
+		-webkit-border-radius: 0px 0px 0px 0px;
+		border: 0px solid #000000;
+		border:0px solid transparent;
+	}
+}
+.pagelayout-frontpage {
+	.generalbox {
+		background-color:#fff;
+		padding:10px 0px 20px 0px; // vorher: padding:20px; 
+	}
+	#page .panel{
+		background-color:#fff;
+		.panel-heading {
+			padding-bottom:0px;
+			.coursename a {
+				font-size:18px;
+			}
+		}
+	}
+}
+.pagelayout-frontpage #page #frontpage-course-list .panel {
+	background-color:@brand-bg;
+}
+.block_vfh_course_overview {
+	.content h2 {
+		fontsize:18px;
+	}
+	& .courses_of_semester {
+		margin-left:10px;
+		& a {
+			background-image:url([[pix:core|i/course]]);
+			background-position: left 0.2em;
+			background-repeat: no-repeat;
+			padding: 3px 0px 5px 21px;	
+			font-size:13px;
+		}
+	}
+}
+.block_course_overview .coursebox {
+	padding:5px;
+	.course_title h2{
+		background-image:url([[pix:core|i/course]]);
+		background-position: left 0.2em;
+		background-repeat: no-repeat;
+		padding: 3px 0px 5px 21px;	
+		font-size:13px;
+	}
+	.activity_info {
+		margin-left:20px;
+		font-size: 12px;
+	} 
+
+}
+.block_course_overview .content {
+	margin:0px 10px;	
+}
+.coursebox .info .coursename {
+	margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 5px;
+	& a {
+		background-image:url([[pix:core|i/course]]);
+		background-position: left 0.2em;
+		background-repeat: no-repeat;
+		padding: 3px 0px 5px 21px;	
+		font-size:13px;
+		
+	}
+}
+course_category_tree .category.with_children{
+	margin-top:10px;
+}
+
+// Seite User Einstellungen
+#page-user-preferences {
+	#region-main-inner div[role="main"] {
+		padding:15px 40px;
+		& h2 {
+			margin-left:-15px;
+		}
+	}
+}
+// ------------------------------------------------------------------------------
+// Weitere Anpassungen
+// ------------------------------------------------------------------------------
+// Auszeichnungsblock
+.block_badges {
+	& .badges li {
+		width: 30%;
+		padding-bottom:10px;
+		& .badge-image {
+			width:65px;
+			height:65px;
+		}		
+	}
+}
+// Webkonferenz-Block
+.webkonfblock_content {
+  & img {
+	height: auto;
+    margin-bottom: 8px;
+    margin-right: 5%;
+    max-width: 99px;
+    width: 45%;
+  }
+  .webkonfblock_grouplisting {
+	 margin-bottom:10px;
+	 margin-top:-10px;
+	 & h3 {
+		font-size:16px;
+		line-height:18px;
+		margin-top:20px;
+	 }
+	 & a {
+		background-image:url([[pix:core|i/group]]);
+		background-position: left 0.2em;
+		background-repeat: no-repeat;
+		padding: 3px 0px 5px 24px;	
+		font-size:13px;
+		line-height: 22px;
+		margin-left: 25px;
+	}
+  }
+}
+// Reiternavigation
+ul.nav-tabs.nav-justified {
+	margin-left:0px;
+	margin-bottom:25px;
+}
+// ------------------------------------------------------------------------------
+// Neue Blockbereiche
+// ------------------------------------------------------------------------------
+// Fullsize-top
+.fullsize .block {
+	border-width:0px;
+	padding:0px;
+	.header {
+		visibility:hidden;
+		display:none;	
+	}
+	.content {
+		padding:0px;
+	}
+}
+.editing .fullsize .block {
+	.header {
+		visibility:visible;
+		display:inline;	
+	}
+}
+// ------------------------------------------------------------------------------
+// Side-top
+#block-region-side-top {
+	padding-left:0px;
+	padding-right:0px;
+	margin-top:0px; //vorher 30px
+	margin-left:-15px;
+	margin-right:-15px;
+	width:auto;
+	.header, .content {
+		padding-left:15px;
+		padding-right:15px;
+	}
+	& .block_html .content {
+		padding-left:0px;
+		padding-right:0px;
+		& .no-overflow {
+			padding-left:15px;
+			padding-right:15px;
+			& .atto_bsgrid {
+				padding-left:0px;
+				padding-right:0px;
+			}
+		}
+	}
+}
+// ------------------------------------------------------------------------------
+// Content-top
+#block-region-content-top{
+	padding-left:0px;
+	padding-right:0px;
+	.header, .content {
+		padding-left:15px;
+		padding-right:15px;
+	}
+	& .block_html .content {
+		padding-left:0px;
+		padding-right:0px;
+		& .no-overflow {
+			padding-left:15px;
+			padding-right:15px;
+			& .atto_bsgrid {
+				padding-left:0px;
+				padding-right:0px;
+			}
+		}
+	}
+}
+// ------------------------------------------------------------------------------
+// Side-bottom
+#block-region-side-bottom {
+	padding-left:0px;
+	padding-right:0px;
+	margin-top:30px;
+	margin-left:-15px;
+	margin-right:-15px;
+	width:auto;
+	max-width:1170px;
+	.header, .content {
+		padding-left:15px;
+		padding-right:15px;
+	}
+	& .block_html .content {
+		padding-left:0px;
+		padding-right:0px;
+		& .no-overflow {
+			padding-left:15px;
+			padding-right:15px;
+			& .atto_bsgrid {
+				padding-left:0px;
+				padding-right:0px;
+			}
+		}
+	}
+}
+// ------------------------------------------------------------------------------
+// Side-footer
+#block-region-side-footer {
+	padding-left:0px;
+	padding-right:0px;
+	.block {
+		border:0px;
+	}
+	.header, .content {
+		padding-left:0px;
+		padding-right:0px;
+	}
+}
+
+// ------------------------------------------------------------------------------
+// Login-Block
+.fullsize .block_login, #block-region-side-top .block_login, #block-region-side-bottom .block_login, #block-region-content-top .block_login {
+	background-image:url(@loginbg); 
+	background-size:@loginareabgsize; 
+	background-color:@loginareabg;
+	background-position:@loginareabgpos; 
+	background-repeat:@loginareabgrepeat;
+	border:none;
+	margin-top:-1px;
+	padding-top:70px;
+	height:450px;
+	width:100%;
+	color:@login-color;
+	& .header {
+		width:260px;
+		margin:10px auto;
+		padding:5px 20px;
+		& .title h2{
+			font-size:120%;
+			color:@login-color;
+		}
+	}
+	& .content {
+		background-color:@login-bg-color;
+		width:260px;
+		margin:5px auto 10px auto;
+		padding:20px;
+	}
+}
+#block-region-side-top .block_login, #block-region-side-bottom .block_login, #block-region-content-top .block_login{
+		height:415px;
+		padding-top:60px;
+		margin-top:0px;
+	}
+#block-region-side-post .block_login {
+	label {
+		min-width:80%;
+	}
+}
+#page-login-index #page-wrapper .loginbox.onecolumn {
+	border-radius: 0px 0px 0px 0px;
+	-moz-border-radius: 0px 0px 0px 0px;
+	-webkit-border-radius: 0px 0px 0px 0px;
+	border: 0px solid #000000;
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	-moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+	background-color:@login-bg-color;
+	padding:20px;
+	max-width:420px;
+	left:0px; //links ausrichten
+	color:@login-color;
+	& .loginpanel {
+		background-color:transparent;
+		max-width:330px;
+		& .forgetpass {
+			margin-top:50px;
+			& a {
+				font-weight:bold;
+			}
+		}
+	}
+}
+#page-login-index {
+	& #page-content {
+		margin:60px 0px;
+	}
+	& .page-context-header .page-header-headings {
+		display:none;
+		visibility:hidden;
+	}
+}
+#page-site-index, #page-login-index {
+	.notloggedin {
+		& .header-banner {
+			display:none; visibility:hidden;
+		}
+		& #dock {
+			display:none; visibility:hidden;
+		}
+	}
+}
+form select, form input[type="text"], form input[type="password"], form.atto_form input[type="url"], select.singleselect {
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+}
+.mform .fitem .felement select, .mform .fitem .felement input[type="text"], .mform .fitem .felement input[type="password"]{
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+}
+.loginbox .loginform .form-input input[type="text"], .loginbox .loginform .form-input input[type="password"],
+#page-mod-forum-discuss .discussioncontrols .discussioncontrol .singleselect select.singleselect, 
+#page-mod-forum-discuss .discussioncontrols .discussioncontrol.movediscussion select.urlselect {
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+}
+// ------------------------------------------------------------------------------
+// Startseite Login Gast
+#page-site-index, #page-login-index {
+	.header-banner {
+		display:none;
+	}
+	.usermenu .login{
+		line-height:1.5;
+	}
+}
+
+#page-site-index.has_dock{
+	.header-banner {
+		display:block;
+	}
+}
+#page-login-index .usermenu .login, #page-login-forgot_password .usermenu .login{
+	line-height:1.5;
+}
+#page-site-index.notloggedin .usermenu .login, #page-login-index.notloggedin .usermenu .login,
+#page-login-forgot_password.notloggedin .usermenu .login {
+	line-height:unset;
+	display:inline;
+}
+
+
+// ------------------------------------------------------------------------------
+// Loginseite
+#page-login-index #page-wrapper {
+	background-image:url(@loginbg); 
+	background-position:top center; 
+	background-repeat:no-repeat;
+	background-color:@loginareabg;
+	border:none;
+	background-size:100% auto; 
+	margin-bottom:-15px;
+	min-height:750px;
+	& #region-main-inner {
+		background-color:transparent;
+		padding:0px;
+	}
+	
+	& .loginbox.twocolumns .loginpanel, & .loginpanel {
+		border-radius: 0px 0px 0px 0px;
+		-moz-border-radius: 0px 0px 0px 0px;
+		-webkit-border-radius: 0px 0px 0px 0px;
+		border:0px;
+		background-color:@login-bg-color;
+	}
+	& .signuppanel {
+		padding:20px;
+		background-color:@login-bg-color;
+	}	
+}
+#page-login-index #page-content #region-main-inner {
+	background: transparent;
+	background-color:transparent;
+}
+
+#page-login-index.notloggedin {
+	@media (min-height:750px) {
+		#page-footer {padding-top:25px;}
+	}
+}
+
+// ------------------------------------------------------------------------------
+// Bewertungsseiten zu Aufgaben
+.path-mod-assign #page {
+	width:98%;
+
+	#region-main.col-md-9 {
+		width:100%;
+		margin-bottom:20px;
+
+		& .gradingsummary {
+			width:45%;
+			margin-right:5%;
+			float:left;
+
+			@media (max-width:@screen-xs-max){
+				width:100%;
+				margin-right:0px;
+			}
+		}
+		& .submissionstatustable {
+			width:45%;
+			float:left;
+
+			@media (max-width:@screen-xs-max){
+				width:100%;
+			}
+		}
+		& .gradingtable {
+			margin-bottom:20px;
+		} 
+	}
+}
+
+
+
+// ------------------------------------------------------------------------------
+//Grafikbanner
+.header-banner{
+	height:@headerhoehe; background-color: @headerbgcolor; 
+	background-image:url(@bannerbg); 
+	background-position:top left; background-repeat:no-repeat; 
+	background-size:cover; //100% auto;
+	/* @media (max-width:1717px) {background-size:cover;} // auto 100% */
+	& h1 {
+		font-size: 26px;
+		color:#fff;
+	}
+}
+.header-banner-inside {
+	height:100%; width:100%; background-color: transparent; background-image:url(@bannerfront); background-repeat:no-repeat;
+	@media (max-width:@screen-xs-max) {background-position-x:-250px;}
+}
+.header-banner-main {background-image:url(@headercontent); background-size:@headercontentsize; background-repeat:@headercontentrepeat; 
+	background-position:@headercontentposition; height:@headerhoehe;}
+#site-bottom-footer{
+  line-height:36px;
+  background-color:@socialfooterbg;
+  padding:5px auto 10px auto;
+  
+  #socialmedia-bar {
+	font-size:22px;
+	.fa {
+		margin:5px;
+	}
+	& li {
+		margin-left:10px;
+		text-align:center;
+		color: rgba(255,255,255,0.6);
+	}
+	& li a {
+		color: rgba(255,255,255,0.6);
+		display:inline-block;
+	}
+  }
+  & #socialmedia-bar, #copyright {
+		@media (max-width:@screen-xs-max) {
+			width:100%;
+		}
+  }
+ }
+
+// ------------------------------------------------------------------------------
+// Anpassung für Arabisch
+// ------------------------------------------------------------------------------
+.dir-rtl #dockeditempanel {
+    right: auto;
+}
+.dir-rtl #dock .dockeditem {
+    float: left;
+    min-width: 100px;
+}
+// ------------------------------------------------------------------------------
+// Content Anpassungen
+// ------------------------------------------------------------------------------
+.course-content {
+	table {
+		max-width:100%;
+		th, td {
+			padding:0.5em;
+		}
+	}
+	img {
+		max-width:100%;
+	}
+}
+
+// ------------------------------------------------------------------------------
+// Moodle Bugs
+// ------------------------------------------------------------------------------
+.path-grade-report-grader .gradeparent {
+	// overflow-x:auto;
+	& .floating {
+		display: none;
+	}
+}
+.mform .fitem_fcheckbox div.fitemtitle {
+	width:25%;
+}
+.mform .fitem_feditor .fitemtitle, .mform .fitem_ftext .fitemtitle{
+	max-width:175px;
+}
+
+.mform .felement.fstatic, .form-item .form-description{
+	margin-top:0px;
+}
+// Fragenteil Einrückung
+.MsoListParagraph {
+	text-indent:0pt !important;
+}
+#groupeditform .groups, #groupeditform .members {
+    float: left;
+	text-align: left;
+    width: 49%;
+}
+// Navigation Aufzählung
+.block_navigation .block_tree, .block_settings .block_tree {
+	margin:5px;
+	& li {
+		list-style-type:none;
+	}
+}
+// Abstand Tabellen untereinander Bewertungen
+.path-grade #overview-grade {
+	margin-bottom:30px;
+}
+// Abstand Seiten Titel - Headerheading
+.page-context-header .page-header-headings {
+    vertical-align:middle;
+	padding-bottom: 15px;
+    padding-top: 25px;
+}
+
+#page-header {
+	padding-left:5px;
+}
+// Navigation Usermenu
+.jsenabled .usermenu .moodle-actionmenu.show {
+	background-color:@navbarbghover;
+	padding:0px 0px 0px 0px;
+	
+	& .menu::before {
+		right:4px;
+	}
+	& .menu::after {
+		right:5px;
+	}
+	& .menu a:hover, & .menu a:focus {
+		background-image:none;
+		background-color:@brand-bg;
+	}  
+}
+.notloggedin .usermenu {
+	color: @navtext-color;
+	& a:hover {
+		color:darken(@navtext-color, 15%);
+	}
+}
+.usermenu .login {
+	color: @navtext-color;
+}
+.pagelayout-admin .usermenu .moodle-actionmenu.show {
+	display:block !important;
+}
+// Navigation Usermenu Username
+.jsenabled .usermenu .moodle-actionmenu .usertext {
+	@media (max-width: @screen-xs-max) {
+		display:none;
+	}
+}
+
+// Listen Bugs
+ul, ol {
+	margin-left:25px;
+	padding:0px;
+}
+
+// Aufzählungen
+th, td {
+	padding:1px;
+}
+
+// Kursdarstellung ausgeblendete Kursthemen im Bearbeitungsmodus
+// opacity entfernen und die ausblendung darstellen
+#page #region-main .course-content ul.topics li.section.hidden {
+	background-color:rgba(255, 255, 255, 0.7);
+}
+ul.topics .hidden a {
+	color: @dimmed-link-color;
+}
+ul.topics .hidden .sectionname {
+	color:lighten(@text-color, 30%);
+}
+.course-content ul li.section.hidden {
+	opacity:1.0;
+}
+
+.pagelayout-redirect #page #page-content {
+	margin:0px;
+	& div[role=main]{
+		max-width:75%;
+		margin: 20px auto;
+	}
+}
+.page-context-header .page-header-headings {
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+/* ----------------------------------------------------------- */
+/*           Weitere Anpassungen und Korrekturen               */
+/* ----------------------------------------------------------- */
+
+/* Contentbreite Korrektur Scrollbalken in mobiler Ansicht */
+#page-content {margin-left:-15px; margin-right:-15px;}
+body.has_dock #page {padding-right:15px;}
+
+
+/*    Anpassung Login-Notice-Page (Sie sind bereits angemeldet.)  */
+
+#page-login-index #page-wrapper #page-content #notice {
+	background-color:@login-bg-color;
+	padding:25px;
+}
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+	margin-left:0px;
+	@media (max-width:@screen-xs-max) {
+		margin-left:15px;
+	}
+}
+/* ------------------------------------------------ (04.05.2017)  */ 
+/*     Anpassung Wochenformat             */
+.course-content ul.weeks li.section {
+	background-color:#fff;
+	padding:10px;
+}
+.course-content ul.weeks {
+	margin-bottom:15px;
+}
+/* Anpassung Profil Beschreibung */
+.userprofile .description {
+	background-color:#fff;
+	padding:15px 15px 10px 15px;
+}
+
+
+
+/* ----------------------------------------------------------- */
+/*      Moodle 3.5 Anpassungen und Korrekturen extra           */
+/* ----------------------------------------------------------- */
+@import "themeupdate.less";

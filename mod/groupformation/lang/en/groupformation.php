@@ -1,0 +1,541 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ *
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+$string ['language'] = 'en';
+$string ['modulename'] = 'Group formation';
+$string ['modulenameplural'] = 'Group formations';
+$string ['modulename_help'] = 'The groupformation plugin generates groups of participants based on a questionnaire answers.';
+$string ['beta_version'] = '';
+$string ['groupformation:addinstance'] = 'Add groupformation';
+$string ['groupformation:editsettings'] = 'Edit groupformation';
+$string ['groupformation:onlymanager'] = 'groupformation: only manager';
+$string ['groupformation:onlyread'] = 'groupformation: only read';
+$string ['groupformation:onlystudent'] = 'groupformation: only student';
+$string ['groupformation:readsettings'] = 'groupformation: read settings';
+$string ['groupformation:submit'] = 'groupformation: submit';
+$string ['groupformation:view'] = 'groupformation: view';
+$string ['password_wrong'] = 'wrong password';
+$string ['groupformationfieldset'] = 'Custom example fieldset';
+$string ['groupformationname'] = 'Group formation';
+$string ['groupformationname_help'] = 'ToolTip Group formation';
+$string ['groupformation'] = 'Group formation';
+$string ['pluginadministration'] = 'Administration: Group formation';
+$string ['pluginname'] = 'Groupformation';
+$string ['nogroupformation'] = 'No group formation';
+$string ['groupnameexists'] = 'This group already exists.';
+$string ['generategroups'] = 'Generation of groups';
+$string ['namingschema'] = 'Naming scheme';
+$string ['userpergroup'] = 'How many users in a group?';
+$string ['notOpen'] = 'Submission is closed.';
+$string ['continueTheForm'] = 'Continue';
+$string ['completeTheForm'] = 'Complete questionnaire';
+$string ['alreadySubmitted'] = 'Already submitted';
+$string ['overview'] = 'Overview';
+$string ['generategroups'] = "Generate groups";
+$string ['edit_param'] = 'Edit';
+$string ['editparam'] = 'Edit parameters';
+$string ['nochangespossible'] = 'The questionnaire has been answered already.
+You can only change the maximum number of members or maximum number of groups. Further changes will not be saved.';
+$string ['availability_nochangespossible'] = 'The questionnaire has been answered already. You cannot change the availability anymore.';
+$string ['scenario'] = 'Scenario';
+$string ['scenarioLabel'] = '';
+$string ['scenario_description'] = 'Please choose the most suitable scenario for the group formation.';
+$string ['scenarioInfo'] = 'The three scenarios differ in the way how questionaaire items influence the group formation.
+            For project teams it considers prior knowledge and traits of the group members to amend each other while motivation (level) and personal targets should be as similar as possible.
+            For homework groups it optimizes each group to have the best possible prerequisites for collaborative learning.
+            For presentation groups the main aspect is a mutual interest in the same selected (and assigend) topic to work on.';
+$string ['groupformationsettings'] = 'Group formation settings';
+$string ['scenario_projectteams'] = 'Project teams';
+$string ['scenario_projectteams_description'] = 'Project teams work intensively together to finish a project (e.g. conduct a study, delivery of a report, etc.). Often, duties and tasks can be split among the team members. Consequently it is beneficial to have a mixture of amending comptencies in the team. Usually, such a collective work result is graded with a equal group mark for all members. Thus, groupformation aims for similar motivation and similar objectives (beside the prerequisites).';
+
+$string ['scenario_homeworkgroups'] = 'Homework groups';
+$string ['scenario_homeworkgroups_description'] = 'Homework groups complete (smaller) assignments in regular intervals (often weekly) as a preperation for examination. Even though the assigment tasks (often called exercises, practice, control questions or homework) are principally subdividable among group members, this is not intended as with the final examination each member will be graded individually and needs to be able to solve all tasks alone. Consequently, groupformation aims for diverse prior knowledge and diverse learning styles that benefit from each other.';
+$string ['scenario_presentationgroups'] = 'Presentation groups';
+$string ['scenario_presentationgroups_description'] = 'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each student, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
+$string ['scenario_usage_header'] = 'Questionnaire-Usage';
+$string ['scenario_usage_header_presentation'] = 'Students set preferences';
+$string ['scenario_projectteams_short'] = 'Knowledge areas and motivation are heterogeneous; knowledge level, targeted goals, and team orientation are homogeneous; character traits are partially homogeneous, partially heterogeneous.';
+$string ['scenario_homeworkgroups_short'] = 'Knowledge areas and targeted goals are heterogeneous; team orientation homogeneous.';
+$string ['scenario_presentationgroups_short'] = 'Enables exclusively to order a list of topics by Drag&Drop. "first-come, first-served" procedure is avoided to allow a fairer topic distribution.';
+
+$string ['time'] = 'Time';
+$string ['topics'] = 'Topics';
+$string ['topics_dummy'] = 'Topic';
+$string ['knowledge_dummy'] = 'Example';
+$string ['topics_description'] = 'I want to define topics';
+$string ['topics_description_extended'] = 'Please list topics for the students to choose from. <strong>Then group formation optimizes using the topic selection preferences exclusively.</strong> All other questionnaire parts will be ignored.';
+$string ['topics_question'] = 'Please sort the following topics regarding your personal interests and start with your favorite topic. Sort via drag and drop.';
+$string ['topicchoice'] = 'Topic selection';
+$string ['useOneLineForEachTopic'] = 'Use one line for each topic';
+$string ['knowledge'] = 'Knowledge';
+$string ['knowledge_description'] = 'I want to include knowledge questions';
+$string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves.
+    Take a look at the preview on the right hand side.';
+$string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves.
+    Take a look at the preview on the right hand side.
+    According to your selection "presentation groups" prior knowledge will be varied within each group (ignored when topics are set)';
+$string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves.
+    Take a look at the preview on the right hand side.
+    According to your selection "homework groups" prior knowledge will be varied within each group.';
+$string ['knowledge_info_project'] = 'Please list knowledge areas in which students should assess themselves.
+    Take a look at the preview on the right hand side.
+    According to your selection "project teams" prior knowledge (areas) will be varied within each group, but the level of knowledge is desired to be similar.';
+$string ['knowledgeChoice'] = 'Knowledge';
+$string ['add_line'] = 'Add line';
+$string ['remove_line'] = 'Remove line';
+$string ['preview'] = 'Preview:';
+$string ['input'] = 'Input:';
+$string ['knowledge_question'] = 'How much do you know about the following topics?';
+$string ['knowledge_scale'] = '0 = no knowledge, 100 = big knowledge';
+$string ['groupoptions'] = 'Group settings';
+$string ['groupoption_description'] = 'Group settings description';
+$string ['groupoption_help'] = 'This parameter can be optimized after the submission of the questionnaires.';
+$string ['groupoption_onlyactivestudents'] = 'Students without answers will not be assigned to any groups.';
+$string ['maxmembers'] = 'Max. number of group members';
+$string ['maxgroups'] = 'Max. number of groups';
+$string ['maxpoints'] = 'Max. points';
+$string ['evaluationmethod_description'] = 'How do you evaluate the work?';
+$string ['groupname'] = 'Grouping name';
+$string ['groupname_help'] = 'The chosen grouping name will be a prefix for the generated groups. The scheme is [grouping name]_XXX, where XXX is the number of the group.';
+$string ['grades'] = 'Grades';
+$string ['points'] = 'Points';
+$string ['justpass'] = 'Just pass';
+$string ['noevaluation'] = 'No evaluation';
+$string ['useOneLineForEachKnowledge'] = 'Use one line for each topic';
+$string ['cannotloadxml'] = 'Cannot load XML file';
+$string ['scenario_error'] = 'Please choose a scenario';
+$string ['maxmembers_error'] = 'Please choose a number greater than 0';
+$string ['maxgroups_error'] = 'Please choose a number greater than 0';
+$string ['maxpoints_error'] = 'Please choose a number between 1 and 100';
+$string ['groupname_error'] = 'Please choose a name with less than 100 characters.';
+$string ['evaluationmethod_error'] = 'Please choose an evaluation method.';
+$string ['choose_scenario'] = 'Choose scenario';
+$string ['choose_number'] = 'Choose number';
+$string ['choose_evaluationmethod'] = 'Choose method';
+$string ['evaluation_point_info'] = 'indicate the maximum available points';
+$string ['students_enrolled_info'] = 'Students are enrolled in this course';
+$string ['groupSettingsInfo'] = 'You have choosen to define topics. Thereof the number of groups and their size will be calculated, as you can see below.';
+$string ['analyse'] = 'Analysis';
+$string ['questionnaire_not_started'] = 'The questionnaire is ready.';
+$string ['questionnaire_press_to_begin'] = 'Give your consent and click "Next" to begin.';
+$string ['questionnaire_not_submitted'] = 'Your answers are not submitted yet.';
+$string ['questionnaire_press_continue_submit'] = 'Click "Edit" to continue the questionnaire or "Submit" to submit your current answers.
+You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent".';
+$string ['questionnaire_press_revert'] = 'Click "Revert" to revert your decision to submit the questionnaire. You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent".';
+$string ['questionnaire_answer_stats'] = 'Current state of the questionnaire:';
+$string ['questionnaire_submitted'] = 'You have submitted your answers. Revert your submission or remove consent to start over.';
+$string ['questionnaire_press_preview'] = 'Press "Preview" to take a look at the questionnaire.';
+$string ['questionnaire_no_more_questions'] = 'There are no more questions to answer.';
+$string ['questionnaire_press_beginning_submit'] = 'Click "Go to Start" to go back to the start page. There you can submit your current answers.';
+$string ['questionnaire_go_to_start'] = 'Go to Start';
+$string ['questionnaire_submit'] = 'Submit answers';
+$string ['questionnaire_submit_disabled_teacher'] = 'Submit is disabled because this is just a preview.';
+$string ['questionnaire_preview'] = 'This is a preview of the questionnaire.';
+$string ['category_general'] = 'General';
+$string ['category_grade'] = 'Goals';
+$string ['category_points'] = 'Goals';
+$string ['category_team'] = 'Team';
+$string ['category_character'] = 'Character';
+$string ['category_motivation'] = 'Motivation';
+$string ['category_learning'] = 'Learning';
+$string ['category_knowledge'] = 'Knowledge';
+$string ['category_topic'] = 'Topics';
+$string ['category_sellmo'] = 'Learning and Achievement Motivation';
+$string ['category_self'] = 'Self-assessment';
+$string ['category_srl'] = 'Self-controlled Learning';
+
+$string ['tabletitle_general'] = 'General';
+$string ['tabletitle_grade'] = 'Goals';
+$string ['tabletitle_points'] = 'Goals';
+$string ['tabletitle_team'] = 'Team';
+$string ['tabletitle_character'] = 'Character';
+$string ['tabletitle_motivation'] = 'Motivation';
+$string ['tabletitle_learning'] = 'Learning';
+$string ['tabletitle_knowledge'] = 'Knowledge';
+$string ['tabletitle_topic'] = 'Topics';
+$string ['tabletitle_sellmo'] = 'Learning and Achievement Motivation';
+$string ['tabletitle_self'] = 'Self-assessment';
+$string ['tabletitle_srl'] = 'Self-controlled Learning';
+$string ['tabletitle_knowledge'] = 'How much do you know about the following topics?';
+
+$string ['stats_partly'] = 'You answered {$a->answered} out of {$a->questions} questions in the category "{$a->category}".';
+$string ['stats_all'] = 'You answered all questions in the category "{$a->category}".';
+$string ['stats_none'] = 'You did not answer any question in the category "{$a->category}".';
+$string ['tab_overview'] = 'Overview';
+$string ['tab_questionnaire'] = 'Questionnaire';
+$string ['tab_analysis'] = 'Analysis';
+$string ['tab_grouping'] = 'Group formation';
+$string ['tab_preview'] = 'Questionnaire (Preview)';
+$string ['tab_evaluation'] = 'Evaluation';
+$string ['tab_group'] = 'Group assignment';
+$string ['questionnaire_availability_info_future'] = 'The questionnaire will be available in the perion from {$a->start} to {$a->end}.';
+$string ['questionnaire_availability_info_now'] = 'The questionnaire is available till {$a->end}.';
+$string ['questionnaire_availability_info_until'] = 'Der Fragebogen ist noch bis {$a->end} Uhr freigeschaltet.';
+$string ['questionnaire_availability_info_from'] = 'Der Fragebogen ist ab {$a->start} Uhr freigeschaltet.';
+$string ['questionnaire_available'] = 'The questionnaire is ready for processing.';
+$string ['questionnaire_not_available_begin'] = 'The questionnaire is available from {$a->start}.';
+$string ['questionnaire_available_end'] = 'The questionnaire is available till {$a->end}.';
+$string ['questionnaire_not_available'] = 'The questionnaire is currently unavailable.';
+$string ['questionnaire_not_available_begin_end'] = 'The questionnaire is available from {$a->start} to {$a->end}.';
+$string ['questionnaire_not_available_end'] = 'The questionnaire is not available anymore.';
+$string ['info_header_student'] = 'What is the "groupformation" for?';
+$string ['info_text_student'] = 'In this Moodle course the "groupformation" is used to build successful cooperating {$a->scenario_name}.
+        After you complete and submit the questionnaire, your appropriate learning partners will be determined.
+        All details are kept confidential.
+        <br>Once the questionnaire is expired, the groups will be generated considering your data and preferences.
+        <br><br>
+        Questions, trouble or any suggestions?
+        You can find the plugin developer and scientist under<br>
+        https://github.com/moodlepeers <br>
+        (created and developed with means for quality improvement of teaching at TU Darmstadt)
+';
+$string ['info_header_teacher_analysis'] = 'How does the groupformation activity work?';
+$string ['info_header_teacher_settings'] = 'How does the groupformation activity work?';
+$string ['info_text_teacher_settings'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
+        1.) Add the activity "groupformation" to your course.
+        In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
+        The further settings allow you to specify the group size and/or preknowledge of the students. If the preknowledges of students should complement to each other,
+        you can specify it in the settings.
+        2.) The students get the questionnaire which is based on your settings. You can set the period when the questionnaire is available(see step 1).
+        A preview of the questonnaire can be found later on by opening the activity as a docent.<br>
+        3.) The statistics to the answers can be found by opening the activity. If you are sutisfied with the response, you can start the groupformation manualy(it never happens automatically).<br>
+        It will takes a while till the groups are formated. You can see the generated groups before you adopt them to Moodle.<br>
+        <br>
+        Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).
+';
+$string ['info_text_teacher_analysis'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
+        1.) Add the activity "groupformation" to your course.
+        In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
+        The further settings allow you to specify the group size and/or preknowledge of the students. If the preknowledges of students should complement to each other,
+        you can specify it in the settings.
+        2.) The students get the questionnaire which is based on your settings. You can set the period when the questionnaire is available(see step 1).
+        A preview of the questonnaire can be found later on by opening the activity as a docent.<br>
+        3.) The statistics to the answers can be found by opening the activity. If you are sutisfied with the response, you can start the groupformation manualy(it never happens automatically).<br>
+        It will takes a while till the groups are formated. You can see the generated groups before you adopt them to Moodle.<br>
+        <br>
+        Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).<br>
+';
+$string ['grouping_status_0'] = 'You have to close the questionnaire to start group formation.';
+$string ['grouping_status_1'] = 'You can start the group formation now';
+$string ['grouping_status_2'] = 'The group formation is in progress.';
+$string ['grouping_status_3'] = 'The termination of group formation is in progress';
+$string ['grouping_status_4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
+$string ['grouping_status_5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
+$string ['grouping_status_6'] = 'The generated groups are going to be adopted to Moodle. This process might take some time.';
+$string ['grouping_start'] = 'Start group formation';
+$string ['grouping_delete'] = 'Delete groups';
+$string ['grouping_adopt'] = 'Adopt groups';
+$string ['grouping_abort'] = 'Cancel generating groups';
+$string ['grouping_edit'] = 'Edit groups';
+$string ['grouping_delete_moodle_groups'] = 'Delete moodle groups';
+$string ['questionnaire_committed'] = 'Your answers are submitted. You cannot change them in this activity.';
+$string ['no_data_to_display'] = 'No data to display';
+
+$string ['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups.';
+$string ['emailnotifications'] = '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
+$string ['onlyactivestudents_description'] = 'Only students with at least one submitted answer should be considered for building groups.';
+$string ['emailnotifications_description'] = '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
+
+$string ['sampleGroupName'] = 'The name of your group is';
+$string ['oneManGroup'] = 'You are a one man group.';
+$string ['noUser'] = 'User does not exist';
+$string ['membersAre'] = 'Your group members are:';
+$string ['groupingNotReady'] = 'Group formation is not finished yet.';
+$string ['jobget_name'] = 'Group formation and clean up';
+$string ['build_groups_task'] = 'Group formation task';
+$string ['adopt_groups_task'] = 'Group adoption task';
+$string ['archive_activity_task'] = 'Archiving Task';
+$string ['no_time'] = 'No time set';
+$string ['activity_end'] = 'Stop activity';
+$string ['activity_start'] = 'Start activity';
+$string ['analysis_status_info1'] = 'You have to stop the activity before group formation.';
+$string ['analysis_status_info2'] = 'You have to start activity so that students are able to answer the questionnaire.';
+$string ['analysis_status_info3'] = 'Group formation has already started or is done respectively. Activity cannot be started anymore. If you want to start the activity again, you need to delete generated groups.';
+$string ['analysis_status_info0'] = 'You are able to start or end activity.';
+$string ['analysis_status_info4'] = 'You can now start the group formation.';
+$string ['contact_members'] = 'To contact your team members you can click on their user names.';
+$string ['invalid'] = 'invalid status';
+$string ['groups_build'] = 'Groups are built.';
+$string ['activity_visible'] = 'Activity is not visible for you.';
+
+$string ['are'] = 'There are';
+$string ['are_now'] = 'Now, there are';
+$string ['students_available_single'] = 'enrolled student who can fill out the questionnaire.';
+$string ['students_available_multiple'] = 'enrolled students who can fill out the questionnaire.';
+$string ['students_answered_single'] = 'student has answered the questionnaire.';
+$string ['students_answered_multiple'] = 'students have answered the questionnaire.';
+$string ['name_by_group'] = 'Name:';
+$string ['quality'] = 'Group quality';
+$string ['quality_info'] = 'Group-Performance-Index (GPI) represents the quality of the built group and has a range between 0 and 1. The bigger the value, so much better the group. Is no value mentioned, the group is not built algorithmically, but by random.';
+$string ['go_to_group_view'] = 'to Moodle group view';
+$string ['number_member'] = 'Number of members:';
+$string ['cohort_index'] = 'Cohorts-Performance-Index:';
+$string ['cohort_index_info'] = 'The Cohorts-Performance-Index (KPI) represents the quality of the built groups and has a range between 0 and 1. The bigger the value, so much better the built groups.';
+$string ['max_group_size'] = 'Max. group size:';
+$string ['number_of_groups'] = 'Number of built groups:';
+$string ['options'] = 'Options';
+$string ['activity'] = 'Activity';
+$string ['statistic'] = 'Statistics of questionnaire';
+$string ['group_building'] = 'Group building';
+$string ['evaluation'] = 'Evaluation';
+$string ['group_overview'] = 'Overview of built groups';
+$string ['max_group_size_not_reached'] = 'Maximum group size has not been reached by the following groups:';
+$string ['your_group'] = 'The name of your group is: ';
+$string ['students_grouping_single'] = 'student for group building.';
+$string ['students_grouping_multiple'] = 'students for group building.';
+$string ['students_committed_single'] = 'student therefrom has already committed his/her answers.';
+$string ['students_committed_multiple'] = 'students have also committed their answers already.';
+$string ['committed_not_completed'] = 'from the committed questionnaires are not complete.';
+$string ['completed_questionnaire'] = 'completely answered questionnaires.';
+
+$string ['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
+$string ['onlyactivestudents_info'] = 'Only students with at least one submitted answer will be considered for the group formation. This can be configured in the {$a->url}.';
+$string ['starttime'] = 'Start time';
+$string ['endtime'] = 'End time';
+
+$string ['excellent'] = 'excellent';
+$string ['none'] = 'none';
+$string ['bad'] = 'bad';
+
+$string ['messageprovider:submission'] = 'Notify me if group formation algorithm finished';
+
+$string ['cron_job_not_running'] = 'In order to handle queued jobs a cron is working in the background. Unfortunately it is either not responding or not running at all. If this message keeps appearing after 24 h please contact the system administrator.';
+
+$string ['groupformation_message_subject'] = 'Gruppenformation abgeschlossen';
+$string ['groupformation_message'] = 'The group formation has finished. You can now view the result.';
+$string ['groupformation_subject'] = 'group formation finished';
+$string ['groupformation_message_contexturlname'] = 'results';
+
+$string ['import'] = 'Import';
+$string ['export'] = 'Export';
+$string ['export_answers'] = 'You can download all answers with anonymized user ids here:';
+$string ['export_users'] = 'You can download all user-related data with anonymized user ids here:';
+$string ['export_groups'] = 'You can download all groups with anonymized user ids here:';
+$string ['export_group_users'] = 'You can download all group-users relations with anonymized user ids here:';
+$string ['export_logging'] = 'You can download all logging data with anonymized user ids here:';
+$string ['export_description_no'] = 'You cannot export your answers since you have not answered any questions in the exportable categories.';
+$string ['export_description_yes'] = 'You can export your answers by clicking on the button below.';
+$string ['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format.';
+$string ['import_description_no'] = 'You cannot import your answers because you submitted your answers already or the questionnaire is not available.';
+$string ['import_form_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';
+
+$string ['file_error'] = 'You have to upload an *.xml file.';
+$string ['failed_import'] = 'The import has failed due to an invalid format. Please upload a file with exportable answer format';
+$string ['successful_import'] = 'The import was successful. You can review your answers in the questionnaire.';
+
+$string ['archived_activity_answers'] = 'The activity has been archived. Your answers are no longer stored and there is nothing to do here.';
+$string ['archived_activity_admin'] = 'The activity has been archived. There is nothing to do here.';
+
+$string ['students_selected'] = 'Students selected';
+$string ['drop_selection'] = 'Unselect all';
+
+$string ['no_evaluation_text'] = 'There is no evaluation for this group formation activity.';
+$string ['no_evaluation_ready'] = 'There is no evaluation for you. The evaluation of your answers is possible if you answered everything and submitted your answers.';
+$string ['eval_final_text'] = 'The comparison is based on {$a->percent}% of the users answers ({$a->completed} of {$a->coursesize} users have answered already).';
+
+$string ['eval_first_page_title'] = "General Information";
+$string ['eval_first_page_text'] = "Hereby you receive your personalized feedback regarding your answers given in the questionnaire. For this purpose, questions related to the same subject were clustered and average values were calculated and compared with a student’s sample. So-called percentile ranks were calculated, not with the intention of judging whether a certain obtained value was good or bad, but how frequent those values are within a student’s sample. A percentile rank of 10 % means, that 10 % of the comparison sample had an equal or smaller value. On the other hand, a percentile rank of 90 % means, that 90 % of the comparison sample obtained an equal or smaller value.
+\\n\\n
+First, you receive feedback on five personality characteristics, that can be understood as relatively stable, that is, independent of specific situations: extraversion, neuroticism, conscientiousness, social agreeableness and openness to experience. You will then receive feedback on four dimensions of motivation, which relate to the current academic course or exercise and thus may vary from situation to situation: interest, challenge, probability of success and expectation of failure.";
+
+$string ['eval_name_big5'] = 'Personality';
+$string ['eval_name_fam'] = 'Motivation';
+
+$string ['eval_cutoff_caption_extraversion'] = 'Extraversion';
+$string ['eval_cutoff_caption_neuroticism'] = 'Neuroticism';
+$string ['eval_cutoff_caption_conscientiousness'] = 'Conscientiousness';
+$string ['eval_cutoff_caption_agreeableness'] = 'Social Agreeableness';
+$string ['eval_cutoff_caption_openness'] = 'Openness to experience';
+$string ['eval_max_caption_extraversion'] = 'extraverted';
+$string ['eval_min_caption_extraversion'] = 'introverted';
+$string ['eval_max_caption_neuroticism'] = 'emotionally stable';
+$string ['eval_min_caption_neuroticism'] = 'emotionally unstable';
+$string ['eval_max_caption_conscientiousness'] = 'conscientious';
+$string ['eval_min_caption_conscientiousness'] = 'careless';
+$string ['eval_max_caption_agreeableness'] = 'agreeable';
+$string ['eval_min_caption_agreeableness'] = 'competitive';
+$string ['eval_max_caption_openness'] = 'open';
+$string ['eval_min_caption_openness'] = 'conservative';
+
+$string ['eval_max_text_extraversion'] = 'Introversion and extraversion are two poles of a personality trait that is characterized by the interaction with the environment. Introversion denotes an inward facing attitude whereas extraversion denotes an outwardly one.';
+$string ['eval_min_text_extraversion'] = 'Introversion and extraversion are two poles of a personality trait that is characterized by the interaction with the environment. Introversion denotes an inward facing attitude whereas extraversion denotes an outwardly one.';
+$string ['eval_max_text_neuroticism'] = 'The personality factor "Neuroticism" reflects individual differences in the experiencing of negative emotions and is also known as emotional lability. The opposite pole is also referred to as Emotional Stability.';
+$string ['eval_min_text_neuroticism'] = 'The personality factor "Neuroticism" reflects individual differences in the experiencing of negative emotions and is also known as emotional lability. The opposite pole is also referred to as Emotional Stability.';
+$string ['eval_max_text_conscientiousness'] = 'The factor "Conscientiousness" primarily describes the degree of self-control, accuracy and determination.';
+$string ['eval_min_text_conscientiousness'] = 'The factor "Conscientiousness" primarily describes the degree of self-control, accuracy and determination.';
+$string ['eval_max_text_agreeableness'] = 'Social agreeableness refers to the behavior towards other people.';
+$string ['eval_min_text_agreeableness'] = 'Social agreeableness refers to the behavior towards other people.';
+$string ['eval_max_text_openness'] = 'The factor "Openness to experience" describes the interest and the amount of engagement in new experiences and impressions.';
+$string ['eval_min_text_openness'] = 'The factor "Openness to experience" describes the interest and the amount of engagement in new experiences and impressions.';
+
+$string ['eval_max_caption_challenge'] = 'Challenge';
+$string ['eval_min_caption_challenge'] = 'Challenge';
+$string ['eval_max_caption_interest'] = 'Interest';
+$string ['eval_min_caption_interest'] = 'Interest';
+$string ['eval_max_caption_successprobability'] = 'Probability of Success';
+$string ['eval_min_caption_successprobability'] = 'Probability of Success';
+$string ['eval_max_caption_lackofconfidence'] = 'Expectation of Failure';
+$string ['eval_min_caption_lackofconfidence'] = 'Expectation of Failure';
+$string ['eval_cutoff_caption_challenge'] = 'Challenge';
+$string ['eval_cutoff_caption_interest'] = 'Interest';
+$string ['eval_cutoff_caption_successprobability'] = 'Probability of Success';
+$string ['eval_cutoff_caption_lackofconfidence'] = 'Expectation of Failure';
+
+$string ['eval_max_text_challenge'] = 'Challenge is a dimension of motivation, which expresses to which extent the current course or exercise is at all interpreted as related to performance, that is, to which extent you feel like exercising your own skills and your abilities.';
+$string ['eval_min_text_challenge'] = 'Challenge is a dimension of motivation, which expresses to which extent the current course or exercise is at all interpreted as related to performance, that is, to which extent you feel like exercising your own skills and your abilities.';
+$string ['eval_max_text_interest'] = 'Interest is a dimension of motivation, which is derived from the appreciation of the content of a task. Interest is expressed, among others, in the fact that tasks are being carried out gladly and voluntarily. Especially when tasks are being carried out self-directed and deep understanding is aimed, interest greatly contributes to successful learning.';
+$string ['eval_min_text_interest'] = 'Interest is a dimension of motivation, which is derived from the appreciation of the content of a task. Interest is expressed, among others, in the fact that tasks are being carried out gladly and voluntarily. Especially when tasks are being carried out self-directed and deep understanding is aimed, interest greatly contributes to successful learning.';
+$string ['eval_max_text_successprobability'] = 'Probability of success includes assumptions about how confident one is that one will obtain a good evaluation in the current course or exercise. A high expected probability of success may derive from the estimation of being sufficiently capable, or from finding the task as easy.';
+$string ['eval_min_text_successprobability'] = 'Probability of success includes assumptions about how confident one is that one will obtain a good evaluation in the current course or exercise. A high expected probability of success may derive from the estimation of being sufficiently capable, or from finding the task as easy.';
+$string ['eval_max_text_lackofconfidence'] = 'Expectation of failure is a form of motivation, which arises from the fear of not succeeding in the task, combined with the idea that due to the pressure of the situation one will not be able to study optimally.';
+$string ['eval_min_text_lackofconfidence'] = 'Expectation of failure is a form of motivation, which arises from the fear of not succeeding in the task, combined with the idea that due to the pressure of the situation one will not be able to study optimally.';
+
+$string ['blbubl'] = 'neurotizismus,extraversion,gewissenhaftigkeit,agreeableness,openness';
+$string ['dlfdss'] = 'herausforderung,interesse,erfolgswahrscheinlichkeit,misserfolgsbefuerchtung';
+
+$string ['eval_text_big5_extraversion_3'] = 'Your answers indicate a high score on extraversion. Accordingly, you probably tend towards socializing, expressing active and talkative behavior, being optimistic and warm, and you probably react with higher susceptibility to stimuli and excitements.';
+$string ['eval_text_big5_extraversion_2'] = 'Your answers suggest an average score on extraversion. Accordingly, you are probably enthusiastic to a rather moderate extent, and you are not particularly dominant or talkative.';
+$string ['eval_text_big5_extraversion_1'] = 'Your answers indicate a low score on extraversion. Accordingly, you probably tend towards introverted, discrete behavior in social interactions and you are happy alone and on your own. Introverted people are often described as calm, quiet and reserved.';
+$string ['eval_text_big5_neuroticism_3'] = 'You seem to have a rather high score on neuroticism. Accordingly, you experience frequent anxiety, nervousness, tension, sadness, uncertainty and embarrassment. Moreover, these feelings stay with you longer and are triggered more easily. You tend to be more worried about your health, to develop unrealistic ideas and you find it difficult to respond to stressful situations.';
+$string ['eval_text_big5_neuroticism_2'] = 'You appear to have an average score on neuroticism. Accordingly, you experience neither particularly often nor rarely anxiety, nervousness, tension, sadness, uncertainty and embarrassment. In stressful situations, you are neither particularly susceptible to problems nor especially robust towards them.';
+$string ['eval_text_big5_neuroticism_1'] = 'You appear to have a low score on neuroticism. Accordingly, you are rather quiet, satisfied, stable, relaxed and feeling safe and you are often able to deal better with stressful situations.';
+$string ['eval_text_big5_conscientiousness_3'] = 'You appear to have a high score on conscientiousness. Accordingly it can be assumed that you are organized, you plan carefully, are effective, responsible, and reliable, and that you act sensibly.';
+$string ['eval_text_big5_conscientiousness_2'] = 'You appear to have an average score on conscientiousness. Accordingly it can be assumed that you have a balanced relationship between conscientiousness and looseness and that you are neither very strictly organized nor disorganized.';
+$string ['eval_text_big5_conscientiousness_1'] = 'You seem to have a rather low score on conscientiousness. Accordingly one can conclude that you tend to be spontaneous and that you act rather careless and inaccurate.';
+$string ['eval_text_big5_agreeableness_3'] = 'Your high scores on agreeableness indicate that in general you are more altruistic. You treat others with understanding, kindness and empathy, and you try to help others and assume that the others will act helpful as well. You tend to interpersonal trust, cooperation and compliance.';
+$string ['eval_text_big5_agreeableness_2'] = 'Your average scores on agreeableness indicate that you are predisposed neither strongly egocentric nor altruistic. One would describe you neither as particularly suspicious nor particularly fast trusting, neither extremely yielding nor extremely stubborn.';
+$string ['eval_text_big5_agreeableness_1'] = 'Your low scores on agreeableness indicate that you are basically rather argumentative, egocentric and suspicious of the intentions of other people. You behave more competitively than cooperatively, have the ability to fight for your own interests and you are less yielding.';
+$string ['eval_text_big5_openness_3'] = 'You have obtained rather high scores on openness. This suggests that you have an active fantasy life and that you are interested in many private and public processes. Such people are often described as intellectual, experimental and with artistic interest, they often behave unconventionally and prefer variety.';
+$string ['eval_text_big5_openness_2'] = 'You have obtained average openness values. This indicates that you do not tend to very conventional nor to very unconventional attitudes and behavior. For you, visonary, imaginative disposition is balanced with pragmatic living in the here and now.';
+$string ['eval_text_big5_openness_1'] = 'You have achieved rather low openness scores. This suggests that you are more prone to conventional behavior and conservative attitudes. You prefer established and approved things over new things and perceive your emotional reactions rather attenuated. You act pragmatically in the here and now.';
+
+$string ['eval_text_fam_challenge_3'] = 'The current course or exercise was considered by you to be particularly challenging. This can be negative in case the exercise is externally regulated. On the contrary, it can have very positive effects if the exercise is self-directed.';
+$string ['eval_text_fam_challenge_2'] = 'The current course or exercise was considered by you as neither especially challenging nor very simple.';
+$string ['eval_text_fam_challenge_1'] = 'The current course or exercise was considered by you as a not very challenging. This can be positive in externally-directed tasks, but can have negative effects when the exercise is self-directed.';
+$string ['eval_text_fam_interest_3'] = 'You seem to have a high interest in the content of the current course or exercise, which should be good for your own learning, in case the process itself takes place self-directed to a greater extent.';
+$string ['eval_text_fam_interest_2'] = 'You seem to have a moderate interest in the content of the current course or exercise.';
+$string ['eval_text_fam_interest_1'] = 'You seem to have a low interest in the content of the current course or exercise, which can be bad for your own learning, in case the process itself takes place self-directed to a greater extent.';
+$string ['eval_text_fam_successprobability_3'] = 'You have considered you will very probably be successful in the current course or exercise. Generally speaking, this should facilitate the learning process.';
+$string ['eval_text_fam_successprobability_2'] = 'You have considered you will obtain moderate good results in the current course or exercise. This should not have either a particularly good or bad influence on your learning process.';
+$string ['eval_text_fam_successprobability_1'] = 'You have considered you will have low probabilities of success in the current course or exercise. Usually this has an adverse effect on the learning process.';
+$string ['eval_text_fam_lackofconfidence_3'] = 'Your score suggests the assumption that the expectation of failure is very pronounced in you. This could be derived from a general fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that expectation of failure has a negative impact on studying.';
+$string ['eval_text_fam_lackofconfidence_2'] = 'You score suggests the assumption that your expectation of failure is moderate. This could be derived from a general fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that expectations of failure have a negative impact on studying.';
+$string ['eval_text_fam_lackofconfidence_1'] = 'Your score suggests the assumption that your expectation of failure is little pronounced in you. This could be derived from a generally non-existent fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that the lack of expectancy of failure has a positive effect on learning.';
+
+$string ['eval_caption_user'] = 'User';
+$string ['eval_caption_group'] = 'Group';
+$string ['eval_caption_course'] = 'Course';
+
+$string ['consent_alert_message'] = 'You need give consent before accessing the questionnaire. Scroll down and agree to terms before clicking on "Next".';
+$string ['consent_opt_in'] = 'Consent (opt-in)';
+$string ['consent_header'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
+$string ['consent_header_import'] = 'By importing your answers, you agree to participate in the groupformation plugin and you agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
+$string ['consent_message'] = '<ul><li>
+The teacher has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
+</li><li>
+My personal data will be deleted when the course ends - latest after 360 days.</li></ul>';
+$string ['consent_agree'] = 'I agree to the terms';
+
+$string ['questionnaire_delete'] = 'Remove consent';
+
+$string ['groupsize'] = 'Group size:';
+$string ['unselect_all'] = 'Unselect All';
+$string ['students_selected'] = 'students selected';
+$string ['select_info'] = 'Select group members to move them to another group';
+
+$string ['topic_group_info'] = 'Your topic is';
+$string ['topic'] = "Topic";
+
+$string ['participant_code_title'] = "Participant Code";
+$string ['participant_code_header'] = "Please enter a personal participant code based on the following rules:";
+$string ['participant_code_rules'] = "1. Your mother's first name (first two characters, capitalized, z.B. EV for Eva)<br>
+2. Your mother's month of birth (as two digits, z.B. 07 for July)<br>
+3. Your father's first name (first two characters, capitalized, z.B. AD for Adam)<br>
+4. Your father's month of birth (as two digits, z.B. 11 for November)<br><br>
+Replace \"Umlaute\" and special characters as follows<br>
+Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S";
+$string ['participant_code_example'] = "Example: EV07AD11";
+$string ['participant_code_footer'] = "Your personal participant code is";
+
+$string ['participant_code_alert_message'] = 'You need enter a valid participant code before accessing the questionnaire. Scroll down and enter your participant code.';
+
+$string ['questionnaire_press_to_begin_participant_code'] = 'Enter your participant code and give your consent. Click "Next" to begin.';
+
+$string['submit-modal-title'] = 'Submit your answers';
+$string['submit-modal-text'] = 'For scientific purposes and the group formation process it is important that you answer all questions truthfully and correctly. We would appreciate your support.
+
+Click on \'Cancel\' if you want to edit your answers before submitting them.';
+
+$string ['questionnaire_outdated'] = 'This activity is too old. The correct functionality cannot be ensured. Please create a new activity to enjoy the full functionality.';
+
+$string ['settings_header'] = 'General';
+$string ['settings_description'] = 'Settings for archiving and additional functionality.';
+
+$string ['settings_archiving_time'] = 'Archiving time';
+$string ['settings_archiving_time_description'] = 'After x days the activity will be archived.';
+
+$string ['settings_import_export'] = 'Import/Export of answers';
+$string ['settings_import_export_description'] = 'If set, students can export their answers and import answers in another instance.';
+
+$string ['settings_participant_code'] = 'Participant code';
+$string ['settings_participant_code_description'] = 'Students need to enter a participant code (as used in psychological tests).';
+
+$string ['answers_for_eval_text'] = 'If all questions are answered, you can receive feedback in the evaluation tab. If your answers are incomplete the evaluation is not possible due to missing answers.';
+
+$string ['page_title_analysis'] = 'Activity';
+$string ['page_title_overview'] = 'Overview';
+$string ['page_title_evaluation'] = 'Evaluation';
+$string ['page_title_export'] = 'Export';
+$string ['page_title_grouping'] = 'Group formation';
+$string ['page_title_group'] = 'Group assignment';
+$string ['page_title_grouping_edit'] = 'Group formation - Edit mode';
+$string ['page_title_import_export'] = 'Import & Export';
+$string ['noGroup'] = 'You haven\'t been assigned any group because you did not answer the questionnaire.';
+
+$string ['topics_statistics'] = 'Statistics of offered topics';
+$string ['topics_statistics_score'] = 'Score [0-1]';
+$string ['topics_statistics_description'] = 'The following scores indicate which topics have been favored by the students, i.e. a score close to 1 indicates that the topic is more liked than topics with a lower score.';
+
+$string ['category_catfreetext'] = 'Freetext';
+$string ['category_catnumber'] = 'Number';
+$string ['category_catmultiselect'] = 'Multiselect';
+$string ['tabletitle_catfreetext'] = 'Freetext';
+$string ['tabletitle_catnumber'] = 'Number';
+$string ['tabletitle_catmultiselect'] = 'Multiselect';
+
+$string ['category_demographic'] = 'Demographic';
+$string ['tabletitle_demographic'] = 'Demographic';
+
+$string ['category_times'] = 'Availability';
+$string ['tabletitle_times'] = 'Availability';
+
+$string ['category_skills'] = 'Experience';
+$string ['tabletitle_skills'] = 'Experience';
+
+$string ['category_honesty'] = 'Honesty';
+$string ['tabletitle_honesty'] = 'Honesty';
+
+$string ['freetext_noanswer'] = 'No answer';
+
+$string ['allanswersrequired'] = 'All questions need to be answered in order to complete the activity.';
+$string ['allanswersrequired_description'] = 'All questions need to be answered in order to complete the activity.';
+$string ['groupoption_allanswersrequired'] = 'Before continuing to the next page of the questionnaire one has to answer all questions.';

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="multiselect questions">
+    <QUESTIONS VERSION="2017090901">
+        <QUESTION ID="1" TYPE="multiselect">
+            <QUESTIONTEXT>
+                <![CDATA[What are your favorite colors?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Red]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Blue]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Green]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>

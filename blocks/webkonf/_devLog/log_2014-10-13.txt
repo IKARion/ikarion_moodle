@@ -1,0 +1,698 @@
+07:41:32  role = 2
+07:44:16  role = 2
+07:45:04 meckekai role = 2
+07:47:08 meckekai role = 2
+07:47:34 meckekai role = 2
+07:48:48 meckekai role = 2
+07:48:50  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezpxu7xaidgkz23twp;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 05:48:40 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezpxu7xaidgkz23twp ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezpxu7xaidgkz23twp;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:48:40 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezpxu7xaidgkz23twp;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:48:40 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezpxu7xaidgkz23twp;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 152
+ <br /> Date: Mon, 13 Oct 2014 05:48:40 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="ok"/><permission acl-id="5305606" permission-id="host" principal-id="5305607"/></results> <br /> user is assigned! <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezpxu7xaidgkz23twp;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:48:40 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezpxu7xaidgkz23twp;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 152
+ <br /> Date: Mon, 13 Oct 2014 05:48:40 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="ok"/><permission acl-id="5305606" permission-id="host" principal-id="5305607"/></results> <br /> user is assigned! <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezpxu7xaidgkz23twp;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:48:40 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br />  room "FHFFM-S-WIG-1600-14W-01" ist located at http://connect.oncampus.de/r4wiya9wiig  <br />
+07:49:21 meckekai role = 2
+07:49:21  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezr7woubfz3in7sf5d;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 05:49:12 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezr7woubfz3in7sf5d ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezr7woubfz3in7sf5d;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:49:12 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezr7woubfz3in7sf5d;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:49:12 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezr7woubfz3in7sf5d;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 152
+ <br /> Date: Mon, 13 Oct 2014 05:49:12 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="ok"/><permission acl-id="5305606" permission-id="host" principal-id="5305607"/></results> <br /> user is assigned! <br />
+07:51:02 meckekai role = 2
+07:51:03  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezsmppdi278ogo628h;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 05:50:53 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezsmppdi278ogo628h ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezsmppdi278ogo628h;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:50:53 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezsmppdi278ogo628h;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:50:53 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezsmppdi278ogo628h;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 83
+ <br /> Date: Mon, 13 Oct 2014 05:50:53 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="no-data"/></results> <br /> User not assigned <br /> assigning user meckekai in room FHFFM-S-WIG-1600-14W-01 with role 2 ...  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezsmppdi278ogo628h;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:50:53 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br />
+07:51:50 meckekai role = 2
+07:51:51  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezy5w5vs2qhoe26prg;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 05:51:42 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezy5w5vs2qhoe26prg ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezy5w5vs2qhoe26prg;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:51:42 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezy5w5vs2qhoe26prg;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:51:42 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezy5w5vs2qhoe26prg;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 152
+ <br /> Date: Mon, 13 Oct 2014 05:51:42 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="ok"/><permission acl-id="5305606" permission-id="host" principal-id="5305607"/></results> <br /> user is assigned! <br />
+07:54:23 meckekai role = 2
+07:54:24  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezq88n3nwx7iatkd5d;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 05:54:14 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezq88n3nwx7iatkd5d ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezq88n3nwx7iatkd5d;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:54:14 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezq88n3nwx7iatkd5d;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:54:14 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezq88n3nwx7iatkd5d;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 83
+ <br /> Date: Mon, 13 Oct 2014 05:54:15 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="no-data"/></results> <br /> User not assigned <br /> assigning user meckekai in room FHFFM-S-WIG-1600-14W-01 with role 2 ...  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezq88n3nwx7iatkd5d;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:54:15 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br />
+07:58:24 meckekai role = 2
+07:58:25  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezgss2ceppewt2az4m;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 05:58:15 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezgss2ceppewt2az4m ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezgss2ceppewt2az4m;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:58:15 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezgss2ceppewt2az4m;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:58:15 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezgss2ceppewt2az4m;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 83
+ <br /> Date: Mon, 13 Oct 2014 05:58:15 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="no-data"/></results> <br /> User not assigned <br /> assigning user meckekai in room FHFFM-S-WIG-1600-14W-01 with role 2 ...  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezgss2ceppewt2az4m;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:58:15 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br />
+07:59:40 meckekai role = 2
+07:59:40  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezhmoygu54vwki7nzt;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 05:59:31 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezhmoygu54vwki7nzt ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezhmoygu54vwki7nzt;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:59:31 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezhmoygu54vwki7nzt;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 05:59:31 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezhmoygu54vwki7nzt;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 152
+ <br /> Date: Mon, 13 Oct 2014 05:59:31 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="ok"/><permission acl-id="5305606" permission-id="host" principal-id="5305607"/></results> <br /> user is assigned! <br />
+08:03:26 meckekai role = 2
+08:03:27  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breeztqdyp7hs2qhtmehi;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 06:03:17 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breeztqdyp7hs2qhtmehi ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztqdyp7hs2qhtmehi;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 494
+ <br /> Date: Mon, 13 Oct 2014 06:03:17 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> unassigning user meckekai in room FHFFM-S-WIG-1600-14W-01-TR with role  ...  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztqdyp7hs2qhtmehi;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 494
+ <br /> Date: Mon, 13 Oct 2014 06:03:17 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01-TR"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztqdyp7hs2qhtmehi;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 494
+ <br /> Date: Mon, 13 Oct 2014 06:03:17 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztqdyp7hs2qhtmehi;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 83
+ <br /> Date: Mon, 13 Oct 2014 06:03:17 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="no-data"/></results> <br /> User not assigned <br /> assigning user meckekai in room FHFFM-S-WIG-1600-14W-01-TR with role 2 ...  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztqdyp7hs2qhtmehi;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 494
+ <br /> Date: Mon, 13 Oct 2014 06:03:17 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br />
+08:03:44 meckekai role = 2
+08:03:45  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breeztbtkxg6rmpnz4mmo;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 06:03:35 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breeztbtkxg6rmpnz4mmo ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztbtkxg6rmpnz4mmo;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:03:35 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztbtkxg6rmpnz4mmo;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:03:35 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztbtkxg6rmpnz4mmo;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 83
+ <br /> Date: Mon, 13 Oct 2014 06:03:35 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="no-data"/></results> <br /> User not assigned <br /> assigning user meckekai in room FHFFM-S-WIG-1600-14W-01 with role 2 ...  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breeztbtkxg6rmpnz4mmo;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:03:35 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> error User not found meckekai <br />
+08:04:00 meckekai role = 2
+08:04:01  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezoigbaft5idg3pcby;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 06:03:51 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezoigbaft5idg3pcby ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezoigbaft5idg3pcby;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:03:51 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezoigbaft5idg3pcby;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:03:51 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezoigbaft5idg3pcby;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 83
+ <br /> Date: Mon, 13 Oct 2014 06:03:51 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="no-data"/></results> <br /> User not assigned <br /> assigning user meckekai in room FHFFM-S-WIG-1600-14W-01 with role 2 ...  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezoigbaft5idg3pcby;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:03:52 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br />
+08:14:46 angresab role = 1
+08:14:46  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezriwhzi6eka3w85d7;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 06:14:37 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezriwhzi6eka3w85d7 ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezriwhzi6eka3w85d7;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:14:37 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "angresab" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezriwhzi6eka3w85d7;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:14:37 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezriwhzi6eka3w85d7;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 152
+ <br /> Date: Mon, 13 Oct 2014 06:14:37 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="ok"/><permission acl-id="5305606" permission-id="view" principal-id="1533407"/></results> <br /> user is assigned! <br />
+08:15:19 angresab role = 2
+08:15:20  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezash7wxavh7dds8to;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 06:15:11 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezash7wxavh7dds8to ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezash7wxavh7dds8to;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:15:11 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> checking assginment for user "angresab" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezash7wxavh7dds8to;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:15:11 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezash7wxavh7dds8to;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 152
+ <br /> Date: Mon, 13 Oct 2014 06:15:11 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="ok"/><permission acl-id="5305606" permission-id="view" principal-id="1533407"/></results> <br /> user is assigned! <br />
+08:16:27 meckekai role = 2
+08:16:28  Connecting to connect.oncampus.de:443 <br /> Login-Request: /api/xml?action=login&external-auth=use <br /> :: HTTP/1.1 200 OK
+ <br /> :: Server: Apache-Coyote/1.1
+ <br /> :: Set-Cookie: BREEZESESSION=breezqqm59rp4mv7m3wn8;HttpOnly;secure;path=/
+ <br /> :: Cache-Control: max-age:5
+ <br /> :: Expires: now
+ <br /> :: Content-Type: text/xml
+ <br /> :: Content-Length: 78
+ <br /> :: Date: Mon, 13 Oct 2014 06:16:19 GMT
+ <br /> :: Connection: close
+ <br /> :: 
+ <br /> :: <?xml version="1.0" encoding="utf-8"?>
+ <br /> :: <results><status code="ok"/></results> <br /> <results><status code="ok"/></results> <br /> Success: SessionId = breezqqm59rp4mv7m3wn8 ;-)  <br /> ------------------------------------------------------------------------------------------ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezqqm59rp4mv7m3wn8;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 94
+ <br /> Date: Mon, 13 Oct 2014 06:16:19 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezqqm59rp4mv7m3wn8;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 94
+ <br /> Date: Mon, 13 Oct 2014 06:16:19 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> room FHFFM-S-WIG-1600-14W-01 created  <br /> checking assginment for user "meckekai" in room "FHFFM-S-WIG-1600-14W-01"  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezqqm59rp4mv7m3wn8;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:16:19 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> #---------------------------------------------------------------------------------------------------- <br /> HTTP/1.1 200 OK
+ <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezqqm59rp4mv7m3wn8;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 83
+ <br /> Date: Mon, 13 Oct 2014 06:16:19 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br /> <results><status code="no-data"/></results> <br /> User not assigned <br /> assigning user meckekai in room FHFFM-S-WIG-1600-14W-01 with role 2 ...  <br /> Server: Apache-Coyote/1.1
+ <br /> Set-Cookie: BREEZESESSION=breezqqm59rp4mv7m3wn8;HttpOnly;secure;path=/
+ <br /> Cache-Control: max-age:5
+ <br /> Expires: now
+ <br /> Content-Type: text/xml
+ <br /> Content-Length: 491
+ <br /> Date: Mon, 13 Oct 2014 06:16:19 GMT
+ <br /> Connection: close
+ <br /> 
+ <br /> <?xml version="1.0" encoding="utf-8"?>
+ <br />

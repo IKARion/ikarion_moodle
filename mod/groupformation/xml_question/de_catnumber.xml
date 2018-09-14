@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="number questions">
+    <QUESTIONS VERSION="2017090901">
+        <QUESTION ID="1" TYPE="number">
+            <QUESTIONTEXT>
+                <![CDATA[Wie viele Stunden lernst du in der Woche?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <MIN><![CDATA[0]]></MIN>
+                <MAX><![CDATA[168]]></MAX>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>

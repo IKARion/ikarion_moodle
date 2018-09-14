@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="free text questions">
+    <QUESTIONS VERSION="2017090901">
+        <QUESTION ID="1" TYPE="freetext">
+            <QUESTIONTEXT>
+                <![CDATA[What are your hobbies?]]>
+            </QUESTIONTEXT>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>

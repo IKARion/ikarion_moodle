@@ -1,0 +1,266 @@
+/**
+ * Themeanpassungen ildcustom
+ */
+
+/* ----------------------------------------------------------- */
+/*           Korrekturen moodle 3.5 update                     */
+/* ----------------------------------------------------------- */
+
+// Bug fixes - Scrollbar in der Kursübersicht!
+.block .content {
+  padding: 5px 15px;
+}
+
+// Navbar Anpassung
+.nav {
+  margin-bottom: 20px;
+}
+
+.navbar .nav {
+  margin-bottom: 0px;
+}
+
+// Reiterhintergrund
+.nav-tabs li.active {
+  a, a:hover, a:focus {
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    background-color: #fff;
+  }
+}
+
+.nav-tabs > li > a {
+  border-radius: 0px;
+}
+
+// Tabs zentrieren
+.text-center, .text-xs-center {
+  text-align: center;
+}
+
+// Button ohne runde Ecken
+.btn {
+  border-radius: 0px;
+}
+
+.container-fluid {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.mform .fitem_feditor .fitemtitle, .mform .fitem_ftext .fitemtitle {
+  max-width: none;
+}
+
+// Eingabefelder und Buttons
+form select, form input[type="text"], form input[type="password"],
+form.atto_form input[type="url"], select.singleselect {
+  vertical-align: middle;
+  margin: 0 0 10px 0;
+
+}
+
+.breadcrumb-button {
+  .singlebutton form input[type="submit"] {
+    margin-bottom: 3px;
+  }
+  .forumsearch {
+    margin-bottom: 10px;
+  }
+}
+
+// Pop-Up ohne runde Ecken
+.modal-content {
+  border-radius: 0px;
+}
+
+// Kursuebersicht korrektur
+// -------------------------------------------------------------
+
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+}
+
+.nav-pills > li > a {
+  border-radius: 0px;
+}
+
+.card {
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 0px;
+}
+
+.fade.show {
+  opacity: 1;
+}
+
+// Kurse Aktivitäten Bearbeiten (Pop-Up)
+// -------------------------------------------------------------
+.jsenabled .moodle-actionmenu[data-enhanced] .menu-action-text {
+  white-space: unset;
+}
+
+.moodle-actionmenu[data-enhanced].show .menu a {
+  padding: 6px 1em 6px 0.7em; // padding: 6px 1em 6px 1em;
+}
+
+.moodle-actionmenu[data-enhanced].show .menu > li > a {
+  padding: 3px 25px 3px 10px;
+}
+
+#changenumsections {
+  margin-bottom: 10px;
+}
+
+.section .moodle-actionmenu[data-enhanced] .menu img {
+  width: 12px;
+  height: 12px;
+}
+
+// Navbar responsive
+// -------------------------------------------------------------
+.navbar-nav > li a.dropdown-toggle {
+  @media (max-width: 320px) {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}
+
+.has_dock_top_horizontal #dock .dockeditem .dockedtitle h2 {
+  @media (max-width: 320px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+// -------------------------------------------------------------
+// Loginseiten
+// -------------------------------------------------------------
+
+#page-login-index #page-content {
+  @media (min-width: @screen-sm-min) {
+    margin: 60px 0px 60px -15px;
+  }
+}
+
+.loginpanel .form-label {
+  text-align: left;
+}
+
+.loginbox.twocolumns .loginpanel {
+  padding: 19px;
+  margin-bottom: 20px;
+  position: relative;
+  @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    float: left;
+    width: 33%;
+  }
+  @media (min-width: @screen-md-min) {
+    float: left;
+    width: 25%;
+  }
+}
+
+.loginpanel {
+  form input[type="text"], form input[type="password"] {
+    min-width: 175px;
+    width: 98%;
+  }
+}
+
+.loginbox.onecolumn .loginpanel {
+  form input[type="text"], form input[type="password"] {
+    width: 100%;
+  }
+}
+
+.loginbox.twocolumns .signuppanel {
+  padding: 19px;
+  margin-bottom: 20px;
+  position: relative;
+  @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    float: left;
+    width: 58.6%;
+    left: 8.4%;
+  }
+  @media (min-width: @screen-md-min) {
+    float: left;
+    width: 66.6%;
+    left: 8.4%;
+  }
+}
+
+// Login ohne Text und Selbsteinschreibung
+// -------------------------------------------------------------
+#page-login-index #page-wrapper .loginbox.onecolumn .signuppanel {
+  background-color: transparent;
+  max-width: 330px;
+}
+
+#page-login-index #page-wrapper .loginbox.onecolumn {
+  max-width: 365px;
+}
+
+// Usermenü Anpassung - Sie sind nicht angemeldet
+// -------------------------------------------------------------
+.notloggedin .usermenu {
+  // padding-top: 15px;
+  // padding-bottom: 15px;
+  line-height: 48px;
+}
+
+.navbar .usermenu .Login, .navbar .usermenu .login {
+  display: inline;
+}
+
+#page-site-index.notloggedin .usermenu .login, #page-login-index.notloggedin .usermenu .login,
+#page-login-forgot_password.notloggedin .usermenu .login {
+  display: inline;
+  @media (max-width: @screen-sm-max) {
+    display: none;
+  }
+}
+
+// Gastanmeldung Usermenü
+// -------------------------------------------------------------
+#page-login-index .usermenu .login, #page-login-forgot_password .usermenu .login,
+.navbar .usermenu .Login, .navbar .usermenu .login,
+#page-site-index .usermenu .login {
+  line-height: 48px;
+}
+
+// Passwort vergessen Textabschnitt
+// -------------------------------------------------------------
+#page-login-forgot_password {
+  .generalbox {
+    padding: 25px 0;
+  }
+}
+
+// -------------------------------------------------------------
+// Nutzungsrichtlinien Cookiebar
+// -------------------------------------------------------------
+.eupopup-container {
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  a:hover, a:active, a:focus {
+    color: #56aad1;
+    text-decoration: underline;
+  }
+  a.eupopup-button {
+    color: #f6a21d;
+  }
+  a.eupopup-button:hover, a.eupopup-button:active, a.eupopup-button:focus {
+    color: #f6a21d;
+    text-decoration: underline;
+  }
+}
+
+//Login Page Korrektur
+.path-login #page .row {
+  margin: 0;
+}

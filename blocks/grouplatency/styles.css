@@ -1,0 +1,71 @@
+.guide-wrapper {
+    margin: 15px 0 0;
+}
+
+.guide-panel {
+    border-width: 3px 1px 1px;
+    padding: 5px 5px 5px 5px;
+    background-color: #fff;
+    border: solid grey;
+    color: #444;
+}
+
+.guide-panel.red {
+    border: solid #c1282f;
+    color: #444;
+}
+
+.guide-panel.orange {
+    border: solid #f4972b;
+    color: #444;
+}
+
+.guide-panel.green {
+    border: solid #149346;
+    color: #444;
+}
+
+#grouplatency label span {
+    margin-left: 15px;
+}
+
+.block_grouplatency .axis.y {
+    display: none;
+}
+
+.block_grouplatency #dc-post-chart {
+    margin: 20px auto 0;
+    width: 240px;
+    min-height: 8px;
+    height: 100%;
+    border-top: 1px solid grey;
+}
+
+.block_grouplatency svg {
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+}
+
+.block_grouplatency svg:first-of-type {
+    padding-top: 10px;
+}
+
+.block_grouplatency svg.border {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}
+
+.block_grouplatency .axis {
+    height: 20px;
+}
+
+.block_grouplatency .zoom {
+    cursor: move;
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: none;
+    pointer-events: all;
+}
+

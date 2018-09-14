@@ -1,0 +1,56 @@
+{{^nothing}}
+    <strong>Gruppenbeteiligung</strong>
+    {{#guide}}
+        <div class="guide-wrapper">
+            <div class="guide-panel {{panel}}">
+                <p>{{text}}</p>
+            </div>
+        </div>
+    {{/guide}}
+
+    {{#mirroring}}
+        <br>
+        <div class='row'>
+            <div class='span12' style="padding-left:50px">
+                <input type="checkbox" name="forum" value="forum"> Forum
+                <input type="checkbox" name="wiki" value="wiki"> Wiki
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='span12'>
+                <div class='row'>
+                    <div class='bar-graph' id='dc-activity-chart'>
+                        <svg width="240" height="300"></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div>
+                <table class='table table-hover' id='dc-table-graph'>
+                    <thead>
+                    <tr class='header'>
+                        <th>Name</th>
+                        <th>Online</th>
+                        <th>Kontakt</th>
+                    </tr>
+                    </thead>
+                    {{#users}}
+                        <tr data-id="{{id}}">
+                            <td><span style="color:{{color}}">&#x25A0</span> {{name}}</td>
+                            <td style="text-align: center;">
+                                {{#online}}<span style="color:#003560">&#x25CF</span>{{/online}}
+                                {{^online}}<span style="color:#003560">&#x25CB</span>{{/online}}
+                            </td>
+                            <td>
+                                <a href="mailto:{{mailto}}">Kontakt</a>
+                            </td>
+                        </tr>
+                    {{/users}}
+                </table>
+            </div>
+        </div>
+    {{/mirroring}}
+{{/nothing}}

@@ -1,0 +1,5 @@
+//login moodledb backup
+moodledb.private.oncampus.de 
+$mo_db_user = "moodleuser";
+$mo_db_pw = "dM-PfdMD";
+//mo_db_name = moodle

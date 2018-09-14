@@ -1,0 +1,33 @@
+{{{policy}}}
+<br>
+<br>
+{{#selected}}
+    {{#yes}}
+        <form id="ikarionconsent">
+            <input class="target" type="radio" name="choice" value="1" checked="checked" style="margin-right:10px;
+">{{#str}}agree, block_ikarionconsent{{/str}}
+            <br><br>
+            <input class="target" type="radio" name="choice" value="0" style="margin-right:10px;">{{#str}}
+            disagree, block_ikarionconsent{{/str}}
+        </form>
+    {{/yes}}
+    {{#no}}
+        <form id="ikarionconsent">
+            <input class="target" type="radio" name="choice" value="1" style="margin-right:10px;">{{#str}}
+            agree, block_ikarionconsent{{/str}}
+            <br><br>
+            <input class="target" type="radio" name="choice" value="0" checked="checked" style="margin-right:10px;
+            ">{{#str}}
+            disagree, block_ikarionconsent{{/str}}
+        </form>
+    {{/no}}
+{{/selected}}
+{{^selected}}
+    <form id="ikarionconsent">
+        <input class="target" type="radio" name="choice" value="1" style="margin-right:10px;">{{#str}}
+        agree, block_ikarionconsent{{/str}}
+        <br><br>
+        <input class="target" type="radio" name="choice" value="0" style="margin-right:10px;">{{#str}}
+        disagree, block_ikarionconsent{{/str}}
+    </form>
+{{/selected}}
