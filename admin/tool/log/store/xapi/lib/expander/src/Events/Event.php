@@ -126,7 +126,8 @@ class Event extends PhpObj {
                     $user_data = array(
                         "username" => openssl_encrypt($user_record->username, $CFG->encryptmethod, $CFG->encryptkey),
                         "email" => openssl_encrypt($user_record->email, $CFG->encryptmethod, $CFG->encryptkey),
-                        "fullname" => openssl_encrypt($full_name, $CFG->encryptmethod, $CFG->encryptkey)
+                        "fullname" => openssl_encrypt($full_name, $CFG->encryptmethod, $CFG->encryptkey),
+                        "name" => openssl_encrypt($user_record->id, $CFG->encryptmethod, $CFG->encryptkey)
                     );
                     $user_data_list[] = $user_data;
                 }
