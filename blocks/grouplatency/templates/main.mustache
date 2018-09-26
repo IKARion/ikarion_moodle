@@ -3,46 +3,47 @@
     {{#guide}}
         <div class="guide-wrapper">
             <div class="guide-panel {{panel}}">
-                <p>{{text}}</p>
+                <p>{{{text}}}</p>
+            </div>
+            <div class="guide-icon">
+                <img src="https://moodle.ikarion-projekt.de/blocks/grouplatency/pix/guide.png" alt="Guide">
             </div>
         </div>
     {{/guide}}
 
     {{#mirroring}}
-        <div class='row'>
-            <div class='span12'>
-                <div class='row'>
-                    <div class='bar-graph' id='dc-post-chart'></div>
-                </div>
-            </div>
-        </div>
+        <div class='bar-graph' id='dc-post-chart'></div>
 
-        <div class='row'>
-            <div>
-                <table class='table table-hover' id='dc-table-graph'>
-                    <thead>
-                    <tr class='header'>
-                        <th>Datum</th>
-                        <th>Beitrag</th>
-                        <th>seit</th>
-                    </tr>
-                    </thead>
-                    {{#data}}
-                        <tr data-id="{{id}}">
-                            <td>{{date}}</td>
-                            <td>
-                                <a href="https://moodle.ikarion-projekt.de/mod/forum/view.php?id={{postid}}">{{posttitle}}</a>
-                            </td>
-                            {{#color}}
-                                <td style="color:{{color}}"><strong>{{since}}</strong></td>
-                            {{/color}}
-                            {{^color}}
-                                <td>{{since}}</td>
-                            {{/color}}
-                        </tr>
-                    {{/data}}
-                </table>
+        <table class='table table-hover' id='dc-table-graph'>
+            <thead>
+            <tr class='header'>
+                <th>Datum</th>
+                <th>Beitrag</th>
+                <th>seit</th>
+            </tr>
+            </thead>
+            {{#data}}
+                <tr data-id="{{id}}">
+                    <td>{{date_formatted}}</td>
+                    <td style="width: 48%">
+                        <a href="https://moodle.ikarion-projekt.de/mod/forum/discuss.php?d={{discussionid}}#{{postid}}">{{postmsg}}</a>
+                    </td>
+                    {{#color}}
+                        <td style="color:{{color}}"><strong>{{since}}</strong></td>
+                    {{/color}}
+                    {{^color}}
+                        <td style="padding-right: 0;"><strong>{{since}}</strong></td>
+                    {{/color}}
+                </tr>
+            {{/data}}
+        </table>
+    {{/mirroring}}
+
+    {{#default}}
+        <div class="guide-wrapper">
+            <div class="guide-panel">
+                <p>{{{text}}}</p>
             </div>
         </div>
-    {{/mirroring}}
+    {{/default}}
 {{/none}}

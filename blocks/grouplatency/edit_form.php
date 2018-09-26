@@ -31,6 +31,7 @@ class block_grouplatency_edit_form extends block_edit_form {
         // Fields for editing HTML block title and contents.
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
 
+        /*
         // Level 0
         $mform->addElement('text', 'config_level_0', get_string('level_0', 'block_grouplatency'));
         $mform->setDefault('config_level_0', 0.33);
@@ -54,6 +55,19 @@ class block_grouplatency_edit_form extends block_edit_form {
 
         $mform->addElement('textarea', 'config_level_2_text', get_string('level_2_text', 'block_grouplatency'));
         $mform->setType('config_level_2_text', PARAM_RAW);
+        */
+
+        $mform->addElement('textarea', 'config_prompt_1', 'Prompt 1');
+        $mform->setType('config_prompt_1', PARAM_RAW);
+
+        $mform->addElement('textarea', 'config_prompt_2', 'Prompt 2');
+        $mform->setType('config_prompt_2', PARAM_RAW);
+
+        $mform->addElement('textarea', 'config_prompt_3', 'Prompt 3');
+        $mform->setType('config_prompt_3', PARAM_RAW);
+
+        $mform->addElement('textarea', 'config_prompt_4', 'Prompt 4');
+        $mform->setType('config_prompt_4', PARAM_RAW);
 
         $groupings_raw = groups_get_all_groupings($COURSE->id);
         $groupings = array();

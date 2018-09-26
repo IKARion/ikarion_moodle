@@ -1,4 +1,4 @@
-define(['jquery', 'block_grouplatency/d3'], function ($, d3) {
+define(['jquery', 'block_grouplatency/d3', 'core/config'], function ($, d3, cfg) {
 
         buildChart = function (data) {
             var allCharts, catchAll, chart, globalX, height, maxX, minX, spanW, spanX, symbols, width,
@@ -14,20 +14,10 @@ define(['jquery', 'block_grouplatency/d3'], function ($, d3) {
             width = wrapper.clientWidth;
 
             minX = d3.min(data, function (d) {
-                var bfyesterday = new Date();
-                bfyesterday.setDate(bfyesterday.getDate() - 2);
-
-                return bfyesterday;
+                return d.date;
             });
 
             maxX = d3.max(data, function (d) {
-                /*
-                var tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate());
-
-                return tomorrow;
-                */
-
                 return new Date();
             });
 
@@ -45,7 +35,7 @@ define(['jquery', 'block_grouplatency/d3'], function ($, d3) {
                 return x(new Date()) - x(d.date);
             };
 
-            height = 20;
+            height = 25;
 
             chart = function (symbol) {
                 var svg;
@@ -54,6 +44,8 @@ define(['jquery', 'block_grouplatency/d3'], function ($, d3) {
                 var g = svg.selectAll('rect').data(symbol.values).enter().append('g').attr('class', 'rect-row');
                 var timelineWidth = 0;
                 var timelineStart = 0;
+                var barchart_pos = $('.block_grouplatency .bar-graph').offset().left;
+                var barchart_width = $('.block_grouplatency .bar-graph').width();
 
                 // timeline
                 g.append('rect').attr('x', function (d) {
@@ -68,110 +60,91 @@ define(['jquery', 'block_grouplatency/d3'], function ($, d3) {
                         return d.color || '#7c7d7e';
                     }).attr('data-id', function (d) {
                     return d.id;
-                });
+                }).attr('class', 'overdue');
 
                 // post back
-                /*
                 g.append('rect').attr('x', function (d) {
-                    return timelineStart + timelineWidth;
-                }).attr('y', 0)
-                    .attr('width', function (d) {
-                        return '30';
-                    }).attr('height', height)
+                    return (timelineStart + timelineWidth) - height;
+                }).attr('y', 0).attr('width', function (d) {
+                    return height;
+                }).attr('height', height)
                     .attr('fill', function (d) {
-                        return '#fff';
-                    });
-                    */
+                        return '#003560';
+                    }).attr('class', 'answer');
 
                 // text inside timeline
                 g.append('text').text(function (d) {
-                    var date1 = d.date;
-                    var date2 = new Date();
-                    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-                    var diffHours = Math.floor(timeDiff / (1000 * 3600));
+                    return d.since;
+                }).attr("x", function (d) {
+                    var rect_end = (barchart_pos + barchart_width) - barchart_pos - 55;
 
-                    return '+ ' + diffHours + ' Std.';
-                })
-                    .attr("x", function (d) {
-                        var barchart_pos = $('.block_grouplatency .bar-graph').offset().left;
-                        var rect_pos = $(this).siblings('rect').offset().left;
-                        var rect_width = $(this).siblings('rect').width();
-                        var rect_end = (rect_pos + rect_width) - barchart_pos - 40;
+                    return rect_end;
+                }).attr("y", '18').attr("fill", "#FFF").attr("text-anchor", "middle").attr('class', 'overdue-text');
 
-                        return rect_end;
-                    })
-                    .attr("y", '15')
-                    .attr("fill", "#FFF")
-                    .attr("text-anchor", "middle");
-                ;
+                // text inside answer button
+                g.append('text').html(function (d) {
+                    return "⤺";
+                }).attr("x", function (d) {
+                    var rect_end = (barchart_pos + barchart_width) - barchart_pos - 13;
+
+                    return rect_end;
+                }).attr("y", '20').attr("fill", "#FFF").attr("text-anchor", "middle").attr('class', 'answer-icon')
+                    .attr('data-postid', function (d) {
+                        return d.postid;
+                    }).attr('data-discussid', function (d) {
+                    return d.discussionid;
+                });
             };
 
             allCharts = d3.select(wrapper).selectAll('svg').data(symbols).enter().append('svg').attr('height', height + 5).attr('class', 'border').each(chart);
-            xAxis = d3.axisBottom(x).ticks(width / 90).tickFormat(d3.timeFormat("%d.%m."));
+            xAxis = d3.axisBottom(x).ticks(2).tickFormat(d3.timeFormat("%d.%m."));
             globalX = d3.select(wrapper).append('svg').attr('class', 'axis').call(xAxis);
 
-            var chartPos = $(wrapper).position().top;
-            var chartHeight = $(wrapper).outerHeight();
+            // Define the div for the tooltip
+            var div = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
 
-            catchAll = d3.select(wrapper).append('svg')
-                .attr('class', 'zoom')
-                .style('height', chartHeight + 'px')
-                .style('top', chartPos + 'px')
-                .append('rect')
-                .attr('fill', 'none')
-                .attr('width', '100%')
-                .attr('height', '100%');
-
-            catchAll.call(d3.zoom().scaleExtent([0.1, 10]).on('zoom', function () {
-                var transform;
-
-                transform = d3.event.transform;
-                globalX.call(xAxis.scale(transform.rescaleX(x)));
-                var chart_return = allCharts.selectAll('rect').attr('x', function (d) {
-                    return transform.applyX(spanX(d));
-                }).attr('width', function (d) {
-                    return transform.k * spanW(d);
+            // Rect toolip
+            allCharts.selectAll('rect.overdue')
+                .on("mouseover", function (d) {
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html(dateFormat(d.date) + ' - ' + d.postmsg)
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function (d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
                 });
 
-                var rects = $('.block_grouplatency .bar-graph .rect-row rect');
-                $(rects).each(function () {
-                    var barchart_pos = $('.block_grouplatency .bar-graph').offset().left;
-                    var barchart_width = $('.block_grouplatency .bar-graph').width();
-                    var barchart_end = (barchart_pos + barchart_width);
-                    var rect_pos = $(this).offset().left;
-                    var rect_width = $(this).width();
-                    var rect_end = (rect_pos + rect_width);
-                    var id = $(this).data('id');
-
-                    if (rect_end < barchart_pos) {
-                        $('.block_grouplatency #dc-table-graph tr[data-id=' + id + ']').fadeOut();
-                    } else if (rect_end > barchart_pos && rect_end < barchart_end) {
-                        $('.block_grouplatency #dc-table-graph tr[data-id=' + id + ']').fadeIn();
-                    } else if (rect_pos > barchart_end) {
-                        $('.block_grouplatency #dc-table-graph tr[data-id=' + id + ']').fadeOut();
-                    } else if (rect_pos < barchart_end) {
-                        $('.block_grouplatency #dc-table-graph tr[data-id=' + id + ']').fadeIn();
-                    }
+            // Answer tooltip
+            allCharts.selectAll('text.answer-icon')
+                .on("mouseover", function (d) {
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html('antworten')
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function (d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
                 });
-
-                // apply text to rect on zoom
-                var texts = $('.block_grouplatency .bar-graph .rect-row text');
-                $(texts).each(function () {
-                    var barchart_pos = $('.block_grouplatency .bar-graph').offset().left;
-                    var rect_pos = $(this).siblings('rect').offset().left;
-                    var rect_width = $(this).siblings('rect').width();
-                    var rect_end = (rect_pos + rect_width) - barchart_pos - 40;
-
-                    $(this).attr('x', rect_end);
-                });
-
-                return chart_return;
-            }));
         }
 
         return {
             init: function (data) {
                 buildChart(data);
+
+                $('#dc-post-chart text.answer-icon').click(function (event) {
+                    $(location).attr('href', cfg.wwwroot + '/mod/forum/discuss.php?d=' + $(this).data('discussid') + '#' + $(this).data('postid'));
+                });
             }
         };
     }

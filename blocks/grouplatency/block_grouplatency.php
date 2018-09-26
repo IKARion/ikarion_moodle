@@ -39,39 +39,54 @@ class block_grouplatency extends block_base {
         $this->content = new stdClass;
         $this->content->footer = '';
 
-        $guiding_config = array(
-            $this->config->level_0 => $this->config->level_0_text,
-            $this->config->level_1 => $this->config->level_1_text,
-            $this->config->level_2 => $this->config->level_2_text,
+        $prompts = array(
+            $this->config->prompt_1,
+            $this->config->prompt_2,
+            $this->config->prompt_3,
+            $this->config->prompt_4
         );
 
-        $data = grouplatency\get_data();
-        $formatted_data = grouplatency\format_data($data);
-        $display = 'mirroring_guiding';
+        $courseid = $this->page->course->id;
+        $role = grouplatency\get_role($courseid);
 
-        switch ($display) {
+        switch ($role) {
             case 'mirroring_guiding':
-                $template_data['text'] = grouplatency\get_guiding_text($guiding_config, count($data));
-                $template_data['data'] = $formatted_data;
+                // guiding TODO
 
-                $template_data['guide'] = 1;
-                $template_data['mirroring'] = 1;
-                $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                break;
+                // mirroring
+                if (grouplatency\show_mirroring($courseid)) {
+                    $data = grouplatency\get_group_posts_data($courseid);
+
+                    $template_data['data'] = $data;
+                    $template_data['mirroring'] = 1;
+                    $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
+                    break;
+                } else {
+                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['default'] = 1;
+                    break;
+                }
 
             case 'mirroring':
-                $template_data['data'] = $formatted_data;
-                $template_data['mirroring'] = 1;
-                $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                break;
+                if (grouplatency\show_mirroring($courseid)) {
+                    $data = grouplatency\get_group_posts_data($courseid);
+
+                    $template_data['data'] = $data;
+                    $template_data['mirroring'] = 1;
+                    $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
+                    break;
+                } else {
+                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['default'] = 1;
+                    break;
+                }
 
             case 'guiding':
-                $template_data['text'] = grouplatency\get_guiding_text($guiding_config, count($data));
+                $template_data['text'] = $prompts[rand(0, 3)];
                 $template_data['guide'] = 1;
-                $template_data['data'] = $formatted_data;
 
                 break;
-            case 'none' :
+            default :
                 $template_data['none'] = 1;
                 break;
         }

@@ -23,8 +23,146 @@
 
 namespace grouplatency;
 
-function curl_request() {
-    $data = array('user' => '3', 'course' => '99');
+function get_role($courseid) {
+    global $DB, $USER;
+
+    $req = [
+        'session' => '0',
+        'query' => 'roles_member',
+        'course' => "$courseid",
+        'id' => anonymize($USER->id)
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+    $roleid = '';
+
+    foreach ($data as $item) {
+        $roleid = $item->role->id;
+    }
+
+    $role = $DB->get_record('role', array('id' => $roleid));
+
+    return $role->shortname;
+}
+
+function get_group_posts_data($courseid, $number = 5) {
+    global $DB;
+
+    $posts = get_group_posts($courseid);
+    $data = array();
+    $counter = 0;
+
+    foreach ($posts as $post) {
+        if ($counter < $number) {
+            $post_item = $DB->get_record('forum_posts', array('id' => $post->post->id));
+
+            $postmsg = \html_to_text($post_item->message);
+            $postmsg = (strlen($postmsg) > 30) ? substr($postmsg, 0, 30) . '...' : $postmsg;
+
+            $item = [
+                'id' => $counter,
+                'date' => $post_item->created,
+                'postid' => $post_item->id,
+                'postmsg' => $postmsg,
+                'discussionid' => $post->post->discussion->id
+            ];
+
+            array_push($data, $item);
+            $counter++;
+        } else {
+            break;
+        }
+    }
+
+    $data = format_date($data);
+
+    return $data;
+}
+
+function get_group_posts($courseid) {
+    global $USER;
+
+    $groupid = get_group($courseid);
+    $group_posts = array();
+
+    $req = [
+        'session' => '0',
+        'query' => 'posts_group',
+        'course' => "$courseid",
+        'id' => "$groupid"
+    ];
+
+    $response = curl_request($req);
+    $posts = serialize($response);
+
+    foreach ($posts as $post) {
+        foreach ($post->post->members as $member) {
+            //if ($member->member->id != anonymize($USER->id)) {
+                $group_posts[$post->post->time] = $post;
+            //}
+        }
+    }
+
+    ksort($group_posts, SORT_NUMERIC);
+
+    return $group_posts;
+}
+
+function show_mirroring($courseid) {
+    $posts = get_group_posts($courseid);
+
+    if (count($posts) >= 3) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function get_group($courseid) {
+    global $USER;
+
+    $req = [
+        'session' => '0',
+        'query' => 'groups_member',
+        'course' => "$courseid",
+        'id' => anonymize($USER->id)
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+    $groupid = '';
+
+    foreach ($data as $item) {
+        $groupid = $item->group->id;
+    }
+
+    return $groupid;
+}
+
+function anonymize($data) {
+    global $CFG;
+
+    return openssl_encrypt($data, $CFG->encryptmethod, $CFG->encryptkey);
+}
+
+function serialize($response) {
+    $data = explode(PHP_EOL, $response['content']);
+
+    unset($data[0]);
+
+    foreach ($data as $key => $item) {
+        if (empty($item)) {
+            unset($data[$key]);
+        } else {
+            $data[$key] = json_decode($item);
+        }
+    }
+
+    return $data;
+}
+
+function curl_request($data) {
     $data_string = json_encode($data);
 
     $url = \get_config('grouplatency', 'curl_url');
@@ -46,12 +184,13 @@ function curl_request() {
         CURLOPT_SSL_VERIFYHOST => false,
         CURLOPT_SSL_VERIFYPEER => false,     // Disabled SSL Cert checks
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_POST => false,
+        CURLOPT_POST => 1,
         CURLOPT_POSTFIELDS => $data_string,
         CURLOPT_HTTPHEADER => array(
             'Authorization: Token ' . $token,
             'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_string))
+            'Content-Length: ' . strlen($data_string),
+        )
     );
 
     $ch = curl_init();
@@ -65,39 +204,6 @@ function curl_request() {
     return array(
         "header" => $header,
         "content" => $rough_content,
-    );
-}
-
-function get_guiding_text($levels, $data_count) {
-    global $USER;
-
-    $value = 0.99;
-    $last_val = 0;
-
-    foreach ($levels as $key => $leveltext) {
-        if ($value >= $last_val && $value <= $key) {
-            $return = str_replace('{g_user}', $USER->firstname, $leveltext);
-            $return = str_replace('{n}', $data_count, $return);
-
-            $last_val = $key;
-        }
-    }
-
-    return $return;
-}
-
-function dump_data() {
-    $data = [
-        ["id" => "0", "date" => "1536303070", "postid" => 1, "posttitle" => "Wie baut man ein Anwendungsfall...", "color" => '#e63233'],
-        ["id" => "1", "date" => "1536321070", "postid" => 1, "posttitle" => "Es gibt ein neues Template für..."],
-        ["id" => "2", "date" => "1536420790", "postid" => 2, "posttitle" => "Welches Programm nehmen..."],
-        ["id" => "3", "date" => "1536435190", "postid" => 3, "posttitle" => "Ich kümmere mich um..."],
-        ["id" => "4", "date" => "1536468310", "postid" => 3, "posttitle" => "Dann übernehme ich Abschnitt.."]
-    ];
-
-    return array(
-        "header" => 'head',
-        "content" => $data,
     );
 }
 
@@ -128,14 +234,14 @@ function time_to_poll() {
     }
 }
 
-function format_data($data) {
+function format_date($data) {
     for ($i = 0; $i < count($data); $i++) {
         $timestamp = $data[$i]['date'];
-        $data[$i]['date'] = date('d.m.', $timestamp);
+        $data[$i]['date_formatted'] = date('d.m.', $timestamp);
 
         $timestamp_diff = time() - $timestamp;
         $diff = round(($timestamp_diff / 3600));
-        $data[$i]['since'] = '+' . $diff . 'Std.';
+        $data[$i]['since'] = '+ ' . $diff . ' Std.';
     }
 
     return $data;

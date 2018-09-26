@@ -1,31 +1,39 @@
-.guide-wrapper {
+.block_grouplatency .guide-wrapper {
     margin: 15px 0 0;
+    position: relative;
 }
 
-.guide-panel {
+.block_grouplatency .guide-panel {
     border-width: 3px 1px 1px;
     padding: 5px 5px 5px 5px;
     background-color: #fff;
     border: solid grey;
     color: #444;
+    width: 75%;
 }
 
-.guide-panel.red {
+.block_grouplatency .guide-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.block_grouplatency .guide-panel.red {
     border: solid #c1282f;
     color: #444;
 }
 
-.guide-panel.orange {
+.block_grouplatency .guide-panel.orange {
     border: solid #f4972b;
     color: #444;
 }
 
-.guide-panel.green {
+.block_grouplatency .guide-panel.green {
     border: solid #149346;
     color: #444;
 }
 
-#grouplatency label span {
+.block_grouplatency #grouplatency label span {
     margin-left: 15px;
 }
 
@@ -35,7 +43,7 @@
 
 .block_grouplatency #dc-post-chart {
     margin: 20px auto 0;
-    width: 240px;
+    width: 100%;
     min-height: 8px;
     height: 100%;
     border-top: 1px solid grey;
@@ -48,7 +56,7 @@
 }
 
 .block_grouplatency svg:first-of-type {
-    padding-top: 10px;
+    padding-top: 6px;
 }
 
 .block_grouplatency svg.border {
@@ -60,12 +68,34 @@
     height: 20px;
 }
 
-.block_grouplatency .zoom {
-    cursor: move;
-    position: absolute;
-    top: 0;
-    left: 0;
-    fill: none;
-    pointer-events: all;
+.block_grouplatency text.answer-icon {
+    font-weight: bold;
+    font-size: 25px;
+    cursor: pointer;
 }
 
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 5px;
+    background: #fff;
+    color: #003560;
+    border: 0;
+    pointer-events: none;
+}
+
+.block_grouplatency #dc-table-graph {
+    margin-top: 20px;
+    margin-left: -15px;
+    margin-right: -15px;
+    width: inherit;
+    max-width: inherit;
+}
+
+.block_grouplatency .overdue-text {
+    font-weight: bold;
+}
+
+.block_grouplatency .answer-icon-span {
+    background-color: aqua;
+}
