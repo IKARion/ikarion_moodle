@@ -39,59 +39,64 @@ class block_groupactivity extends block_base {
         $this->content = new stdClass;
         $this->content->footer = '';
 
-        $guiding_config = array(
-            $this->config->level_0 => $this->config->level_0_text,
-            $this->config->level_1 => $this->config->level_1_text,
-            $this->config->level_2 => $this->config->level_2_text,
+        $prompts = array(
+            $this->config->prompt_1,
+            $this->config->prompt_2,
+            $this->config->prompt_3,
+            $this->config->prompt_4
         );
 
-        $data = groupactivity\get_data();
-        $users = array(
-            0 => array(
-                'name' => 'Eugen Ebel',
-                'online' => 1,
-                'mailto' => 'eugen.ebel@fh-luebeck.de',
-                'color' => '#a05d56'
-            ),
-            1 => array(
-                'name' => 'Max Muster',
-                'online' => 0,
-                'mailto' => 'max.muster@fh-luebeck.de',
-                'color' => '#d0743c'
-            ),
-            2 => array(
-                'name' => 'Jenny Johe',
-                'online' => 1,
-                'mailto' => 'jenny.johe@fh-luebeck.de',
-                'color' => '#ff8c00'
-            )
-        );
-        $display = 'mirroring_guiding';
+        $courseid = $this->page->course->id;
+        $role = groupactivity\get_role($courseid);
 
-        switch ($display) {
+        switch ($role) {
             case 'mirroring_guiding':
-                $template_data['text'] = groupactivity\get_guiding_text($guiding_config, count($data));
-                $template_data['users'] = $users;
+                //guiding TODO
 
-                $template_data['guide'] = 1;
-                $template_data['mirroring'] = 1;
-                $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data]);
-                break;
+                //mirroring
+                if (groupactivity\show_mirroring($courseid)) {
+                    $data = groupactivity\get_group_activity_data($courseid);
+                    $template_data['mirroring'] = 1;
+                    $template_data['usersdata'] = $data['usersdata'];
+                    $template_data['mailtogroup'] = $data['mailtogroup'];
+
+                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                    $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
+                    $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
+                    $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
+                    break;
+                } else {
+                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['default'] = 1;
+                    break;
+                }
 
             case 'mirroring':
-                $template_data['mirroring'] = 1;
-                $template_data['users'] = $users;
+                if (groupactivity\show_mirroring($courseid)) {
+                    $data = groupactivity\get_group_activity_data($courseid);
+                    $template_data['mirroring'] = 1;
+                    $template_data['usersdata'] = $data['usersdata'];
+                    $template_data['mailtogroup'] = $data['mailtogroup'];
 
-                $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data]);
-                break;
+                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                    $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
+                    $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
+                    $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
+                    break;
+                } else {
+                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['default'] = 1;
+                    break;
+                }
 
             case 'guiding':
-                $template_data['text'] = groupactivity\get_guiding_text($guiding_config, count($data));
+                $template_data['text'] = $prompts[rand(1, 4)];
                 $template_data['guide'] = 1;
 
                 break;
-            case 'nothing' :
-                $template_data['nothing'] = 1;
+            default:
+                $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                $template_data['default'] = 1;
                 break;
         }
 

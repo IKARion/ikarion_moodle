@@ -1,71 +1,62 @@
-.guide-wrapper {
+.block_groupactivity .guide-wrapper {
     margin: 15px 0 0;
+    position: relative;
 }
 
-.guide-panel {
+.block_groupactivity .guide-panel {
     border-width: 3px 1px 1px;
     padding: 5px 5px 5px 5px;
     background-color: #fff;
     border: solid grey;
     color: #444;
+    width: 75%;
 }
 
-.guide-panel.red {
+.block_groupactivity .guide-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.block_groupactivity .guide-panel.red {
     border: solid #c1282f;
     color: #444;
 }
 
-.guide-panel.orange {
+.block_groupactivity .guide-panel.orange {
     border: solid #f4972b;
     color: #444;
 }
 
-.guide-panel.green {
+.block_groupactivity .guide-panel.green {
     border: solid #149346;
     color: #444;
 }
 
-#groupactivity label span {
-    margin-left: 15px;
+.block_groupactivity #dc-table-graph {
+    margin-top: 20px;
+    margin-left: -15px;
+    margin-right: -15px;
+    width: inherit;
+    max-width: inherit;
 }
 
-.block_groupactivity .axis.y {
-    display: none;
+.block_groupactivity #dc-table-graph td {
+    vertical-align: middle;
 }
 
-.block_groupactivity #dc-post-chart {
-    margin: 20px auto 0;
-    width: 240px;
-    min-height: 8px;
-    height: 100%;
-    border-top: 1px solid grey;
+.block_groupactivity #dc-activity-chart {
+    margin-top: 20px;
+    position: relative;
+    height: 270px;
 }
 
-.block_groupactivity svg {
-    vertical-align: top;
-    width: 100%;
-    height: 100%;
-}
-
-.block_groupactivity svg:first-of-type {
-    padding-top: 10px;
-}
-
-.block_groupactivity svg.border {
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
-}
-
-.block_groupactivity .axis {
-    height: 20px;
-}
-
-.block_groupactivity .zoom {
-    cursor: move;
+.block_groupactivity #dc-activity-chart svg{
+    border-bottom: 1px solid grey;
     position: absolute;
-    top: 0;
-    left: 0;
-    fill: none;
-    pointer-events: all;
 }
 
+.block_groupactivity #dc-activity-chart .user-symbols {
+    position: absolute;
+    bottom: 0;
+}

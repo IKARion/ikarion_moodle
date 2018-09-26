@@ -23,13 +23,237 @@
 
 namespace groupactivity;
 
-function curl_request() {
-    $data = array('user' => '3', 'course' => '99');
+function get_role($courseid) {
+    global $DB, $USER;
+
+    $req = [
+        'session' => '0',
+        'query' => 'roles_member',
+        'course' => "$courseid",
+        'id' => anonymize($USER->id)
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+    $roleid = '';
+
+    foreach ($data as $item) {
+        $roleid = $item->role->id;
+    }
+
+    $role = $DB->get_record('role', array('id' => $roleid));
+
+    return $role->shortname;
+}
+
+function get_group_activity_data($courseid) {
+    global $DB;
+
+    $members = get_group_members($courseid);
+    $data = array();
+    $symbol = 9818;
+    $all_mails = '';
+
+    foreach ($members as $member) {
+        $words = get_wordcount($courseid, $member);
+
+        //print_object($words);
+
+        $user = $DB->get_record('user', array('id' => deanonymize($member)));
+
+        if ($user->lastaccess > (time() - 5 * 60)) {
+            $online = 1;
+        } else {
+            $online = 0;
+        }
+
+        $user_data = [
+            'name' => $user->firstname . ' ' . $user->lastname,
+            'mailto' => $user->email,
+            'chatto' => (new \moodle_url('/message/index.php?id=' . $user->id))->out(),
+            'online' => $online,
+            'usymbol' => '&#' . $symbol . ';',
+            'profile' => (new \moodle_url('/user/view.php?id=' . $user->id . '&course=' . $courseid))->out(),
+            'words_total' => $words['total'],
+            'words_forum' => $words['forum'],
+            'words_wiki' => $words['wiki'],
+        ];
+
+        $all_mails .= $user->email . ';';
+
+        array_push($data, $user_data);
+        $symbol++;
+    }
+
+    return [
+        'usersdata' => $data,
+        'mailtogroup' => $all_mails
+    ];
+}
+
+function get_wordcount($courseid, $member) {
+    $req = [
+        'session' => '0',
+        'query' => 'contents_member',
+        'course' => "$courseid",
+        'id' => $member
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+    $wordcount_total = 0;
+    $wordcount_forum = 0;
+    $wordcount_wiki = 0;
+
+    foreach ($data as $item) {
+        if (isset($item->post)) {
+            $wordcount_forum += $item->post->words;
+            $wordcount_total += $wordcount_forum;
+        }
+        if (isset($item->page)) {
+            foreach ($item->page->members as $pm) {
+                if ($pm->member->id == $member) {
+                    $wordcount_wiki += $pm->words->insert;
+                    $wordcount_total += $wordcount_wiki;
+                }
+            }
+        }
+    }
+
+    return [
+        'total' => $wordcount_total,
+        'forum' => $wordcount_forum,
+        'wiki' => $wordcount_wiki
+    ];
+}
+
+function get_group_activities($courseid) {
+    global $USER;
+
+    $groupid = get_group($courseid);
+    $group_activities = array();
+
+    $req = [
+        'session' => '0',
+        'query' => 'contents_group',
+        'course' => "$courseid",
+        'id' => "$groupid"
+    ];
+
+    $response = curl_request($req);
+    $contents = serialize($response);
+
+    foreach ($contents as $content) {
+        if (isset($content->post)) {
+            foreach ($content->post->members as $member) {
+                //if ($member->member->id != anonymize($USER->id)) {
+                    $group_activities[$content->post->time] = $content;
+                //}
+            }
+        }
+
+        if (isset($content->page)) {
+            foreach ($content->page->members as $member) {
+                //if ($member->member->id != anonymize($USER->id)) {
+                    $group_activities[$content->page->time] = $content;
+                //}
+            }
+        }
+    }
+
+    ksort($group_activities, SORT_NUMERIC);
+
+    return $group_activities;
+}
+
+function show_mirroring($courseid) {
+    $activities = get_group_activities($courseid);
+
+    if (count($activities) >= 3) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function get_group_members($courseid) {
+    $groupid = get_group($courseid);
+
+    $req = [
+        'session' => '0',
+        'query' => 'group',
+        'course' => "$courseid",
+        'id' => $groupid
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+    $members = array();
+
+    foreach ($data as $item) {
+        foreach ($item->group->members as $member) {
+            array_push($members, $member->member->id);
+        }
+    }
+
+    return $members;
+}
+
+function get_group($courseid) {
+    global $USER;
+
+    $req = [
+        'session' => '0',
+        'query' => 'groups_member',
+        'course' => "$courseid",
+        'id' => anonymize($USER->id)
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+    $groupid = '';
+
+    foreach ($data as $item) {
+        $groupid = $item->group->id;
+    }
+
+    return $groupid;
+}
+
+function anonymize($data) {
+    global $CFG;
+
+    return openssl_encrypt($data, $CFG->encryptmethod, $CFG->encryptkey);
+}
+
+function deanonymize($data) {
+    global $CFG;
+
+    return openssl_decrypt($data, $CFG->encryptmethod, $CFG->encryptkey);
+}
+
+function serialize($response) {
+    $data = explode(PHP_EOL, $response['content']);
+
+    unset($data[0]);
+
+    foreach ($data as $key => $item) {
+        if (empty($item)) {
+            unset($data[$key]);
+        } else {
+            $data[$key] = json_decode($item);
+        }
+    }
+
+    return $data;
+}
+
+function curl_request($data) {
     $data_string = json_encode($data);
 
-    $url = \get_config('groupactivity', 'curl_url');
-    $port = \get_config('groupactivity', 'curl_port');
-    $token = \get_config('groupactivity', 'secrettoken');
+    $url = \get_config('grouplatency', 'curl_url');
+    $port = \get_config('grouplatency', 'curl_port');
+    $token = \get_config('grouplatency', 'secrettoken');
 
     $options = array(
         CURLOPT_URL => $url,
@@ -46,12 +270,13 @@ function curl_request() {
         CURLOPT_SSL_VERIFYHOST => false,
         CURLOPT_SSL_VERIFYPEER => false,     // Disabled SSL Cert checks
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_POST => false,
+        CURLOPT_POST => 1,
         CURLOPT_POSTFIELDS => $data_string,
         CURLOPT_HTTPHEADER => array(
             'Authorization: Token ' . $token,
             'Content-Type: application/json',
-            'Content-Length: ' . strlen($data_string))
+            'Content-Length: ' . strlen($data_string),
+        )
     );
 
     $ch = curl_init();
@@ -65,66 +290,6 @@ function curl_request() {
     return array(
         "header" => $header,
         "content" => $rough_content,
-    );
-}
-
-function get_guiding_text($levels, $data_count) {
-    global $USER;
-
-    $value = 0.15;
-    $last_val = 0;
-
-    foreach ($levels as $key => $leveltext) {
-        if ($value >= $last_val && $value <= $key) {
-            $return = str_replace('{g_user}', $USER->firstname, $leveltext);
-            $return = str_replace('{n}', $data_count, $return);
-
-            $last_val = $key;
-        }
-    }
-
-    return $return;
-}
-
-function dump_data() {
-    $data = [
-        ['categories' => 'KW32',
-            'values' => [
-                [
-                    'value' => '150',
-                    'rate' => 'Eugen Ebel'
-                ],
-                [
-                    'value' => '50',
-                    'rate' => 'Max Msuter'
-                ],
-                [
-                    'value' => '20',
-                    'rate' => 'Jenny Johe'
-                ],
-            ]
-        ],
-        ['categories' => 'KW33',
-            'values' => [
-                [
-                    'value' => '175',
-                    'rate' => 'Eugen Ebel'
-                ],
-                [
-                    'value' => '80',
-                    'rate' => 'Max Msuter'
-                ],
-                [
-                    'value' => '20',
-                    'rate' => 'Jenny Johe'
-                ],
-            ]
-        ]
-    ];
-
-    return array(
-        "header" => 'head',
-        "content" => $data,
     );
 }
 
@@ -158,7 +323,7 @@ function time_to_poll() {
 function format_data($data) {
     for ($i = 0; $i < count($data); $i++) {
         $timestamp = $data[$i]['date'];
-        $data[$i]['date'] = date('d.m.', $timestamp);
+        $data[$i]['date_formatted'] = date('d.m.', $timestamp);
 
         $timestamp_diff = time() - $timestamp;
         $diff = round(($timestamp_diff / 3600));
