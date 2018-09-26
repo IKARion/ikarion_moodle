@@ -18,20 +18,18 @@ namespace LogExpander\Events;
 
 defined('MOODLE_INTERNAL') || die();
 
-use \LogExpander\Repository as Repository;
-use \stdClass as PhpObj;
+use LogExpander\Repository as Repository;
 use stdClass;
+use stdClass as PhpObj;
 
-class Event extends PhpObj
-{
+class Event extends PhpObj {
     protected $repo;
 
     /**
      * Constructs a new Event.
      * @param repository $repo
      */
-    public function __construct(Repository $repo)
-    {
+    public function __construct(Repository $repo) {
         $this->repo = $repo;
     }
 
@@ -40,8 +38,7 @@ class Event extends PhpObj
      * @param [String => Mixed] $opts
      * @return [String => Mixed]
      */
-    public function read(array $opts)
-    {
+    public function read(array $opts) {
         $usergroups = groups_get_all_groups($opts['courseid'], $opts['userid']);
         $this->add_groups_tasks_context($usergroups);
         $blabla = array();
@@ -58,10 +55,9 @@ class Event extends PhpObj
         ];
     }
 
-    public function add_groups_tasks_context(array $groups)
-    {
+    public function add_groups_tasks_context(array $groups) {
         //Add context data
-        global $DB;
+        global $DB, $CFG;
         foreach ($groups as $groupid => $group) {
             $group_task_mapping_table = "group_task_mapping";
             $task_table = "group_task";
@@ -96,7 +92,7 @@ class Event extends PhpObj
                 $forum_discussion_table = "forum_discussions";
                 $forum_discussion_condition = array("groupid" => $groupid);
                 $group_forum_record = $DB->get_record($forum_discussion_table, $forum_discussion_condition);
-                if($group_forum_record){
+                if ($group_forum_record) {
                     $module_data = $this->repo->read_module($group_forum_record->forum, "forum");
                     $resources[] = $module_data->url;
                 }
@@ -105,7 +101,7 @@ class Event extends PhpObj
                 $course_module_table = "course_modules";
                 $course_mod_record_list = $DB->get_records_list($course_module_table, "id", $modids);
                 $module_type_table = "modules";
-                foreach( $course_mod_record_list as $course_mod_record){
+                foreach ($course_mod_record_list as $course_mod_record) {
                     $mod_type = $course_mod_record->module;
                     $mod_constraint = array("id" => $mod_type);
                     $mod_type_record = $DB->get_record($module_type_table, $mod_constraint);
@@ -119,28 +115,23 @@ class Event extends PhpObj
                 $group_cond = array("groupid" => $groupid);
                 $group_memeber_records = $DB->get_records($group_memeber_table, $group_cond);
                 $userids = array();
-                foreach($group_memeber_records as $group_memeber){
+                foreach ($group_memeber_records as $group_memeber) {
                     $userids[] = $group_memeber->userid;
                 }
                 $user_table = "user";
                 $user_records = $DB->get_records_list($user_table, "id", $userids);
                 $user_data_list = array();
-                foreach($user_records as $user_record){
-                    $full_name = $user_record->firstname." ".$user_record->lastname;
-                    $user_data = array("username" =>$user_record->username ,
-                        "email" => $user_record->email,
-                        "fullname" => $full_name);
+                foreach ($user_records as $user_record) {
+                    $full_name = $user_record->firstname . " " . $user_record->lastname;
+                    $user_data = array(
+                        "username" => openssl_encrypt($user_record->username, $CFG->encryptmethod, $CFG->encryptkey),
+                        "email" => openssl_encrypt($user_record->email, $CFG->encryptmethod, $CFG->encryptkey),
+                        "fullname" => openssl_encrypt($full_name, $CFG->encryptmethod, $CFG->encryptkey)
+                    );
                     $user_data_list[] = $user_data;
                 }
                 $group->members = $user_data_list;
                 $group->task = $task_data;
-
-
-
-
-
-
-
             }
         }
 

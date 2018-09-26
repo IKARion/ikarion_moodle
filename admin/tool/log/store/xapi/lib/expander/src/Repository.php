@@ -261,9 +261,13 @@ class Repository extends PhpObj {
      * @return PhpObj
      */
     public function read_user($id) {
+        global $CFG;
+
         $model = $this->read_object($id, 'user');
         $model->url = $this->cfg->wwwroot;
-        $model->fullname = $this->fullname($model);
+        $model->fullname = openssl_encrypt($this->fullname($model), $CFG->encryptmethod, $CFG->encryptkey);
+        $model->id = openssl_encrypt($model->id, $CFG->encryptmethod, $CFG->encryptkey);
+
         if (isset($model->password)) {
             unset($model->password);
         }

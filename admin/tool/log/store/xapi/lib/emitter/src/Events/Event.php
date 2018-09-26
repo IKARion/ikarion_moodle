@@ -18,7 +18,7 @@ namespace XREmitter\Events;
 
 defined('MOODLE_INTERNAL') || die();
 
-use \stdClass as PhpObj;
+use stdClass as PhpObj;
 
 abstract class Event extends PhpObj {
     protected static $verbdisplay;
@@ -29,6 +29,32 @@ abstract class Event extends PhpObj {
      * @return [String => Mixed]
      */
     public function read(array $opts) {
+        global $CFG;
+
+        if (isset($opts['context_ext'])) {
+            if (isset($opts['context_ext']['userid'])) {
+                $opts['context_ext']['userid'] = openssl_encrypt($opts['context_ext']['userid'], $CFG->encryptmethod, $CFG->encryptkey);
+            }
+
+            if (isset($opts['context_ext']['relateduserid']) && $opts['context_ext']['relateduserid'] != null) {
+                $opts['context_ext']['relateduserid'] = openssl_encrypt($opts['context_ext']['relateduserid'], $CFG->encryptmethod, $CFG->encryptkey);
+            }
+
+            if (isset($opts['context_ext']['realuserid']) && $opts['context_ext']['realuserid'] != null) {
+                $opts['context_ext']['realuserid'] = openssl_encrypt($opts['context_ext']['realuserid'], $CFG->encryptmethod, $CFG->encryptkey);
+            }
+
+            if (isset($opts['context_ext']['other'])) {
+                $other = unserialize($opts['context_ext']['other']);
+
+                if (isset($other['username'])) {
+                    $other['username'] = openssl_encrypt($other['username'], $CFG->encryptmethod, $CFG->encryptkey);
+                }
+
+                $opts['context_ext']['other'] = serialize($other);
+            }
+        }
+
         return [
             'actor' => $this->read_user($opts, 'user'),
             'context' => [
@@ -55,15 +81,15 @@ abstract class Event extends PhpObj {
     protected function read_user(array $opts, $key) {
         if (isset($opts['sendmbox']) && $opts['sendmbox'] == true) {
             return [
-                'name' => $opts[$key.'_name'],
-                'mbox' => $opts[$key.'_email'],
+                'name' => $opts[$key . '_name'],
+                'mbox' => $opts[$key . '_email'],
             ];
         } else {
             return [
-                'name' => $opts[$key.'_name'],
+                'name' => $opts[$key . '_name'],
                 'account' => [
-                    'homePage' => $opts[$key.'_url'],
-                    'name' => $opts[$key.'_id'],
+                    'homePage' => $opts[$key . '_url'],
+                    'name' => $opts[$key . '_id'],
                 ],
             ];
         }
@@ -71,21 +97,21 @@ abstract class Event extends PhpObj {
 
     protected function read_activity(array $opts, $key) {
         $activity = [
-            'id' => $opts[$key.'_url'],
+            'id' => $opts[$key . '_url'],
             'definition' => [
-                'type' => $opts[$key.'_type'],
+                'type' => $opts[$key . '_type'],
                 'name' => [
-                    $opts['context_lang'] => $opts[$key.'_name'],
+                    $opts['context_lang'] => $opts[$key . '_name'],
                 ],
                 'description' => [
-                    $opts['context_lang'] => $opts[$key.'_description'],
+                    $opts['context_lang'] => $opts[$key . '_description'],
                 ],
             ],
         ];
 
-        if (isset($opts[$key.'_ext']) && isset($opts[$key.'_ext_key'])) {
+        if (isset($opts[$key . '_ext']) && isset($opts[$key . '_ext_key'])) {
             $activity['definition']['extensions'] = [];
-            $activity['definition']['extensions'][$opts[$key.'_ext_key']] = $opts[$key.'_ext'];
+            $activity['definition']['extensions'][$opts[$key . '_ext_key']] = $opts[$key . '_ext'];
         }
 
         return $activity;
@@ -144,7 +170,7 @@ abstract class Event extends PhpObj {
                 $componentlist = [];
                 foreach ($opts['interaction_' . $listtype] as $id => $description) {
                     array_push($componentlist, (object)[
-                        'id' => (string) $id,
+                        'id' => (string)$id,
                         'description' => [
                             $opts['context_lang'] => $description,
                         ]
