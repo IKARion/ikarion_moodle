@@ -81,8 +81,9 @@ echo $OUTPUT->doctype() ?>
             <li>
 		<?php 
 			if (isloggedin()) {
-				global $DB;
+				global $DB, $USER;
 				$unread_messages = $DB->count_records_select('message', "useridto = ?", array($USER->id), "COUNT('id')");
+
 				$style = 'pull-right ild-read-messages';
 				if ($unread_messages > 0) {
 					$style = 'ild-unread-messages';

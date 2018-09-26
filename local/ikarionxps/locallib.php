@@ -66,10 +66,12 @@ function local_ikarionxps_send_event($data) {
     file_put_contents($logfile, 'content: ' . $rough_content . PHP_EOL . PHP_EOL, FILE_APPEND);
     */
 
+    /*
     $content = json_decode($rough_content);
     if ($content->size < 0 || $content->add == false) {
         $err = 1;
     }
+    */
 
     return $err;
 }
