@@ -4,10 +4,10 @@
 }
 
 .block_grouplatency .guide-panel {
-    border-width: 3px 1px 1px;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 20px 5px 5px;
     background-color: #fff;
     border: solid grey;
+    border-width: 5px 2px 1px;
     color: #444;
     width: 75%;
 }
@@ -16,6 +16,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    width: 85px;
 }
 
 .block_grouplatency .guide-panel.red {
@@ -69,8 +70,7 @@
 }
 
 .block_grouplatency text.answer-icon {
-    font-weight: bold;
-    font-size: 25px;
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -94,8 +94,4 @@ div.tooltip {
 
 .block_grouplatency .overdue-text {
     font-weight: bold;
-}
-
-.block_grouplatency .answer-icon-span {
-    background-color: aqua;
 }

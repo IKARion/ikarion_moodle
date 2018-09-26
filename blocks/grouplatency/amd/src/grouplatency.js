@@ -57,7 +57,7 @@ define(['jquery', 'block_grouplatency/d3', 'core/config'], function ($, d3, cfg)
                         return timelineWidth;
                     }).attr('height', height)
                     .attr('fill', function (d) {
-                        return d.color || '#7c7d7e';
+                        return d.color || '#808080';
                     }).attr('data-id', function (d) {
                     return d.id;
                 }).attr('class', 'overdue');
@@ -76,19 +76,18 @@ define(['jquery', 'block_grouplatency/d3', 'core/config'], function ($, d3, cfg)
                 g.append('text').text(function (d) {
                     return d.since;
                 }).attr("x", function (d) {
-                    var rect_end = (barchart_pos + barchart_width) - barchart_pos - 55;
+                    var rect_end = (barchart_pos + barchart_width) - barchart_pos - 60;
 
                     return rect_end;
-                }).attr("y", '18').attr("fill", "#FFF").attr("text-anchor", "middle").attr('class', 'overdue-text');
+                }).attr("y", '18').attr("fill", "#d2d3d4").attr("text-anchor", "middle").attr('class', 'overdue-text');
 
                 // text inside answer button
-                g.append('text').html(function (d) {
-                    return "⤺";
+                g.append('text').attr('font-family', 'FontAwesome').attr('fontz-size', '14px').text(function (d) {
+                    return '\uf112';
                 }).attr("x", function (d) {
                     var rect_end = (barchart_pos + barchart_width) - barchart_pos - 13;
-
                     return rect_end;
-                }).attr("y", '20').attr("fill", "#FFF").attr("text-anchor", "middle").attr('class', 'answer-icon')
+                }).attr("y", '19').attr("fill", "#FFF").attr("text-anchor", "middle").attr('class', 'answer-icon')
                     .attr('data-postid', function (d) {
                         return d.postid;
                     }).attr('data-discussid', function (d) {

@@ -10,12 +10,13 @@ define(['jquery', 'block_groupactivity/d3'], function ($, d3) {
                 center = 0,
                 g = svg.append("g").attr("transform", "translate(" + center + "," + margin.top + ")");
 
-            var x = d3.scaleBand().rangeRound([0, 90], .1);
+            var x = d3.scaleBand().rangeRound([0, 65], 1);
             var y = d3.scaleLinear().rangeRound([height, 0]);
 
             x.domain(data.map(function (d) {
                 return d.name;
             }));
+
             y.domain([0, d3.max(data, function (d) {
                 return d.words_total;
             })]);

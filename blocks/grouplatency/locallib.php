@@ -55,15 +55,13 @@ function get_group_posts_data($courseid, $number = 5) {
 
     foreach ($posts as $post) {
         if ($counter < $number) {
-            $post_item = $DB->get_record('forum_posts', array('id' => $post->post->id));
-
-            $postmsg = \html_to_text($post_item->message);
+            $postmsg = \html_to_text($post->post->value);
             $postmsg = (strlen($postmsg) > 30) ? substr($postmsg, 0, 30) . '...' : $postmsg;
 
             $item = [
                 'id' => $counter,
-                'date' => $post_item->created,
-                'postid' => $post_item->id,
+                'date' => $post->post->time,
+                'postid' => $post->post->id,
                 'postmsg' => $postmsg,
                 'discussionid' => $post->post->discussion->id
             ];
@@ -99,7 +97,7 @@ function get_group_posts($courseid) {
     foreach ($posts as $post) {
         foreach ($post->post->members as $member) {
             //if ($member->member->id != anonymize($USER->id)) {
-                $group_posts[$post->post->time] = $post;
+            $group_posts[$post->post->time] = $post;
             //}
         }
     }
@@ -113,6 +111,26 @@ function show_mirroring($courseid) {
     $posts = get_group_posts($courseid);
 
     if (count($posts) >= 3) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function show_guiding($courseid) {
+    $groupid = get_group($courseid);
+
+    $req = [
+        'session' => '0',
+        'query' => 'response',
+        'course' => "$courseid",
+        'id' => "$groupid"
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+
+    if ($data[1]->participation->value == null) {
         return true;
     } else {
         return false;
@@ -241,7 +259,12 @@ function format_date($data) {
 
         $timestamp_diff = time() - $timestamp;
         $diff = round(($timestamp_diff / 3600));
-        $data[$i]['since'] = '+ ' . $diff . ' Std.';
+
+        if ($diff < 1) {
+            $data[$i]['since'] = '+ ' . round(($timestamp_diff / 60)) . ' Min.';
+        } else {
+            $data[$i]['since'] = '+ ' . $diff . ' Std.';
+        }
     }
 
     return $data;

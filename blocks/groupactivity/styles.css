@@ -4,10 +4,10 @@
 }
 
 .block_groupactivity .guide-panel {
-    border-width: 3px 1px 1px;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 20px 5px 5px;
     background-color: #fff;
     border: solid grey;
+    border-width: 5px 2px 1px;
     color: #444;
     width: 75%;
 }
@@ -16,6 +16,7 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    width: 85px;
 }
 
 .block_groupactivity .guide-panel.red {
@@ -51,7 +52,7 @@
     height: 270px;
 }
 
-.block_groupactivity #dc-activity-chart svg{
+.block_groupactivity #dc-activity-chart svg {
     border-bottom: 1px solid grey;
     position: absolute;
 }
@@ -59,4 +60,23 @@
 .block_groupactivity #dc-activity-chart .user-symbols {
     position: absolute;
     bottom: 0;
+    color: #003560;
+}
+
+.block_groupactivity #dc-table-graph th {
+    border-bottom: 2px solid;
+    border-color: #808080;
+}
+
+.block_groupactivity #dc-table-graph tbody tr:last-child {
+    border-top: 2px solid;
+    border-color: #808080;
+}
+
+.block_groupactivity .user-symbol {
+    color: #003560;
+}
+
+.block_groupactivity .choices {
+    text-align: center;
 }

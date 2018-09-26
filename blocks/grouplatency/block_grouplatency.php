@@ -51,7 +51,14 @@ class block_grouplatency extends block_base {
 
         switch ($role) {
             case 'mirroring_guiding':
-                // guiding TODO
+                //guiding
+                if (grouplatency\show_guiding($courseid)) {
+                    $template_data['text'] = $prompts[rand(0, 3)];
+                    $template_data['guide'] = 1;
+                } else {
+                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['default'] = 1;
+                }
 
                 // mirroring
                 if (grouplatency\show_mirroring($courseid)) {
@@ -60,13 +67,8 @@ class block_grouplatency extends block_base {
                     $template_data['data'] = $data;
                     $template_data['mirroring'] = 1;
                     $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                    break;
-                } else {
-                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
-                    $template_data['default'] = 1;
-                    break;
                 }
-
+                break;
             case 'mirroring':
                 if (grouplatency\show_mirroring($courseid)) {
                     $data = grouplatency\get_group_posts_data($courseid);
@@ -74,20 +76,23 @@ class block_grouplatency extends block_base {
                     $template_data['data'] = $data;
                     $template_data['mirroring'] = 1;
                     $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                    break;
                 } else {
                     $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
                     $template_data['default'] = 1;
-                    break;
                 }
+                break;
 
             case 'guiding':
-                $template_data['text'] = $prompts[rand(0, 3)];
-                $template_data['guide'] = 1;
-
+                if (grouplatency\show_guiding($courseid)) {
+                    $template_data['text'] = $prompts[rand(0, 3)];
+                    $template_data['guide'] = 1;
+                } else {
+                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['default'] = 1;
+                }
                 break;
             default :
-                $template_data['none'] = 1;
+                $template_data['nothing'] = 1;
                 break;
         }
 

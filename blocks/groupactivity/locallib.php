@@ -51,14 +51,11 @@ function get_group_activity_data($courseid) {
 
     $members = get_group_members($courseid);
     $data = array();
-    $symbol = 9818;
     $all_mails = '';
+    $symbols = [9632, 9733, 9650, 10010, 9670];
 
     foreach ($members as $member) {
         $words = get_wordcount($courseid, $member);
-
-        //print_object($words);
-
         $user = $DB->get_record('user', array('id' => deanonymize($member)));
 
         if ($user->lastaccess > (time() - 5 * 60)) {
@@ -72,7 +69,7 @@ function get_group_activity_data($courseid) {
             'mailto' => $user->email,
             'chatto' => (new \moodle_url('/message/index.php?id=' . $user->id))->out(),
             'online' => $online,
-            'usymbol' => '&#' . $symbol . ';',
+            'usymbol' => '&#' . array_shift($symbols) . ';',
             'profile' => (new \moodle_url('/user/view.php?id=' . $user->id . '&course=' . $courseid))->out(),
             'words_total' => $words['total'],
             'words_forum' => $words['forum'],
@@ -82,7 +79,6 @@ function get_group_activity_data($courseid) {
         $all_mails .= $user->email . ';';
 
         array_push($data, $user_data);
-        $symbol++;
     }
 
     return [
@@ -147,7 +143,7 @@ function get_group_activities($courseid) {
         if (isset($content->post)) {
             foreach ($content->post->members as $member) {
                 //if ($member->member->id != anonymize($USER->id)) {
-                    $group_activities[$content->post->time] = $content;
+                $group_activities[$content->post->time] = $content;
                 //}
             }
         }
@@ -155,7 +151,7 @@ function get_group_activities($courseid) {
         if (isset($content->page)) {
             foreach ($content->page->members as $member) {
                 //if ($member->member->id != anonymize($USER->id)) {
-                    $group_activities[$content->page->time] = $content;
+                $group_activities[$content->page->time] = $content;
                 //}
             }
         }
@@ -173,6 +169,26 @@ function show_mirroring($courseid) {
         return true;
     } else {
         return false;
+    }
+}
+
+function show_guiding($courseid) {
+    $groupid = get_group($courseid);
+
+    $req = [
+        'session' => '0',
+        'query' => 'participation',
+        'course' => "$courseid",
+        'id' => "$groupid"
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+
+    if ($data[1]->participation->value == null) {
+        return false;
+    } else {
+        return true;
     }
 }
 

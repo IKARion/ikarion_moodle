@@ -1,12 +1,23 @@
-{{^none}}
+{{^nothing}}
     <strong>Unbeantwortete Beiträge im Forum deiner Gruppe</strong>
+    {{#default}}
+        <div class="guide-wrapper">
+            <div class="guide-panel">
+                <p>{{{text}}}</p>
+            </div>
+            <div class="guide-icon">
+                <img src="https://moodle.ikarion-projekt.de/blocks/grouplatency/pix/pointing_guide.svg" alt="Guide">
+            </div>
+        </div>
+    {{/default}}
+
     {{#guide}}
         <div class="guide-wrapper">
             <div class="guide-panel {{panel}}">
                 <p>{{{text}}}</p>
             </div>
             <div class="guide-icon">
-                <img src="https://moodle.ikarion-projekt.de/blocks/grouplatency/pix/guide.png" alt="Guide">
+                <img src="https://moodle.ikarion-projekt.de/blocks/grouplatency/pix/pointing_guide.svg" alt="Guide">
             </div>
         </div>
     {{/guide}}
@@ -32,18 +43,10 @@
                         <td style="color:{{color}}"><strong>{{since}}</strong></td>
                     {{/color}}
                     {{^color}}
-                        <td style="padding-right: 0;"><strong>{{since}}</strong></td>
+                        <td style="padding-right: 0;text-align:right;"><strong>{{since}}</strong></td>
                     {{/color}}
                 </tr>
             {{/data}}
         </table>
     {{/mirroring}}
-
-    {{#default}}
-        <div class="guide-wrapper">
-            <div class="guide-panel">
-                <p>{{{text}}}</p>
-            </div>
-        </div>
-    {{/default}}
-{{/none}}
+{{/nothing}}

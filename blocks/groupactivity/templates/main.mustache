@@ -1,12 +1,23 @@
 {{^nothing}}
-    <strong>Gruppenbeteiligung</strong>
+    <strong>Gruppenbeteiligung (Beiträge)</strong>
+    {{#default}}
+        <div class="guide-wrapper">
+            <div class="guide-panel">
+                <p>{{{text}}}</p>
+            </div>
+            <div class="guide-icon">
+                <img src="https://moodle.ikarion-projekt.de/blocks/groupactivity/pix/guide.svg" alt="Guide">
+            </div>
+        </div>
+    {{/default}}
+
     {{#guide}}
         <div class="guide-wrapper">
             <div class="guide-panel {{panel}}">
                 <p>{{{text}}}</p>
             </div>
             <div class="guide-icon">
-                <img src="https://moodle.ikarion-projekt.de/blocks/groupactivity/pix/guide.png" alt="Guide">
+                <img src="https://moodle.ikarion-projekt.de/blocks/groupactivity/pix/pointing_guide.svg" alt="Guide">
             </div>
         </div>
     {{/guide}}
@@ -14,8 +25,10 @@
     {{#mirroring}}
         <br>
 
-        <input id="forum_chkbox" type="checkbox" name="forum" value="forum" checked> Forum
-        <input id="wiki_chkbox" type="checkbox" name="wiki" value="wiki" checked> Wiki
+        <div class="choices">
+            <input id="forum_chkbox" type="checkbox" name="forum" value="forum" checked> Forum
+            <input id="wiki_chkbox" type="checkbox" name="wiki" value="wiki" checked> Wiki
+        </div>
 
         <div class='bar-graph' id='dc-activity-chart'>
             <svg id="forum-chart" width="100%" height="250" style="display:none"></svg>
@@ -38,35 +51,22 @@
             </thead>
             {{#usersdata}}
                 <tr data-id="{{id}}">
-                    <td><span>{{{usymbol}}}</span> <a href="{{profile}}">{{name}}</a></td>
+                    <td><span class="user-symbol">{{{usymbol}}}</span> <a href="{{profile}}">{{name}}</a></td>
                     <td style="text-align: center;">
                         {{#online}}<span style="color:#003560;font-size:22px;">&#x25CF</span>{{/online}}
                         {{^online}}<span style="color:#003560;font-size:22px;">&#x25CB</span>{{/online}}
                     </td>
                     <td style="text-align:center;">
-                        <a href="mailto:{{mailto}}"><i class="glyphicon glyphicon-envelope"></i></a>&nbsp;
-                        <a href="{{chatto}}"><i class="glyphicon glyphicon-comment"></i></a>
+                        <a href="mailto:{{mailto}}"><i class="fa fa-envelope"></i></a>&nbsp;
+                        <a href="{{chatto}}"><i class="fa fa-comment"></i></a>
                     </td>
                 </tr>
             {{/usersdata}}
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
                 <td>Gruppe kontaktieren</td>
                 <td></td>
-                <td style="text-align:center;"><a href="mailto:{{mailtogroup}}"><i class="glyphicon glyphicon-envelope"></i></a></td>
+                <td style="padding-left:16px;"><a href="mailto:{{mailtogroup}}"><i class="fa fa-envelope"></i></a></td>
             </tr>
         </table>
     {{/mirroring}}
-
-    {{#default}}
-        <div class="guide-wrapper">
-            <div class="guide-panel">
-                <p>{{{text}}}</p>
-            </div>
-        </div>
-    {{/default}}
 {{/nothing}}
