@@ -24,6 +24,18 @@ define(['jquery'], function ($) {
                         $('#wiki-chart').hide();
                     }
                 });
+
+                $('.user-symbols span').each(function () {
+                    var id = $(this).data('symbol-id');
+                    var rect = $('#forum-wiki-chart rect[data-symbol-id="' + id + '"]');
+                    var rect_start = $(rect).offset().left;
+                    var top = $(this).offset().top;
+
+                    $(this).offset({top: top, left: rect_start + 7});
+
+                    console.log(rect_start);
+                    console.log($(this).offset().left);
+                });
             }
         };
     }

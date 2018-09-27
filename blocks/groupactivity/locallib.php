@@ -53,6 +53,7 @@ function get_group_activity_data($courseid) {
     $data = array();
     $all_mails = '';
     $symbols = [9632, 9733, 9650, 10010, 9670];
+    $symbolid = 1;
 
     foreach ($members as $member) {
         $words = get_wordcount($courseid, $member);
@@ -65,6 +66,7 @@ function get_group_activity_data($courseid) {
         }
 
         $user_data = [
+            'symbolid' => $symbolid,
             'name' => $user->firstname . ' ' . $user->lastname,
             'mailto' => $user->email,
             'chatto' => (new \moodle_url('/message/index.php?id=' . $user->id))->out(),
@@ -79,6 +81,7 @@ function get_group_activity_data($courseid) {
         $all_mails .= $user->email . ';';
 
         array_push($data, $user_data);
+        $symbolid++;
     }
 
     return [
@@ -103,8 +106,12 @@ function get_wordcount($courseid, $member) {
 
     foreach ($data as $item) {
         if (isset($item->post)) {
-            $wordcount_forum += $item->post->words;
-            $wordcount_total += $wordcount_forum;
+            foreach ($item->post->members as $pm) {
+                if ($pm->member->id == $member) {
+                    $wordcount_forum += $pm->words->insert;
+                    $wordcount_total += $wordcount_forum;
+                }
+            }
         }
         if (isset($item->page)) {
             foreach ($item->page->members as $pm) {
@@ -185,7 +192,7 @@ function show_guiding($courseid) {
     $response = curl_request($req);
     $data = serialize($response);
 
-    if ($data[1]->participation->value == null) {
+    if ($data[1]->participation->value == 0) {
         return false;
     } else {
         return true;

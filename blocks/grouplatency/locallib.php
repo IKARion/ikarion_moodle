@@ -130,10 +130,10 @@ function show_guiding($courseid) {
     $response = curl_request($req);
     $data = serialize($response);
 
-    if ($data[1]->participation->value == null) {
-        return true;
-    } else {
+    if ($data[1]->participation->value == 0) {
         return false;
+    } else {
+        return true;
     }
 }
 

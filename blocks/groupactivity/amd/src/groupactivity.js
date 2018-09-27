@@ -10,7 +10,7 @@ define(['jquery', 'block_groupactivity/d3'], function ($, d3) {
                 center = 0,
                 g = svg.append("g").attr("transform", "translate(" + center + "," + margin.top + ")");
 
-            var x = d3.scaleBand().rangeRound([0, 65], 1);
+            var x = d3.scaleBand().rangeRound([0, 120], 1);
             var y = d3.scaleLinear().rangeRound([height, 0]);
 
             x.domain(data.map(function (d) {
@@ -33,9 +33,15 @@ define(['jquery', 'block_groupactivity/d3'], function ($, d3) {
                 })
                 .attr("width", 25)
                 .attr("height", function (d) {
-                    return height - y(d.words_total);
+                    if (d.words_total == 0) {
+                        return 1;
+                    } else {
+                        return height - y(d.words_total);
+                    }
                 })
-                .attr('fill', '#003560');
+                .attr('fill', '#003560').attr('data-symbol-id', function (d) {
+                return d.symbolid;
+            });
         }
 
         return {
