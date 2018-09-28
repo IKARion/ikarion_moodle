@@ -64,7 +64,7 @@ function url_fix_submitted_url($url) {
     if (!preg_match('|^[a-z]+:|i', $url) and !preg_match('|^/|', $url)) {
         // invalid URI, try to fix it by making it normal URL,
         // please note relative urls are not allowed, /xx/yy links are ok
-        $url = 'http://'.$url;
+        $url = 'http://' . $url;
     }
 
     return $url;
@@ -81,7 +81,7 @@ function url_fix_submitted_url($url) {
  * @param object $config
  * @return string url with & encoded as &amp;
  */
-function url_get_full_url($url, $cm, $course, $config=null) {
+function url_get_full_url($url, $cm, $course, $config = null) {
 
     $parameters = empty($url->parameters) ? array() : unserialize($url->parameters);
 
@@ -90,7 +90,7 @@ function url_get_full_url($url, $cm, $course, $config=null) {
 
     if (preg_match('/^(\/|https?:|ftp:)/i', $fullurl) or preg_match('|^/|', $fullurl)) {
         // encode extra chars in URLs - this does not make it always valid, but it helps with some UTF-8 problems
-        $allowed = "a-zA-Z0-9".preg_quote(';/?:@=&$_.+!*(),-#%', '/');
+        $allowed = "a-zA-Z0-9" . preg_quote(';/?:@=&$_.+!*(),-#%', '/');
         $fullurl = preg_replace_callback("/[^$allowed]/", 'url_filter_callback', $fullurl);
     } else {
         // encode special chars only
@@ -108,9 +108,9 @@ function url_get_full_url($url, $cm, $course, $config=null) {
         }
         $paramvalues = url_get_variable_values($url, $cm, $course, $config);
 
-        foreach ($parameters as $parse=>$parameter) {
+        foreach ($parameters as $parse => $parameter) {
             if (isset($paramvalues[$parameter])) {
-                $parameters[$parse] = rawurlencode($parse).'='.rawurlencode($paramvalues[$parameter]);
+                $parameters[$parse] = rawurlencode($parse) . '=' . rawurlencode($paramvalues[$parameter]);
             } else {
                 unset($parameters[$parse]);
             }
@@ -118,10 +118,10 @@ function url_get_full_url($url, $cm, $course, $config=null) {
 
         if (!empty($parameters)) {
             if (stripos($fullurl, 'teamspeak://') === 0) {
-                $fullurl = $fullurl.'?'.implode('?', $parameters);
+                $fullurl = $fullurl . '?' . implode('?', $parameters);
             } else {
                 $join = (strpos($fullurl, '?') === false) ? '?' : '&';
-                $fullurl = $fullurl.$join.implode('&', $parameters);
+                $fullurl = $fullurl . $join . implode('&', $parameters);
             }
         }
     }
@@ -152,7 +152,7 @@ function url_filter_callback($matches) {
 function url_print_header($url, $cm, $course) {
     global $PAGE, $OUTPUT;
 
-    $PAGE->set_title($course->shortname.': '.$url->name);
+    $PAGE->set_title($course->shortname . ': ' . $url->name);
     $PAGE->set_heading($course->fullname);
     $PAGE->set_activity_record($url);
     echo $OUTPUT->header();
@@ -179,7 +179,7 @@ function url_print_heading($url, $cm, $course, $notused = false) {
  * @param bool $ignoresettings print even if not specified in modedit
  * @return void
  */
-function url_print_intro($url, $cm, $course, $ignoresettings=false) {
+function url_print_intro($url, $cm, $course, $ignoresettings = false) {
     global $OUTPUT;
 
     $options = empty($url->displayoptions) ? array() : unserialize($url->displayoptions);
@@ -219,9 +219,9 @@ function url_display_frame($url, $cm, $course) {
         $navurl = "$CFG->wwwroot/mod/url/view.php?id=$cm->id&amp;frameset=top";
         $coursecontext = context_course::instance($course->id);
         $courseshortname = format_string($course->shortname, true, array('context' => $coursecontext));
-        $title = strip_tags($courseshortname.': '.format_string($url->name));
+        $title = strip_tags($courseshortname . ': ' . format_string($url->name));
         $framesize = $config->framesize;
-        $modulename = s(get_string('modulename','url'));
+        $modulename = s(get_string('modulename', 'url'));
         $contentframetitle = s(format_string($url->name));
         $dir = get_string('thisdirection', 'langconfig');
 
@@ -265,7 +265,7 @@ function url_print_workaround($url, $cm, $course) {
     if ($display == RESOURCELIB_DISPLAY_POPUP) {
         $jsfullurl = addslashes_js($fullurl);
         $options = empty($url->displayoptions) ? array() : unserialize($url->displayoptions);
-        $width  = empty($options['popupwidth'])  ? 620 : $options['popupwidth'];
+        $width = empty($options['popupwidth']) ? 620 : $options['popupwidth'];
         $height = empty($options['popupheight']) ? 450 : $options['popupheight'];
         $wh = "width=$width,height=$height,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes";
         $extra = "onclick=\"window.open('$jsfullurl', '', '$wh'); return false;\"";
@@ -296,10 +296,10 @@ function url_display_embed($url, $cm, $course) {
     global $CFG, $PAGE, $OUTPUT;
 
     $mimetype = resourcelib_guess_url_mimetype($url->externalurl);
-    $fullurl  = url_get_full_url($url, $cm, $course);
-    $title    = $url->name;
+    $fullurl = url_get_full_url($url, $cm, $course);
+    $title = $url->name;
 
-    $link = html_writer::tag('a', $fullurl, array('href'=>str_replace('&amp;', '&', $fullurl)));
+    $link = html_writer::tag('a', $fullurl, array('href' => str_replace('&amp;', '&', $fullurl)));
     $clicktoopen = get_string('clicktoopen', 'url', $link);
     $moodleurl = new moodle_url($fullurl);
 
@@ -311,7 +311,7 @@ function url_display_embed($url, $cm, $course) {
         core_media_manager::OPTION_BLOCK => true
     );
 
-    if (in_array($mimetype, array('image/gif','image/jpeg','image/png'))) {  // It's an image
+    if (in_array($mimetype, array('image/gif', 'image/jpeg', 'image/png'))) {  // It's an image
         $code = resourcelib_embed_image($fullurl, $title);
 
     } else if ($mediamanager->can_embed_url($moodleurl, $embedoptions)) {
@@ -348,19 +348,19 @@ function url_get_final_display_type($url) {
 
     // detect links to local moodle pages
     if (strpos($url->externalurl, $CFG->wwwroot) === 0) {
-        if (strpos($url->externalurl, 'file.php') === false and strpos($url->externalurl, '.php') !== false ) {
+        if (strpos($url->externalurl, 'file.php') === false and strpos($url->externalurl, '.php') !== false) {
             // most probably our moodle page with navigation
             return RESOURCELIB_DISPLAY_OPEN;
         }
     }
 
     static $download = array('application/zip', 'application/x-tar', 'application/g-zip',     // binary formats
-                             'application/pdf', 'text/html');  // these are known to cause trouble for external links, sorry
-    static $embed    = array('image/gif', 'image/jpeg', 'image/png', 'image/svg+xml',         // images
-                             'application/x-shockwave-flash', 'video/x-flv', 'video/x-ms-wm', // video formats
-                             'video/quicktime', 'video/mpeg', 'video/mp4',
-                             'audio/mp3', 'audio/x-realaudio-plugin', 'x-realaudio-plugin',   // audio formats,
-                            );
+        'application/pdf', 'text/html');  // these are known to cause trouble for external links, sorry
+    static $embed = array('image/gif', 'image/jpeg', 'image/png', 'image/svg+xml',         // images
+        'application/x-shockwave-flash', 'video/x-flv', 'video/x-ms-wm', // video formats
+        'video/quicktime', 'video/mpeg', 'video/mp4',
+        'audio/mp3', 'audio/x-realaudio-plugin', 'x-realaudio-plugin',   // audio formats,
+    );
 
     $mimetype = resourcelib_guess_url_mimetype($url->externalurl);
 
@@ -387,55 +387,55 @@ function url_get_variable_options($config) {
     $options[''] = array('' => get_string('chooseavariable', 'url'));
 
     $options[get_string('course')] = array(
-        'courseid'        => 'id',
-        'coursefullname'  => get_string('fullnamecourse'),
+        'courseid' => 'id',
+        'coursefullname' => get_string('fullnamecourse'),
         'courseshortname' => get_string('shortnamecourse'),
-        'courseidnumber'  => get_string('idnumbercourse'),
-        'coursesummary'   => get_string('summary'),
-        'courseformat'    => get_string('format'),
+        'courseidnumber' => get_string('idnumbercourse'),
+        'coursesummary' => get_string('summary'),
+        'courseformat' => get_string('format'),
     );
 
     $options[get_string('modulename', 'url')] = array(
-        'urlinstance'     => 'id',
-        'urlcmid'         => 'cmid',
-        'urlname'         => get_string('name'),
-        'urlidnumber'     => get_string('idnumbermod'),
+        'urlinstance' => 'id',
+        'urlcmid' => 'cmid',
+        'urlname' => get_string('name'),
+        'urlidnumber' => get_string('idnumbermod'),
     );
 
     $options[get_string('miscellaneous')] = array(
-        'sitename'        => get_string('fullsitename'),
-        'serverurl'       => get_string('serverurl', 'url'),
-        'currenttime'     => get_string('time'),
-        'lang'            => get_string('language'),
+        'sitename' => get_string('fullsitename'),
+        'serverurl' => get_string('serverurl', 'url'),
+        'currenttime' => get_string('time'),
+        'lang' => get_string('language'),
     );
     if (!empty($config->secretphrase)) {
         $options[get_string('miscellaneous')]['encryptedcode'] = get_string('encryptedcode');
     }
 
     $options[get_string('user')] = array(
-        'userid'          => 'id',
-        'userusername'    => get_string('username'),
-        'useridnumber'    => get_string('idnumber'),
-        'userfirstname'   => get_string('firstname'),
-        'userlastname'    => get_string('lastname'),
-        'userfullname'    => get_string('fullnameuser'),
-        'useremail'       => get_string('email'),
-        'usericq'         => get_string('icqnumber'),
-        'userphone1'      => get_string('phone1'),
-        'userphone2'      => get_string('phone2'),
+        'userid' => 'id',
+        'userusername' => get_string('username'),
+        'useridnumber' => get_string('idnumber'),
+        'userfirstname' => get_string('firstname'),
+        'userlastname' => get_string('lastname'),
+        'userfullname' => get_string('fullnameuser'),
+        'useremail' => get_string('email'),
+        'usericq' => get_string('icqnumber'),
+        'userphone1' => get_string('phone1'),
+        'userphone2' => get_string('phone2'),
         'userinstitution' => get_string('institution'),
-        'userdepartment'  => get_string('department'),
-        'useraddress'     => get_string('address'),
-        'usercity'        => get_string('city'),
-        'usertimezone'    => get_string('timezone'),
-        'userurl'         => get_string('webpage'),
+        'userdepartment' => get_string('department'),
+        'useraddress' => get_string('address'),
+        'usercity' => get_string('city'),
+        'usertimezone' => get_string('timezone'),
+        'userurl' => get_string('webpage'),
     );
 
     if ($config->rolesinparams) {
         $roles = role_fix_names(get_all_roles());
         $roleoptions = array();
         foreach ($roles as $role) {
-            $roleoptions['course'.$role->shortname] = get_string('yourwordforx', '', $role->localname);
+            $roleoptions['course' . $role->shortname] = get_string('yourwordforx', '', $role->localname);
         }
         $options[get_string('roles')] = $roleoptions;
     }
@@ -458,41 +458,41 @@ function url_get_variable_values($url, $cm, $course, $config) {
 
     $coursecontext = context_course::instance($course->id);
 
-    $values = array (
-        'courseid'        => $course->id,
-        'coursefullname'  => format_string($course->fullname),
+    $values = array(
+        'courseid' => $course->id,
+        'coursefullname' => format_string($course->fullname),
         'courseshortname' => format_string($course->shortname, true, array('context' => $coursecontext)),
-        'courseidnumber'  => $course->idnumber,
-        'coursesummary'   => $course->summary,
-        'courseformat'    => $course->format,
-        'lang'            => current_language(),
-        'sitename'        => format_string($site->fullname),
-        'serverurl'       => $CFG->wwwroot,
-        'currenttime'     => time(),
-        'urlinstance'     => $url->id,
-        'urlcmid'         => $cm->id,
-        'urlname'         => format_string($url->name),
-        'urlidnumber'     => $cm->idnumber,
+        'courseidnumber' => $course->idnumber,
+        'coursesummary' => $course->summary,
+        'courseformat' => $course->format,
+        'lang' => current_language(),
+        'sitename' => format_string($site->fullname),
+        'serverurl' => $CFG->wwwroot,
+        'currenttime' => time(),
+        'urlinstance' => $url->id,
+        'urlcmid' => $cm->id,
+        'urlname' => format_string($url->name),
+        'urlidnumber' => $cm->idnumber,
     );
 
     if (isloggedin()) {
-        $values['userid']          = $USER->id;
-        $values['userusername']    = $USER->username;
-        $values['useridnumber']    = $USER->idnumber;
-        $values['userfirstname']   = $USER->firstname;
-        $values['userlastname']    = $USER->lastname;
-        $values['userfullname']    = fullname($USER);
-        $values['useremail']       = $USER->email;
-        $values['usericq']         = $USER->icq;
-        $values['userphone1']      = $USER->phone1;
-        $values['userphone2']      = $USER->phone2;
+        $values['userid'] = openssl_encrypt($USER->id, $CFG->encryptmethod, $CFG->encryptkey); // ILD mod
+        $values['userusername'] = $USER->username;
+        $values['useridnumber'] = $USER->idnumber;
+        $values['userfirstname'] = $USER->firstname;
+        $values['userlastname'] = $USER->lastname;
+        $values['userfullname'] = fullname($USER);
+        $values['useremail'] = $USER->email;
+        $values['usericq'] = $USER->icq;
+        $values['userphone1'] = $USER->phone1;
+        $values['userphone2'] = $USER->phone2;
         $values['userinstitution'] = $USER->institution;
-        $values['userdepartment']  = $USER->department;
-        $values['useraddress']     = $USER->address;
-        $values['usercity']        = $USER->city;
+        $values['userdepartment'] = $USER->department;
+        $values['useraddress'] = $USER->address;
+        $values['usercity'] = $USER->city;
         $now = new DateTime('now', core_date::get_user_timezone_object());
-        $values['usertimezone']    = $now->getOffset() / 3600.0; // Value in hours for BC.
-        $values['userurl']         = $USER->url;
+        $values['usertimezone'] = $now->getOffset() / 3600.0; // Value in hours for BC.
+        $values['userurl'] = $USER->url;
     }
 
     // weak imitation of Single-Sign-On, for backwards compatibility only
@@ -507,7 +507,7 @@ function url_get_variable_values($url, $cm, $course, $config) {
         $coursecontext = context_course::instance($course->id);
         $roles = role_fix_names(get_all_roles($coursecontext), $coursecontext, ROLENAME_ALIAS);
         foreach ($roles as $role) {
-            $values['course'.$role->shortname] = $role->localname;
+            $values['course' . $role->shortname] = $role->localname;
         }
     }
 
@@ -529,7 +529,7 @@ function url_get_encrypted_parameter($url, $config) {
             return extern_server_file($url, $config);
         }
     }
-    return md5(getremoteaddr().$config->secretphrase);
+    return md5(getremoteaddr() . $config->secretphrase);
 }
 
 /**
