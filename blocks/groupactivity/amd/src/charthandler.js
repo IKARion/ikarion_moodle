@@ -27,14 +27,12 @@ define(['jquery'], function ($) {
 
                 $('.user-symbols span').each(function () {
                     var id = $(this).data('symbol-id');
+                    var chart_start = $('#dc-activity-chart').offset().left;
                     var rect = $('#forum-wiki-chart rect[data-symbol-id="' + id + '"]');
-                    var rect_start = $(rect).offset().left;
+                    var rect_x = parseInt($(rect).attr('x'));
                     var top = $(this).offset().top;
 
-                    $(this).offset({top: top, left: rect_start + 7});
-
-                    console.log(rect_start);
-                    console.log($(this).offset().left);
+                    $(this).offset({top: top, left: (chart_start + rect_x + 7)});
                 });
             }
         };

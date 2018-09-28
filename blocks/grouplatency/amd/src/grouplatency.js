@@ -142,7 +142,7 @@ define(['jquery', 'block_grouplatency/d3', 'core/config'], function ($, d3, cfg)
                 buildChart(data);
 
                 $('#dc-post-chart text.answer-icon').click(function (event) {
-                    $(location).attr('href', cfg.wwwroot + '/mod/forum/discuss.php?d=' + $(this).data('discussid') + '#' + $(this).data('postid'));
+                    $(location).attr('href', cfg.wwwroot + '/mod/forum/post.php?reply=' + $(this).data('postid'));
                 });
             }
         };
