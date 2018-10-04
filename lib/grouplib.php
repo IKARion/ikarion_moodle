@@ -1154,3 +1154,22 @@ function groups_get_most_recent_user_group($userid, $courseid) {
 
     return $records->id;
 }
+
+function groups_get_user_group_for_module($userid, $moduleid) {
+
+    global $DB;
+    $params = array('userid'=>$userid, 'moduleid'=>$moduleid);
+    $sql = "SELECT * FROM 
+	          mdl_groups_members gm,
+              mdl_group_task_mapping gtm,
+              mdl_task_module_mapping tmm
+      
+    	      WHERE
+        	      gm.userid = :userid
+                  AND gtm.groupid = gm.groupid
+                  AND gtm.taskid = tmm. taskid
+                  AND tmm.moduleid = :moduleid";
+
+    $record = $DB->get_record_sql($sql, $params);
+    return $record->groupid;
+}

@@ -161,7 +161,8 @@
             }
         } else if ($groupmode == SEPARATEGROUPS) {
 
-            $usergroup = groups_get_most_recent_user_group($USER->id, $cm->course);
+//            $usergroup = groups_get_most_recent_user_group($USER->id, $cm->course);
+            $usergroup = groups_get_user_group_for_module($USER->id, $id);
 
             if (!$usergroup) {
 
