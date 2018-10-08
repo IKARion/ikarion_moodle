@@ -759,6 +759,9 @@ function groups_print_activity_menu($cm, $urlroot, $return=false, $hideallpartic
     }
 }
 
+
+
+
 /**
  * Returns group active in course, changes the group by default if 'group' page param present
  *
@@ -1171,5 +1174,10 @@ function groups_get_user_group_for_module($userid, $moduleid) {
                   AND tmm.moduleid = :moduleid";
 
     $record = $DB->get_record_sql($sql, $params);
-    return $record->groupid;
+    if($record){
+        return $record->groupid;
+    } else{
+        return false;
+    }
+
 }

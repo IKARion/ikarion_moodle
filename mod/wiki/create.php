@@ -122,3 +122,33 @@ case 'new':
     $wikipage->print_footer();
     break;
 }
+
+// Ikarion
+
+$group_task_group = groups_get_user_group_for_module($USER->id, $cm->id);
+
+
+$script = "var groupSelectFormId = 'selectgroup';
+var groupId = $group_task_group;
+var selectButton = document.getElementById('id_groupinfo');
+if(selectButton){
+    selectButton.style.display = 'none';
+    var taskGroupName = selectButton.selectedOptions[0].text;
+    var h = document.createElement('H1');
+    var t = document.createTextNode(taskGroupName);
+    h.appendChild(t);
+    selectButton.parentElement.appendChild(h);
+    if(selectButton.value != groupId){
+        var actionFunc = function(){
+            selectButton.value = groupId;
+            selectButton.click();
+        }
+        setTimeout(actionFunc, 500);
+    }
+}  
+";
+
+
+if($group_task_group){
+    echo "<script>".$script."</script>";
+}
