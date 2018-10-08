@@ -133,17 +133,18 @@ var groupId = $group_task_group;
 var selectButton = document.getElementById('id_groupinfo');
 if(selectButton){
     selectButton.style.display = 'none';
-    var taskGroupName = selectButton.selectedOptions[0].text;
-    var h = document.createElement('H1');
-    var t = document.createTextNode(taskGroupName);
-    h.appendChild(t);
-    selectButton.parentElement.appendChild(h);
     if(selectButton.value != groupId){
         var actionFunc = function(){
             selectButton.value = groupId;
             selectButton.click();
         }
-        setTimeout(actionFunc, 500);
+        actionFunc();
+            var taskGroupName = selectButton.selectedOptions[0].text;
+    var h = document.createElement('H1');
+    var t = document.createTextNode(taskGroupName);
+    h.appendChild(t);
+    selectButton.parentElement.appendChild(h);
+        
     }
 }  
 ";
