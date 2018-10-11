@@ -35,7 +35,7 @@ class group_task_select_form extends moodleform
         $mform->addElement('select', 'group_task_id', $group_task_str, $group_task_options);
 
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('submit'));
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('select', 'group'));
         $buttonarray[] = &$mform->createElement('submit', 'createbutton', get_string('taskcreate', 'group'));
         $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
 

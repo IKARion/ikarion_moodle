@@ -89,13 +89,13 @@ class Event extends PhpObj {
                 // check if group forum exists.
                 // Single discussion in same forum created for each group
                 // Look up groupid in discussion table
-                $forum_discussion_table = "forum_discussions";
-                $forum_discussion_condition = array("groupid" => $groupid);
-                $group_forum_record = $DB->get_record($forum_discussion_table, $forum_discussion_condition);
-                if ($group_forum_record) {
-                    $module_data = $this->repo->read_module($group_forum_record->forum, "forum");
-                    $resources[] = $module_data->url;
-                }
+//                $forum_discussion_table = "forum_discussions";
+//                $forum_discussion_condition = array("groupid" => $groupid);
+//                $group_forum_record = $DB->get_record($forum_discussion_table, $forum_discussion_condition);
+//                if ($group_forum_record) {
+//                    $module_data = $this->repo->read_module($group_forum_record->forum, "forum");
+//                    $resources[] = $module_data->url;
+//                }
 
 
                 $course_module_table = "course_modules";

@@ -54,6 +54,7 @@ $string['grouptask'] = 'Group Task';
 $string['startdate'] = 'Start Date';
 $string['enddate'] = 'End Date';
 $string['grouptaskmapping'] = 'Group Task Mapping';
+$string['select'] = 'Select';
 $string['taskcreate'] = 'Create Group Tasks';
 $string['taskname'] = 'Task Name';
 $string['tasktype'] = 'Task Type';
@@ -62,6 +63,7 @@ $string['tasktypelist'] = array('collaborative wiki writing' =>'collaborative wi
 $string['taskedit'] = 'Edit Group Tasks';
 
 $string['grouptaskmappingedit'] = 'Edit Group to Task Mapping';
+
 
 // group task end
 

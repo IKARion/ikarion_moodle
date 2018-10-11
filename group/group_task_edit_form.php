@@ -99,7 +99,11 @@ class group_task_edit_form extends moodleform
         }
 
 
-        $select = $mform->addElement('select', 'activities', get_string('activities', 'group'), $activitylist);
+        $select = $mform->addElement('select',
+            'activities',
+            get_string('activities', 'group'),
+            $activitylist,
+            array('style' => 'height:60vh'));
         $select->setMultiple(true);
         $mform->getElement("activities")->setSelected($taskmodulesdefault);
 
