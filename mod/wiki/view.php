@@ -53,6 +53,8 @@ $swid = optional_param('swid', 0, PARAM_INT); // Subwiki ID
 
 $PAGE->force_settings_menu();
 
+
+
 /*
  * Case 0:
  *
@@ -66,6 +68,9 @@ if ($id) {
     if (!$cm = get_coursemodule_from_id('wiki', $id)) {
         print_error('invalidcoursemodule');
     }
+
+    // Ikarion
+    $group_task_group = groups_get_user_group_for_module($USER->id, $cm->id);
 
     // Checking course instance
     $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
@@ -84,7 +89,11 @@ if ($id) {
     // that wiki
 
     // Getting current group id
-    $currentgroup = groups_get_activity_group($cm);
+    if($group_task_group){
+        $currentgroup = $group_task_group;
+    }else {
+        $currentgroup = groups_get_activity_group($cm);
+    }
 
     // Ikarion
 //    $currentgroup = groups_get_user_group_for_module($USER->id, $id);
@@ -139,7 +148,14 @@ if ($id) {
         print_error('invalidcoursemodule');
     }
 
-    $currentgroup = $subwiki->groupid;
+    // Ikarion
+    $group_task_group = groups_get_user_group_for_module($USER->id, $cm->id);
+
+    if($group_task_group){
+        $currentgroup = $group_task_group;
+    }else {
+        $currentgroup = $subwiki->groupid;
+    }
 
     // Checking course instance
     $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
@@ -314,8 +330,7 @@ $PAGE->requires->js(new moodle_url('/mod/wiki/viewconceptsv4.js'));
 
 
 
-// Ikarion
-$group_task_group = groups_get_user_group_for_module($USER->id, $cm->id);
+
 
 //$script = "var groupSelectFormId = 'selectgroup';
 //var groupId = $group_task_group;
@@ -331,6 +346,28 @@ $group_task_group = groups_get_user_group_for_module($USER->id, $cm->id);
 //}
 //";
 
+//$script = "var groupSelectFormId = 'selectgroup';
+//var groupId = $group_task_group;
+//var selectForm = document.getElementById(groupSelectFormId);
+//var selectEleList = selectForm.getElementsByTagName('select');
+//if(selectEleList.length > 0){
+//    var selectButton = selectEleList[0];
+//    selectButton.style.display = 'none';
+//    var taskGroupName = selectButton.selectedOptions[0].text;
+//    var h = document.createElement('H1');
+//    var t = document.createTextNode(taskGroupName);
+//    h.appendChild(t);
+//    selectForm.appendChild(h);
+//    if(selectButton.value != groupId){
+//        var actionFunc = function(){
+//            selectButton.value = groupId;
+//            selectButton.click();
+//        }
+//        setTimeout(actionFunc, 500);
+//    }
+//}
+//";
+
 $script = "var groupSelectFormId = 'selectgroup';
 var groupId = $group_task_group;
 var selectForm = document.getElementById(groupSelectFormId);
@@ -338,7 +375,13 @@ var selectEleList = selectForm.getElementsByTagName('select');
 if(selectEleList.length > 0){
     var selectButton = selectEleList[0];
     selectButton.style.display = 'none';
-    var taskGroupName = selectButton.selectedOptions[0].text;
+    var taskGroupName = '____';
+    var options = selectButton.options;
+    for(var i = 0; i<options.length; i++){
+        if(options[i].value == groupId){
+            taskGroupName = options[i].text;
+        }
+    }
     var h = document.createElement('H1');
     var t = document.createTextNode(taskGroupName);
     h.appendChild(t);
