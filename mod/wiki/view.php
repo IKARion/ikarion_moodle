@@ -188,12 +188,16 @@ if ($id) {
         print_error('invalidcoursemodule');
     }
 
+
     // Checking course instance
     $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 
     require_login($course, true, $cm);
 
     $groupmode = groups_get_activity_groupmode($cm);
+
+    // Ikarion
+    $group_task_group = groups_get_user_group_for_module($USER->id, $cm->id);
 
     if ($wiki->wikimode == 'individual' && ($groupmode == SEPARATEGROUPS || $groupmode == VISIBLEGROUPS)) {
         list($gid, $uid) = explode('-', $groupanduser);
@@ -204,6 +208,10 @@ if ($id) {
         $gid = 0;
         $uid = 0;
     } else {
+        // Ikarion
+        if($group_task_group){
+            $currentgroup = $group_task_group;
+        }
         $gid = $currentgroup;
         $uid = 0;
     }

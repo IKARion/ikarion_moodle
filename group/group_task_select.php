@@ -58,7 +58,14 @@ if ($editform->is_cancelled()) {
         $group_task_id = $DB->insert_record('group_task', $record);
         redirect(new moodle_url('/group/group_task_edit.php',
             array('courseid' => $courseid, 'group_task_id' => $group_task_id)));
-    } else {
+    }elseif($data->deletebutton){
+        $group_task_id = $data->group_task_id;
+        $DB->delete_records('group_task', array('id' => $group_task_id));
+        $DB->delete_records('group_task_mapping', array('taskid'=> $group_task_id));
+        $DB->delete_records('task_module_mapping', array('taskid' => $group_task_id));
+        redirect($returnurl);
+    }
+    else {
         $group_task_id = $data->group_task_id;
         redirect(new moodle_url('/group/group_task_edit.php',
             array('courseid' => $courseid, 'group_task_id' => $group_task_id)));

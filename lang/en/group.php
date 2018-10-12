@@ -49,6 +49,7 @@ $string['all'] = 'Group Formation';
 
 // group task begin
 $string['activities'] = 'Activities';
+$string['delete'] = "Delete";
 $string['editgrouptasks'] = 'Edit Group Tasks';
 $string['grouptask'] = 'Group Task';
 $string['startdate'] = 'Start Date';
