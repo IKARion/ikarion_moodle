@@ -109,7 +109,7 @@ function get_wordcount($courseid, $member) {
             foreach ($item->post->members as $pm) {
                 if ($pm->member->id == $member) {
                     $wordcount_forum += $pm->words->insert;
-                    $wordcount_total += $wordcount_forum;
+                    $wordcount_total += $pm->words->insert;
                 }
             }
         }
@@ -117,7 +117,7 @@ function get_wordcount($courseid, $member) {
             foreach ($item->page->members as $pm) {
                 if ($pm->member->id == $member) {
                     $wordcount_wiki += $pm->words->insert;
-                    $wordcount_total += $wordcount_wiki;
+                    $wordcount_total += $pm->words->insert;
                 }
             }
         }
@@ -130,49 +130,42 @@ function get_wordcount($courseid, $member) {
     ];
 }
 
-function get_group_activities($courseid) {
-    global $USER;
-
+function get_activity_count($courseid) {
+    $total = 0;
     $groupid = get_group($courseid);
-    $group_activities = array();
 
     $req = [
         'session' => '0',
         'query' => 'contents_group',
         'course' => "$courseid",
-        'id' => "$groupid"
+        'id' => $groupid
     ];
 
     $response = curl_request($req);
-    $contents = serialize($response);
+    $data = serialize($response);
 
-    foreach ($contents as $content) {
-        if (isset($content->post)) {
-            foreach ($content->post->members as $member) {
-                //if ($member->member->id != anonymize($USER->id)) {
-                $group_activities[$content->post->time] = $content;
-                //}
+    foreach ($data as $item) {
+        if (isset($item->post)) {
+            foreach ($item->post->members as $pm) {
+                $patches = count($pm->patches);
+                $total += $patches;
             }
         }
-
-        if (isset($content->page)) {
-            foreach ($content->page->members as $member) {
-                //if ($member->member->id != anonymize($USER->id)) {
-                $group_activities[$content->page->time] = $content;
-                //}
+        if (isset($item->page)) {
+            foreach ($item->page->members as $pm) {
+                $patches = count($pm->patches);
+                $total += $patches;
             }
         }
     }
 
-    ksort($group_activities, SORT_NUMERIC);
-
-    return $group_activities;
+    return $total;
 }
 
 function show_mirroring($courseid) {
-    $activities = get_group_activities($courseid);
+    $activities = get_activity_count($courseid);
 
-    if (count($activities) >= 3) {
+    if ($activities >= 3) {
         return true;
     } else {
         return false;
@@ -181,6 +174,7 @@ function show_mirroring($courseid) {
 
 function show_guiding($courseid) {
     $groupid = get_group($courseid);
+    $activities = get_activity_count($courseid);
 
     $req = [
         'session' => '0',
@@ -192,10 +186,14 @@ function show_guiding($courseid) {
     $response = curl_request($req);
     $data = serialize($response);
 
-    if ($data[1]->participation->value == 0) {
+    if ($data[1]->participation->value != 1) {
         return false;
     } else {
-        return true;
+        if ($activities >= 3) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
@@ -235,9 +233,12 @@ function get_group($courseid) {
     $response = curl_request($req);
     $data = serialize($response);
     $groupid = '';
+    $temp_group = 0;
 
     foreach ($data as $item) {
-        $groupid = $item->group->id;
+        if ($item->group->id > $temp_group) {
+            $groupid = $temp_group = $item->group->id;
+        }
     }
 
     return $groupid;

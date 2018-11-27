@@ -53,3 +53,5 @@ $string['mirroring'] = 'Grouping Mirroring';
 $string['guiding'] = 'Grouping Guiding';
 $string['mirroring_guiding'] = 'Grouping Mirroring & Guiding';
 $string['nothing'] = 'Grouping Nothing to show';
+
+$string['noactivity'] = 'Derzeit gibt es keine neuen Hinweise zur Beteiligung in eurer Gruppe.';

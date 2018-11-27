@@ -1,30 +1,22 @@
 {{^nothing}}
-    <strong>Gruppenbeteiligung (Beiträge)</strong>
+    <strong>Aktuelle Gruppenbeteiligung</strong>
     {{#default}}
         <div class="guide-wrapper">
-            <div class="guide-panel">
+            <div class="guide-panel fullwidth">
                 <p>{{{text}}}</p>
-            </div>
-            <div class="guide-icon">
-                <img src="https://moodle.ikarion-projekt.de/blocks/groupactivity/pix/guide.svg" alt="Guide">
             </div>
         </div>
     {{/default}}
 
     {{#guide}}
         <div class="guide-wrapper">
-            <div class="guide-panel {{panel}}">
+            <div class="guide-panel {{panel}} fullwidth">
                 <p>{{{text}}}</p>
-            </div>
-            <div class="guide-icon">
-                <img src="https://moodle.ikarion-projekt.de/blocks/groupactivity/pix/pointing_guide.svg" alt="Guide">
             </div>
         </div>
     {{/guide}}
 
     {{#mirroring}}
-        <br>
-
         <div class="choices">
             <input id="forum_chkbox" type="checkbox" name="forum" value="forum" checked> Forum
             <input id="wiki_chkbox" type="checkbox" name="wiki" value="wiki" checked> Wiki
@@ -54,8 +46,8 @@
                     <td><span class="user-symbol">{{{usymbol}}}</span></td>
                     <td><a href="{{profile}}">{{name}}</a></td>
                     <td style="text-align: center;">
-                        {{#online}}<span style="color:#003560;font-size:22px;">&#x25CF</span>{{/online}}
-                        {{^online}}<span style="color:#003560;font-size:22px;">&#x25CB</span>{{/online}}
+                        {{#online}}<span style="color:#003560;"><i class="fa fa-check"></i></span>{{/online}}
+                        {{^online}}<span style="color:#003560;"><i class="fa fa-times"></i></span>{{/online}}
                     </td>
                     <td style="text-align:center;">
                         <a href="mailto:{{mailto}}"><i class="fa fa-envelope"></i></a>&nbsp;

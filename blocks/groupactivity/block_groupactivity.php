@@ -21,7 +21,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once($CFG->dirroot . '/blocks/groupactivity/locallib.php');
+require_once($CFG->dirroot . '/blocks/groupactivity/classes/request.php');
 
 class block_groupactivity extends block_base {
 
@@ -47,27 +47,122 @@ class block_groupactivity extends block_base {
         );
 
         $courseid = $this->page->course->id;
-        $role = groupactivity\get_role($courseid);
+        $request = new groupactivity\request($courseid, $USER->id);
+        $role = $request->getrole();
+        $out = null;
 
         switch ($role) {
-            case 'mirroring_guiding':
+            case 'mgo':
                 //guiding
-                if (groupactivity\show_guiding($courseid)) {
+                if ($request->showguiding()) {
                     $template_data['text'] = $prompts[rand(0, 3)];
                     $template_data['guide'] = 1;
                 } else {
-                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
                     $template_data['default'] = 1;
                 }
 
                 //mirroring
-                if (groupactivity\show_mirroring($courseid)) {
-                    $data = groupactivity\get_group_activity_data($courseid);
+                $data = $request->get_group_activity_data();
+                $template_data['mirroring'] = 1;
+                $template_data['usersdata'] = $data['usersdata'];
+                $template_data['mailtogroup'] = $data['mailtogroup'];
+
+                if ($courseid == 2) {
+                    $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
+                } else {
+                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                }
+
+                $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
+                $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
+                $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
+
+                break;
+
+            case 'mgma':
+                //guiding
+                if ($request->showguiding()) {
+                    $template_data['text'] = $prompts[rand(0, 3)];
+                    $template_data['guide'] = 1;
+                } else {
+                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
+                    $template_data['default'] = 1;
+                }
+
+                //mirroring
+                $data = $request->get_group_activity_data();
+                $template_data['mirroring'] = 1;
+                $template_data['usersdata'] = $data['usersdata'];
+                $template_data['mailtogroup'] = $data['mailtogroup'];
+
+                if ($courseid == 2) {
+                    $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
+                } else {
+                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                }
+
+                $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
+                $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
+                $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
+
+                $out = $OUTPUT->render_from_template('block_groupactivity/mgma', $template_data);
+
+                break;
+
+            case 'mgmb':
+                //guiding
+                if ($request->showguiding()) {
+                    $template_data['text'] = $prompts[rand(0, 3)];
+                    $template_data['guide'] = 1;
+                } else {
+                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
+                    $template_data['default'] = 1;
+                }
+
+                //mirroring
+                $data = $request->get_group_activity_data();
+                $template_data['mirroring'] = 1;
+                $template_data['usersdata'] = $data['usersdata'];
+                $template_data['mailtogroup'] = $data['mailtogroup'];
+
+                if ($courseid == 2) {
+                    $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
+                } else {
+                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                }
+
+                $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
+                $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
+                $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
+
+                $out = $OUTPUT->render_from_template('block_groupactivity/mgmb', $template_data);
+
+                break;
+
+            case 'mirroring_guiding':
+                //guiding
+                if ($request->showguiding() && $request->activitycount() > 3) {
+                    $template_data['text'] = $prompts[rand(0, 3)];
+                    $template_data['guide'] = 1;
+                } else {
+                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
+                    $template_data['default'] = 1;
+                }
+
+                //mirroring
+                if ($request->activitycount() > 3) {
+                    $data = $request->get_group_activity_data();
                     $template_data['mirroring'] = 1;
                     $template_data['usersdata'] = $data['usersdata'];
                     $template_data['mailtogroup'] = $data['mailtogroup'];
 
-                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                    if ($courseid == 2) {
+                        $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
+                    } else {
+                        $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                    }
+
                     $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
                     $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
                     $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
@@ -75,28 +170,33 @@ class block_groupactivity extends block_base {
                 break;
 
             case 'mirroring':
-                if (groupactivity\show_mirroring($courseid)) {
-                    $data = groupactivity\get_group_activity_data($courseid);
+                if ($request->activitycount() > 3) {
+                    $data = $request->get_group_activity_data();
                     $template_data['mirroring'] = 1;
                     $template_data['usersdata'] = $data['usersdata'];
                     $template_data['mailtogroup'] = $data['mailtogroup'];
 
-                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                    if ($courseid == 2) {
+                        $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
+                    } else {
+                        $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
+                    }
+
                     $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
                     $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
                     $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
                 } else {
-                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
                     $template_data['default'] = 1;
                 }
                 break;
 
             case 'guiding':
-                if (groupactivity\show_guiding($courseid)) {
+                if ($request->showguiding() && $request->activitycount() > 3) {
                     $template_data['text'] = $prompts[rand(0, 3)];
                     $template_data['guide'] = 1;
                 } else {
-                    $template_data['text'] = 'Derzeit gibt es keine neuen Informationen zu eurer Gruppenarbeit.';
+                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
                     $template_data['default'] = 1;
                 }
                 break;
@@ -105,7 +205,9 @@ class block_groupactivity extends block_base {
                 break;
         }
 
-        $out = $OUTPUT->render_from_template('block_groupactivity/main', $template_data);
+        if ($out == null) {
+            $out = $OUTPUT->render_from_template('block_groupactivity/main', $template_data);
+        }
 
         $this->content->text = $out;
         $this->content->footer = '';
