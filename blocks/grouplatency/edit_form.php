@@ -69,6 +69,7 @@ class block_grouplatency_edit_form extends block_edit_form {
         $mform->addElement('textarea', 'config_prompt_4', 'Prompt 4');
         $mform->setType('config_prompt_4', PARAM_RAW);
 
+        /*
         $groupings_raw = groups_get_all_groupings($COURSE->id);
         $groupings = array();
 
@@ -85,5 +86,6 @@ class block_grouplatency_edit_form extends block_edit_form {
         $mform->addElement('select', 'config_mirroring_guiding', get_string('mirroring_guiding', 'block_grouplatency'),
             $groupings);
         $mform->addElement('select', 'config_nothing', get_string('nothing', 'block_grouplatency'), $groupings);
+        */
     }
 }

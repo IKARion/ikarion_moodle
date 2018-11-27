@@ -12,6 +12,10 @@
     width: 75%;
 }
 
+.block_grouplatency .guide-panel.fullwidth {
+    width: 100%;
+}
+
 .block_grouplatency .guide-icon {
     position: absolute;
     bottom: 0;
@@ -43,17 +47,17 @@
 }
 
 .block_grouplatency #dc-post-chart {
-    margin: 20px auto 0;
+    margin: 15px auto 0;
     width: 100%;
     min-height: 8px;
-    height: 100%;
+    height: auto;
     border-top: 1px solid grey;
 }
 
 .block_grouplatency svg {
     vertical-align: top;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .block_grouplatency svg:first-of-type {
@@ -72,16 +76,27 @@
 .block_grouplatency text.answer-icon {
     font-size: 14px;
     cursor: pointer;
+    font-family: 'FontAwesome';
 }
 
-div.tooltip {
+div.ttip {
     position: absolute;
-    text-align: center;
     padding: 5px;
     background: #fff;
     color: #003560;
-    border: 0;
-    pointer-events: none;
+    border: 1px solid #AEAEAE;
+    font-size: 12px;
+    max-width: 250px;
+}
+
+div.ttip::after {
+    content: " ";
+    position: absolute;
+    top: 45%;
+    left: 100%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
 }
 
 .block_grouplatency #dc-table-graph {
@@ -94,4 +109,8 @@ div.tooltip {
 
 .block_grouplatency .overdue-text {
     font-weight: bold;
+}
+
+.block_grouplatency.block .content {
+    padding: 15px;
 }

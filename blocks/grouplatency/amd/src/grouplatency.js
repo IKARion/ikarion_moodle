@@ -57,7 +57,7 @@ define(['jquery', 'block_grouplatency/d3', 'core/config'], function ($, d3, cfg)
                         return timelineWidth;
                     }).attr('height', height)
                     .attr('fill', function (d) {
-                        return d.color || '#808080';
+                        return d.color || '#AEAEAE';
                     }).attr('data-id', function (d) {
                     return d.id;
                 }).attr('class', 'overdue');
@@ -79,7 +79,7 @@ define(['jquery', 'block_grouplatency/d3', 'core/config'], function ($, d3, cfg)
                     var rect_end = (barchart_pos + barchart_width) - barchart_pos - 60;
 
                     return rect_end;
-                }).attr("y", '18').attr("fill", "#d2d3d4").attr("text-anchor", "middle").attr('class', 'overdue-text');
+                }).attr("y", '18').attr("fill", "#003560").attr("text-anchor", "middle").attr('class', 'overdue-text');
 
                 // text inside answer button
                 g.append('text').attr('font-family', 'FontAwesome').attr('fontz-size', '14px').text(function (d) {
@@ -101,49 +101,38 @@ define(['jquery', 'block_grouplatency/d3', 'core/config'], function ($, d3, cfg)
 
             // Define the div for the tooltip
             var div = d3.select("body").append("div")
-                .attr("class", "tooltip")
-                .style("opacity", 0);
+                .attr("class", "ttip")
+                .style("display", 'none');
 
             // Rect toolip
-            allCharts.selectAll('rect.overdue')
+            allCharts.selectAll('.rect-row')
                 .on("mouseover", function (d) {
                     div.transition()
                         .duration(200)
-                        .style("opacity", .9);
-                    div.html(dateFormat(d.date) + ' - ' + d.postmsg)
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                })
-                .on("mouseout", function (d) {
-                    div.transition()
-                        .duration(500)
-                        .style("opacity", 0);
+                        .style("display", "block");
+                    div.html(
+                        '<span style="color:#AEAEAE;">' + d.since + '</span><br>'
+                        + '<a class="user-profile" href="' + cfg.wwwroot + '/user/view.php?id=' + d.userid + '&course=' + d.courseid + '"><strong>' + d.user + '</strong></a><br>'
+                        + '<a class="post-message" href="' + cfg.wwwroot + '/mod/forum/post.php?reply=' + d.postid + '"><span' +
+                        ' style="text-decoration:underline;">' + d.postmsg + '</span></a>'
+                    ).style("left", function (d) {
+                        var rect = d3.event.srcElement;
+                        var text = $(rect).siblings('text.overdue-text').offset().left;
+                        var tooltip = $('.ttip').outerWidth();
+
+                        return (text - tooltip - 15) + "px";
+                        //return (d3.event.pageX) + "px";
+                    }).style("top", (d3.event.pageY - 28) + "px");
                 });
 
-            // Answer tooltip
-            allCharts.selectAll('text.answer-icon')
-                .on("mouseover", function (d) {
-                    div.transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                    div.html('antworten')
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                })
-                .on("mouseout", function (d) {
-                    div.transition()
-                        .duration(500)
-                        .style("opacity", 0);
-                });
+            $('.ttip').on("mouseleave", function (d) {
+                $(this).hide(500);
+            });
         }
 
         return {
             init: function (data) {
                 buildChart(data);
-
-                $('#dc-post-chart text.answer-icon').click(function (event) {
-                    $(location).attr('href', cfg.wwwroot + '/mod/forum/post.php?reply=' + $(this).data('postid'));
-                });
             }
         };
     }

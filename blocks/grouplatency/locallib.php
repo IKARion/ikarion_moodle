@@ -46,41 +46,45 @@ function get_role($courseid) {
     return $role->shortname;
 }
 
-function get_group_posts_data($courseid, $number = 5) {
+function get_group_posts_data($courseid) {
     global $DB;
 
     $posts = get_group_posts($courseid);
     $data = array();
     $counter = 0;
 
+    ksort($posts, SORT_NUMERIC);
+
     foreach ($posts as $post) {
-        if ($counter < $number) {
-            $postmsg = \html_to_text($post->post->value);
-            $postmsg = (strlen($postmsg) > 30) ? substr($postmsg, 0, 30) . '...' : $postmsg;
+        $userid = deanonymize($post->post->members[0]->member->id);
+        $user = $DB->get_record('user', array('id' => $userid), 'id, firstname, lastname');
 
-            $item = [
-                'id' => $counter,
-                'date' => $post->post->time,
-                'postid' => $post->post->id,
-                'postmsg' => $postmsg,
-                'discussionid' => $post->post->discussion->id
-            ];
+        $postmsg = \html_to_text($post->post->value);
+        $postmsg = (strlen($postmsg) > 120) ? substr($postmsg, 0, 120) . '...' : $postmsg;
 
-            array_push($data, $item);
-            $counter++;
-        } else {
-            break;
-        }
+        $item = [
+            'id' => $counter,
+            'date' => $post->post->time,
+            'postid' => $post->post->id,
+            'postmsg' => $postmsg,
+            'discussionid' => $post->post->discussion->id,
+            'userid' => $userid,
+            'user' => $user->firstname . ' ' . $user->lastname,
+            'courseid' => $courseid
+        ];
+
+        array_push($data, $item);
+        $counter++;
+
     }
 
+    $data = array_slice($data, -3, 3);
     $data = format_date($data);
 
     return $data;
 }
 
 function get_group_posts($courseid) {
-    global $USER;
-
     $groupid = get_group($courseid);
     $group_posts = array();
 
@@ -95,22 +99,48 @@ function get_group_posts($courseid) {
     $posts = serialize($response);
 
     foreach ($posts as $post) {
-        foreach ($post->post->members as $member) {
-            //if ($member->member->id != anonymize($USER->id)) {
-            $group_posts[$post->post->time] = $post;
-            //}
-        }
+        $group_posts[$post->post->time] = $post;
     }
-
-    ksort($group_posts, SORT_NUMERIC);
 
     return $group_posts;
 }
 
-function show_mirroring($courseid) {
-    $posts = get_group_posts($courseid);
+function get_activity_count($courseid) {
+    $total = 0;
+    $groupid = get_group($courseid);
 
-    if (count($posts) >= 3) {
+    $req = [
+        'session' => '0',
+        'query' => 'contents_group',
+        'course' => "$courseid",
+        'id' => $groupid
+    ];
+
+    $response = curl_request($req);
+    $data = serialize($response);
+
+    foreach ($data as $item) {
+        if (isset($item->post)) {
+            foreach ($item->post->members as $pm) {
+                $patches = count($pm->patches);
+                $total += $patches;
+            }
+        }
+        if (isset($item->page)) {
+            foreach ($item->page->members as $pm) {
+                $patches = count($pm->patches);
+                $total += $patches;
+            }
+        }
+    }
+
+    return $total;
+}
+
+function show_mirroring($courseid) {
+    $activities = get_activity_count($courseid);
+
+    if ($activities >= 3) {
         return true;
     } else {
         return false;
@@ -119,6 +149,7 @@ function show_mirroring($courseid) {
 
 function show_guiding($courseid) {
     $groupid = get_group($courseid);
+    $activities = get_activity_count($courseid);
 
     $req = [
         'session' => '0',
@@ -130,10 +161,14 @@ function show_guiding($courseid) {
     $response = curl_request($req);
     $data = serialize($response);
 
-    if ($data[1]->participation->value == 0) {
+    if ($data[1]->response->value != 1) {
         return false;
     } else {
-        return true;
+        if ($activities >= 3) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
@@ -150,9 +185,12 @@ function get_group($courseid) {
     $response = curl_request($req);
     $data = serialize($response);
     $groupid = '';
+    $temp_group = 0;
 
     foreach ($data as $item) {
-        $groupid = $item->group->id;
+        if ($item->group->id > $temp_group) {
+            $groupid = $temp_group = $item->group->id;
+        }
     }
 
     return $groupid;
@@ -162,6 +200,12 @@ function anonymize($data) {
     global $CFG;
 
     return openssl_encrypt($data, $CFG->encryptmethod, $CFG->encryptkey);
+}
+
+function deanonymize($data) {
+    global $CFG;
+
+    return openssl_decrypt($data, $CFG->encryptmethod, $CFG->encryptkey);
 }
 
 function serialize($response) {

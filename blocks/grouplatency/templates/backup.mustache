@@ -1,0 +1,52 @@
+{{^nothing}}
+    <strong>Unbeantwortete Beiträge im Forum</strong>
+    {{#default}}
+        <div class="guide-wrapper">
+            <div class="guide-panel">
+                <p>{{{text}}}</p>
+            </div>
+            <div class="guide-icon">
+                <img src="https://moodle.ikarion-projekt.de/blocks/grouplatency/pix/guide.svg" alt="Guide">
+            </div>
+        </div>
+    {{/default}}
+
+    {{#guide}}
+        <div class="guide-wrapper">
+            <div class="guide-panel {{panel}}">
+                <p>{{{text}}}</p>
+            </div>
+            <div class="guide-icon">
+                <img src="https://moodle.ikarion-projekt.de/blocks/grouplatency/pix/pointing_guide.svg" alt="Guide">
+            </div>
+        </div>
+    {{/guide}}
+
+    {{#mirroring}}
+        <div class='bar-graph' id='dc-post-chart'></div>
+
+        <table class='table table-hover' id='dc-table-graph'>
+            <thead>
+            <tr class='header'>
+                <th>Datum</th>
+                <th>Beitrag</th>
+                <th>seit</th>
+            </tr>
+            </thead>
+            {{#data}}
+                <tr data-id="{{id}}">
+                    <td>{{date_formatted}}</td>
+                    <td style="width: 48%">
+                        <a href="https://moodle.ikarion-projekt.de/mod/forum/discuss.php?d={{discussionid}}#{{postid}}">{{postmsg}}</a>
+                    </td>
+                    {{#color}}
+                        <td style="color:{{color}}"><strong>{{since}}</strong></td>
+                    {{/color}}
+                    {{^color}}
+                        <td style="text-align:right;"><strong>{{since}}</strong></td>
+                    {{/color}}
+                </tr>
+            {{/data}}
+        </table>
+    {{/mirroring}}
+{{/nothing}}
