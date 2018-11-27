@@ -53,7 +53,7 @@ class theme_ildcustom_core_renderer extends theme_bootstrap_core_renderer {
             'block_settings',
             'block_navigation'
         );
-        
+
         foreach ($blocks as $block) {
             if (strpos($classes, $block) !== false) $bc->add_class('dock_on_load');
         }
@@ -86,4 +86,41 @@ class theme_ildcustom_core_renderer extends theme_bootstrap_core_renderer {
     }
 
     //end class
+}
+
+class theme_ildcustom_core_user_myprofile_renderer extends \core_user\output\myprofile\renderer {
+
+    public function render_category(\core_user\output\myprofile\category $category) {
+        global $USER;
+
+        $classes = $category->classes;
+        if (empty($classes)) {
+            $return = \html_writer::start_tag('section', array('class' => 'node_category'));
+        } else {
+            $return = \html_writer::start_tag('section', array('class' => 'node_category ' . $classes));
+        }
+        $return .= \html_writer::tag('h3', $category->title);
+        $nodes = $category->nodes;
+        if (empty($nodes) || ($category->name == 'loginactivity' && !is_siteadmin())) {
+            // No nodes, nothing to render.
+            return '';
+        }
+        $return .= \html_writer::start_tag('ul');
+
+        foreach ($nodes as $node) {
+            if($node->name == 'roles') {
+                $context = \context_system::instance();
+                if(\has_capability('moodle/site:configview', $context)) {
+                    $return .= $this->render($node);
+                } else {
+                    continue;
+                }
+            } else {
+                $return .= $this->render($node);
+            }
+        }
+        $return .= \html_writer::end_tag('ul');
+        $return .= \html_writer::end_tag('section');
+        return $return;
+    }
 }
