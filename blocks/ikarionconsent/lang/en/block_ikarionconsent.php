@@ -29,5 +29,6 @@ $string['pluginname'] = 'Site policy';
 
 $string['policy-text'] = 'Policy text';
 $string['edit'] = 'Edit';
+$string['overview'] = 'Overview';
 $string['agree'] = '<strong>Ich stimme</strong> der Erhebung, der Verarbeitung und Nutzung meiner Daten für die Begleitforschung im Rahmen der Lehrveranstaltung <strong>zu</strong>.';
 $string['disagree'] = 'Der Erhebung, Verarbeitung und Nutzung meiner Daten zu Forschungszwecken <strong>stimme ich nicht zu</strong>.';

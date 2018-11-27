@@ -45,7 +45,7 @@ class block_ikarionconsent extends block_base {
     }
 
     function get_content() {
-        global $USER, $OUTPUT, $DB;
+        global $USER, $OUTPUT, $DB, $COURSE;
 
         if ($this->content !== NULL) {
             return $this->content;
@@ -70,7 +70,14 @@ class block_ikarionconsent extends block_base {
                 'selected' => [$selected => $selected]));
         }
 
-        $out = $OUTPUT->render_from_template('block_ikarionconsent/modalbutton', '');
+        if(has_capability('block/ikarionconsent:addinstance', context_course::instance($COURSE->id))) {
+            $data['overview'] = 1;
+            $data['url'] = new moodle_url('/blocks/ikarionconsent/overview.php', array('courseid' => $COURSE->id));
+        } else {
+            $data['overview'] = 0;
+        }
+
+        $out = $OUTPUT->render_from_template('block_ikarionconsent/modalbutton', $data);
 
         $this->content->text = $out;
 

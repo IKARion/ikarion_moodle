@@ -1,0 +1,35 @@
+{{#hasusers}}
+    <table class="admintable generaltable">
+        <thead>
+        <tr>
+            <!--
+            <th class="header">
+                Nachname
+            </th>
+            <th class="header">
+                Vorname
+            </th>
+            -->
+            <th class="header">
+                Pseudo-ID
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#users}}
+            <tr>
+                <!--
+                <td>{{lastname}}</td>
+                <td>{{firstname}}</td>
+                -->
+                <td>{{id}}</td>
+            </tr>
+        {{/users}}
+        </tbody>
+    </table>
+{{/hasusers}}
+{{^hasusers}}
+    <p>Keine Teilnehmer vorhanden</p>
+{{/hasusers}}
+<br>
+<a class="btn btn-default" href="{{backurl}}">{{#str}}back{{/str}}</a>

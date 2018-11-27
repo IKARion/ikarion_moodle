@@ -29,5 +29,6 @@ $string['pluginname'] = 'Einwilligungserklärung';
 
 $string['policy-text'] = 'Einwilligungserklärung';
 $string['edit'] = 'Bearbeiten';
+$string['overview'] = 'Übersicht';
 $string['agree'] = '<strong>Ich stimme</strong> der Erhebung, der Verarbeitung und Nutzung meiner Daten für die Begleitforschung im Rahmen der Lehrveranstaltung <strong>zu</strong>.';
 $string['disagree'] = 'Der Erhebung, Verarbeitung und Nutzung meiner Daten zu Forschungszwecken <strong>stimme ich nicht zu</strong>.';

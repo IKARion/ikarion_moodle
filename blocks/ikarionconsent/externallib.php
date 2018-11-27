@@ -19,7 +19,7 @@
  *
  * @package    block_ikarionconsent
  * @copyright  2018 ILD, Fachhoschule Lübeck
- * @author	   Eugen Ebel (eugen.ebel@fh-luebeck.de)
+ * @author       Eugen Ebel (eugen.ebel@fh-luebeck.de)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once($CFG->libdir . "/externallib.php");
@@ -52,6 +52,7 @@ class block_ikarionconsent_external extends external_api {
         self::validate_context($context);
 
         $record_exist = $DB->get_record('ikarionconsent', array('userid' => $USER->id));
+        $user_info = $DB->get_record('user_info_field', array('shortname' => 'ildikarionconsent'));
 
         if ($record_exist) {
             $record_exist->choice = $choice;
@@ -64,6 +65,22 @@ class block_ikarionconsent_external extends external_api {
             $record->timecreated = time();
             $record->timemodified = time();
             $DB->insert_record('ikarionconsent', $record);
+        }
+
+        if ($user_info) {
+            $user_info_data = $DB->get_record('user_info_data', array('userid' => $USER->id, 'fieldid' => $user_info->id));
+
+            if ($user_info_data) {
+                $user_info_data->data = $choice;
+                $DB->update_record('user_info_data', $user_info_data);
+            } else {
+                $user_info_data = new  stdClass();
+                $user_info_data->userid = $USER->id;
+                $user_info_data->fieldid = $user_info->id;
+                $user_info_data->data = $choice;
+                $user_info_data->dataformat = 0;
+                $DB->insert_record('user_info_data', $user_info_data);
+            }
         }
 
         $response = array(
