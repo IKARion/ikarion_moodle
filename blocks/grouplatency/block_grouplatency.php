@@ -22,6 +22,7 @@
  */
 
 require_once($CFG->dirroot . '/blocks/grouplatency/classes/request.php');
+require_once($CFG->dirroot . '/blocks/grouplatency/locallib.php');
 
 class block_grouplatency extends block_base {
 
@@ -62,6 +63,8 @@ class block_grouplatency extends block_base {
                     $template_data['default'] = 1;
                 }
 
+                grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
+
                 // mirroring
                 $data = $request->get_group_posts_data();
                 $template_data['mirroring'] = 1;
@@ -83,6 +86,8 @@ class block_grouplatency extends block_base {
                     $template_data['text'] = get_string('noactivity', 'block_grouplatency');
                     $template_data['default'] = 1;
                 }
+
+                grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
 
                 // mirroring
                 $data = $request->get_group_posts_data();
@@ -108,6 +113,8 @@ class block_grouplatency extends block_base {
                     $template_data['default'] = 1;
                 }
 
+                grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
+
                 // mirroring
                 $data = $request->get_group_posts_data();
                 $template_data['mirroring'] = 1;
@@ -127,9 +134,11 @@ class block_grouplatency extends block_base {
                 if ($request->showguiding() && $request->activitycount() > 3) {
                     $template_data['text'] = $prompts[rand(0, 3)];
                     $template_data['guide'] = 1;
+                    grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
                 } else {
                     $template_data['text'] = get_string('noactivity', 'block_grouplatency');
                     $template_data['default'] = 1;
+                    grouplatency\trigger_event($this->context->id, $this->instance->id, false, $template_data['text']);
                 }
 
                 // mirroring
@@ -167,9 +176,11 @@ class block_grouplatency extends block_base {
                 if ($request->showguiding() && $request->activitycount() > 3) {
                     $template_data['text'] = $prompts[rand(0, 3)];
                     $template_data['guide'] = 1;
+                    grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
                 } else {
                     $template_data['text'] = get_string('noactivity', 'block_grouplatency');
                     $template_data['default'] = 1;
+                    grouplatency\trigger_event($this->context->id, $this->instance->id, false, $template_data['text']);
                 }
                 break;
             default :

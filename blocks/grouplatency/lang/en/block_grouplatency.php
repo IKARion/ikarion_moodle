@@ -24,6 +24,7 @@
 $string['pluginname'] = 'IKARion Grouplatency';
 $string['grouplatency'] = 'IKARion Grouplatency';
 $string['grouplatency:addinstance'] = 'Add a new IKARion Grouplatency block';
+$string['eventusernotificationviewed'] = 'Grouplatency-Prompt viewed';
 
 $string['headerconfig'] = 'IKARion Grouplatency configuration';
 $string['descconfig'] = 'Global interface configuration to the expert system';

@@ -15,6 +15,7 @@ $req = [
 ];
 */
 
+/*
 $req = [
     'session' => '0',
     'query' => 'contents_group',
@@ -27,4 +28,4 @@ $response = groupactivity\curl_request($req);
 $data = groupactivity\serialize($response);
 
 print_object($data);
-
+*/
