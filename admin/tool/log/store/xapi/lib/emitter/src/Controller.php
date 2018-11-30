@@ -18,7 +18,7 @@ namespace XREmitter;
 
 defined('MOODLE_INTERNAL') || die();
 
-use \stdClass as PhpObj;
+use stdClass as PhpObj;
 
 class Controller extends PhpObj {
     protected $repo;
@@ -44,7 +44,9 @@ class Controller extends PhpObj {
         'scorm_scoreraw_submitted' => 'ScormScoreRawSubmitted',
         'scorm_status_submitted' => 'ScormStatusSubmitted',
         'post_created' => 'ForumPostCreated',
-        'page_updated' => 'WikiPageUpdated'
+        'page_updated' => 'WikiPageUpdated',
+        'grouplatency_prompt_viewed' => 'GrouplatencyViewed',
+        'groupactivity_prompt_viewed' => 'GroupactivityViewed'
     ];
 
     /**
@@ -65,7 +67,7 @@ class Controller extends PhpObj {
         foreach ($events as $index => $opts) {
             $route = isset($opts['recipe']) ? $opts['recipe'] : '';
             if (isset(static::$routes[$route])) {
-                $event = '\XREmitter\Events\\'.static::$routes[$route];
+                $event = '\XREmitter\Events\\' . static::$routes[$route];
                 $service = new $event();
                 $opts['context_lang'] = $opts['context_lang'] ?: 'en';
                 array_push($statements, $service->read($opts));

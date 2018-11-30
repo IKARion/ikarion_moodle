@@ -41,7 +41,6 @@ class Event extends PhpObj {
     public function read(array $opts) {
         $usergroups = groups_get_all_groups($opts['courseid'], $opts['userid']);
         $this->add_groups_tasks_context($usergroups);
-        $blabla = array();
         return [
             'user' => $opts['userid'] < 1 ? null : $this->repo->read_user($opts['userid']),
             'relateduser' => $opts['relateduserid'] < 1 ? null : $this->repo->read_user($opts['relateduserid']),

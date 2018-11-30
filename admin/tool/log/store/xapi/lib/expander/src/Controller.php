@@ -66,6 +66,8 @@ class Controller extends PhpObj {
         '\core\event\course_completed' => 'CourseCompleted',
         '\mod_scorm\event\scoreraw_submitted' => 'ScormSubmitted',
         '\mod_scorm\event\status_submitted' => 'ScormSubmitted',
+        '\block_grouplatency\event\grouplatency_prompt_viewed' => 'GrouplatencyEvent',
+        '\block_groupactivity\event\groupactivity_prompt_viewed' => 'GroupactivityEvent',
     ];
 
     /**

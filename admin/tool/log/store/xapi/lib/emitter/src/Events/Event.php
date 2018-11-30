@@ -117,6 +117,10 @@ abstract class Event extends PhpObj {
         return $activity;
     }
 
+    protected function read_block($opts) {
+        return $this->read_activity($opts, 'block');
+    }
+
     protected function read_course($opts) {
         return $this->read_activity($opts, 'course');
     }
