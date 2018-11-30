@@ -22,6 +22,7 @@
  */
 
 require_once($CFG->dirroot . '/blocks/groupactivity/classes/request.php');
+require_once($CFG->dirroot . '/blocks/groupactivity/locallib.php');
 
 class block_groupactivity extends block_base {
 
@@ -62,6 +63,8 @@ class block_groupactivity extends block_base {
                     $template_data['default'] = 1;
                 }
 
+                groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
+
                 //mirroring
                 $data = $request->get_group_activity_data();
                 $template_data['mirroring'] = 1;
@@ -89,6 +92,8 @@ class block_groupactivity extends block_base {
                     $template_data['text'] = get_string('noactivity', 'block_groupactivity');
                     $template_data['default'] = 1;
                 }
+
+                groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
 
                 //mirroring
                 $data = $request->get_group_activity_data();
@@ -120,6 +125,8 @@ class block_groupactivity extends block_base {
                     $template_data['default'] = 1;
                 }
 
+                groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
+
                 //mirroring
                 $data = $request->get_group_activity_data();
                 $template_data['mirroring'] = 1;
@@ -145,9 +152,11 @@ class block_groupactivity extends block_base {
                 if ($request->showguiding() && $request->activitycount() > 3) {
                     $template_data['text'] = $prompts[rand(0, 3)];
                     $template_data['guide'] = 1;
+                    groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
                 } else {
                     $template_data['text'] = get_string('noactivity', 'block_groupactivity');
                     $template_data['default'] = 1;
+                    groupactivity\trigger_event($this->context->id, $this->instance->id, false, $template_data['text']);
                 }
 
                 //mirroring
@@ -195,9 +204,11 @@ class block_groupactivity extends block_base {
                 if ($request->showguiding() && $request->activitycount() > 3) {
                     $template_data['text'] = $prompts[rand(0, 3)];
                     $template_data['guide'] = 1;
+                    groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
                 } else {
                     $template_data['text'] = get_string('noactivity', 'block_groupactivity');
                     $template_data['default'] = 1;
+                    groupactivity\trigger_event($this->context->id, $this->instance->id, false, $template_data['text']);
                 }
                 break;
             default:

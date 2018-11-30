@@ -24,6 +24,7 @@
 $string['pluginname'] = 'IKARion Gruppenaktivität';
 $string['groupactivity'] = 'IKARion Gruppenaktivität';
 $string['groupactivity:addinstance'] = 'Einen neuen IKARion Gruppenaktivität Block hinzufügen';
+$string['eventusernotificationviewed'] = 'Grouplactivity-Prompt viewed';
 
 $string['headerconfig'] = 'IKARion Gruppenaktivität Konfiguration';
 $string['descconfig'] = 'Globale Konfiguration der Schnittstelle zum Expertensystem';
