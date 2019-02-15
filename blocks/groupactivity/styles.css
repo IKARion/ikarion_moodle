@@ -42,6 +42,7 @@
     margin: 15px -15px 0 -15px;
     width: inherit;
     max-width: inherit;
+    font-size: 14px;
 }
 
 .block_groupactivity #dc-activity-chart {

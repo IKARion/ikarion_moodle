@@ -29,16 +29,21 @@ class request {
     private $groupid;
     private $role;
     private $showguiding;
-    private $showmirroring;
-    private $activitycount;
+    private $showmirroring = 0;
+    private $activitycount = 0;
+    private $members_content;
 
     public function __construct($courseid, $userid) {
         $this->courseid = $courseid;
         $this->userid = $userid;
         $this->role = $this->get_role();
         $this->groupid = $this->get_group();
-        $this->activitycount = $this->get_activity_count();
-        $this->showguiding = $this->show_guiding();
+
+        if (!empty($this->groupid)) {
+            $this->members_content = $this->get_activity_data();
+            $this->activitycount = $this->members_content['total'];
+            $this->showguiding = $this->show_guiding();
+        }
     }
 
     private function get_role() {
@@ -106,9 +111,7 @@ class request {
         }
     }
 
-    private function get_activity_count() {
-        $total = 0;
-
+    private function get_activity_data() {
         $req = [
             'session' => '0',
             'query' => 'contents_group',
@@ -118,23 +121,52 @@ class request {
 
         $response = $this->curl_request($req);
         $data = $this->serialize($response);
+        $total_activities = 0;
+        $members_content = array();
 
         foreach ($data as $item) {
             if (isset($item->post)) {
                 foreach ($item->post->members as $pm) {
+                    if (isset($members_content[$pm->member->id]['forum'])) {
+                        $members_content[$pm->member->id]['forum'] += $pm->words->insert;
+                    } else {
+                        $members_content[$pm->member->id]['forum'] = $pm->words->insert;
+                    }
+
+                    if (isset($members_content[$pm->member->id]['total'])) {
+                        $members_content[$pm->member->id]['total'] += $pm->words->insert;
+                    } else {
+                        $members_content[$pm->member->id]['total'] = $pm->words->insert;
+                    }
+
                     $patches = count($pm->patches);
-                    $total += $patches;
+                    $total_activities += $patches;
                 }
             }
             if (isset($item->page)) {
                 foreach ($item->page->members as $pm) {
+                    if (isset($members_content[$pm->member->id]['wiki'])) {
+                        $members_content[$pm->member->id]['wiki'] += $pm->words->insert;
+                    } else {
+                        $members_content[$pm->member->id]['wiki'] = $pm->words->insert;
+                    }
+
+                    if (isset($members_content[$pm->member->id]['total'])) {
+                        $members_content[$pm->member->id]['total'] += $pm->words->insert;
+                    } else {
+                        $members_content[$pm->member->id]['total'] = $pm->words->insert;
+                    }
+
                     $patches = count($pm->patches);
-                    $total += $patches;
+                    $total_activities += $patches;
                 }
             }
         }
 
-        return $total;
+        return [
+            'totalactivities' => $total_activities,
+            'memberscontent' => $members_content
+        ];
     }
 
     public function get_group_activity_data() {
@@ -147,7 +179,7 @@ class request {
         $symbolid = 1;
 
         foreach ($members as $member) {
-            $words = $this->get_wordcount($member);
+            $words = $this->members_content['memberscontent'][$member];
             $user = $DB->get_record('user', array('id' => $this->deanonymize($member)));
 
             if ($user->lastaccess > (time() - 5 * 60)) {
@@ -200,46 +232,6 @@ class request {
         }
 
         return $members;
-    }
-
-    private function get_wordcount($member) {
-        $req = [
-            'session' => '0',
-            'query' => 'contents_member',
-            'course' => $this->courseid,
-            'id' => $member
-        ];
-
-        $response = $this->curl_request($req);
-        $data = $this->serialize($response);
-        $wordcount_total = 0;
-        $wordcount_forum = 0;
-        $wordcount_wiki = 0;
-
-        foreach ($data as $item) {
-            if (isset($item->post)) {
-                foreach ($item->post->members as $pm) {
-                    if ($pm->member->id == $member) {
-                        $wordcount_forum += $pm->words->insert;
-                        $wordcount_total += $pm->words->insert;
-                    }
-                }
-            }
-            if (isset($item->page)) {
-                foreach ($item->page->members as $pm) {
-                    if ($pm->member->id == $member) {
-                        $wordcount_wiki += $pm->words->insert;
-                        $wordcount_total += $pm->words->insert;
-                    }
-                }
-            }
-        }
-
-        return [
-            'total' => $wordcount_total,
-            'forum' => $wordcount_forum,
-            'wiki' => $wordcount_wiki
-        ];
     }
 
     private function curl_request($data) {
