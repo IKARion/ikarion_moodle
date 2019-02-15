@@ -36,3 +36,6 @@ composer.phar
 /lib/yuilib/*/*/*-coverage.js
 atlassian-ide-plugin.xml
 /node_modules/
+/local/ikarionxps/classes/event.log
+/admin/tool/log/store/xapi/classes/log/error_log.txt
+/oncampus/scripts/

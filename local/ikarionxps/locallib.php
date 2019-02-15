@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 function local_ikarionxps_send_event($data) {
     global $CFG;
-
+    
     $options = array(
         CURLOPT_URL => $CFG->xpsurl,
         CURLOPT_PORT => $CFG->xpsport,
@@ -62,8 +62,7 @@ function local_ikarionxps_send_event($data) {
     /* uncomment for local loggin /classes/event.log
     global $CFG;
     $logfile = $CFG->dirroot . '/local/ikarionxps/classes/event.log';
-    //file_put_contents($logfile, 'event: ' . $data . PHP_EOL . PHP_EOL, FILE_APPEND);
-    file_put_contents($logfile, 'content: ' . $rough_content . PHP_EOL . PHP_EOL, FILE_APPEND);
+    file_put_contents($logfile, 'event: ' . $data . PHP_EOL . PHP_EOL, FILE_APPEND);
     */
 
     /*

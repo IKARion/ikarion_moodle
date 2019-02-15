@@ -33,11 +33,11 @@ button, input.form-submit, input[type="button"], input[type="submit"], input[typ
 // Navigationsbanner
 .navbar {border-radius:0px; margin-bottom:0px; background-color:@navbarbgcolor; border-left:none; border-right:none;}
 .navbar-brand {
-	background-image:url(@logo); 
-	background-size:@logosize; 
-	background-position:@logopos; 
-	width:@brandbreite; 
-	height:@brandhoehe; 
+	background-image:url(@logo);
+	background-size:@logosize;
+	background-position:@logopos;
+	width:@brandbreite;
+	height:@brandhoehe;
 	background-repeat:no-repeat;
 	}
 
@@ -54,15 +54,15 @@ button, input.form-submit, input[type="button"], input[type="submit"], input[typ
 }
 .jsenabled .usermenu .moodle-actionmenu a.toggle-display.textmenu:hover {background-color:@navbarbghover;}
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {background-color:@brand-bg;}
-.navbar-default .navbar-nav > li > a, .navbar-header a, 
+.navbar-default .navbar-nav > li > a, .navbar-header a,
 .navbar a .userbutton, .navbar a .caret {color:@navtext-color;}
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {color:@navtext-color;}
 
 .navbar.navbar-default {
 	border:0px;
-	border-top:@navbordertopwidth solid @navbarbordercolor; 
-	border-bottom:@navborderbottomwidth solid @navbarbordercolor; 
-} 
+	border-top:@navbordertopwidth solid @navbarbordercolor;
+	border-bottom:@navborderbottomwidth solid @navbarbordercolor;
+}
 
 
 .navbar-right {margin-right:0px;}
@@ -109,7 +109,7 @@ button, input.form-submit, input[type="button"], input[type="submit"], input[typ
 }
 .navbar-default .navbbar-nav li.dropdown a.dropdown-toggle, .navbar-nav > li > a {
 	padding:15px;
-}  
+}
 .pagelayout-frontpage #moodle-navbar .dropdown {display:inline; visibility:visible;}
 
 // +++ ---  Anpassung Pixelfehler --- +++
@@ -134,7 +134,7 @@ button, input.form-submit, input[type="button"], input[type="submit"], input[typ
 #dockeditempanel .dockeditempanel_hd .commands a.moveto {display:none;}
 #dock .controls {display:none;}
 .block_action .moveto {display:none;}
-	
+
 .has_dock_top_horizontal #dock {width:100%;height:30px;background-image:none; border:0; position:absolute; top:@doctop;} // top:175px bei navbar 52px
 @media (max-width: @screen-xs-min) {
 	.has_dock_top_horizontal #dock {top:(@doctop + 52px);}
@@ -160,17 +160,17 @@ body.has_dock #page, body.has_dock .moodleheader  {padding-left:15px;}
 .has_dock_top_horizontal #dock .dockeditem {display:inline-block;}
 .has_dock_top_horizontal #dock .dockeditem .dockedtitle {background-image:none; border-style:solid;border-width: 0; width:auto;
 border-radius:0px; margin:0px 2px 0px 0px;}
-.has_dock_top_horizontal #dock .dockeditem .dockedtitle h2 {margin:0 12px;line-height:20px; font-size:14px; display:block; 
+.has_dock_top_horizontal #dock .dockeditem .dockedtitle h2 {margin:0 12px;line-height:20px; font-size:14px; display:block;
 font-weight:normal; padding:15px; margin:0px;}
 .has_dock_top_horizontal #dock .dockeditem.firstdockitem {margin-left:0px;}
 .has_dock_top_horizontal #dock .dockeditem.firstdockitem .dockedtitle {border:0px;}
 .has_dock_top_horizontal #dock .controls {bottom:auto;right:10px;top:0;width:auto;line-height:30px;}
 .has_dock_top_horizontal #dock #dockeditempanel {position:absolute;}
 
-#dock .dockedtitle:active:hover, #dock .dockedtitle.active:hover, 
-.open > #dock.dropdown-toggle .dockedtitle:hover, #dock .dockedtitle:active:focus, 
-#dock .dockedtitle.active:focus, .open > #dock.dropdown-toggle .dockedtitle:focus, 
-#dock .dockedtitle.focus:active, #dock .dockedtitle.active.focus, 
+#dock .dockedtitle:active:hover, #dock .dockedtitle.active:hover,
+.open > #dock.dropdown-toggle .dockedtitle:hover, #dock .dockedtitle:active:focus,
+#dock .dockedtitle.active:focus, .open > #dock.dropdown-toggle .dockedtitle:focus,
+#dock .dockedtitle.focus:active, #dock .dockedtitle.active.focus,
 .open > #dock.dropdown-toggle .dockedtitle.focus {
 	border:none;
 }
@@ -191,8 +191,8 @@ font-weight:normal; padding:15px; margin:0px;}
 }
 #dockeditempanel .dockeditempanel_content{
 	border-top:0px;
-	border-radius:0px; 
-	padding:15px; 
+	border-radius:0px;
+	padding:15px;
 	background-color:@brand-bg;//rgba(240,240,240,0.95)
 	border-left:2px solid @block-border;
 }
@@ -209,7 +209,7 @@ font-weight:normal; padding:15px; margin:0px;}
 	& h1 {
 		font-size:25px;
 	}
-	
+
 }
 .breadcrumb-button .singlebutton {
     float: left;
@@ -284,8 +284,8 @@ font-weight:normal; padding:15px; margin:0px;}
 
 #page #region-main .course-content ul.topics {
 	li.section { // Kurs Topics
-		background-color:#fff; 
-		padding:15px; 
+		background-color:#fff;
+		padding:15px;
 		margin-bottom:25px; border:none;
 		&.current {
 			border-left: 2px solid @block-border;
@@ -294,7 +294,7 @@ font-weight:normal; padding:15px; margin:0px;}
 			padding-top: 0px;
 		}
 	}
-} 
+}
 
 
 .panel-default > .panel-heading, .box.message table td.heading, .box.message .messagearea .messagerecent .singlemessage .otheruser, .block .header {
@@ -334,8 +334,8 @@ font-weight:normal; padding:15px; margin:0px;}
 	background-repeat:no-repeat;
 	background-position:center center;
 	cursor:pointer;
-	width:44px; 
-	height:34px; 
+	width:44px;
+	height:34px;
 	margin-top:-51px;
 	position:relative;
 	border:1px solid #ccc;
@@ -378,13 +378,13 @@ font-weight:normal; padding:15px; margin:0px;}
 }
 .magicEffect {
 	@media (max-width: @screen-sm-max){
-		width:95%; max-width:300px; z-index:500; position:absolute; top:0px;  
+		width:95%; max-width:300px; z-index:500; position:absolute; top:0px;
 		background-color:rgba(180,188,190,0.7); padding-top:15px; right:0px;
 	}
 }
 #block-region-side-post.magicEffect .block {
 	@media (max-width: @screen-sm-max){
-		background-color:#fff;	
+		background-color:#fff;
 	}
 }
 #block-region-side-post.magicEffect {
@@ -477,7 +477,7 @@ font-weight:normal; padding:15px; margin:0px;}
 // ------------------------------------------------------------------------------
 // Dashboard-Seite
 .page-header-image img {
-	width:70px; 
+	width:70px;
 	height:70px;
 	margin-top:15px;
 	margin-bottom:10px;
@@ -524,14 +524,14 @@ h4, .h4 {
 	}
 }
 .editing .course-content ul.topics li.section .content ul, .editing .course-content ul.weeks li.section .content ul {margin-top:0px;}
- 
+
  // ------------------------------------------------------------------------------
 // Block Webkonf - Seite
 .course-content.webkonf {
 	background-color:#fff;
 	margin-bottom:20px;
 	padding:0px 20px 20px 20px;
-	.generaltable h3 { // Anpassung für alten Webkonfblock!
+	.generaltable h3 { // Anpassung fï¿½r alten Webkonfblock!
 		font-size:14px;
 		line-height:1.1;
 		margin:0px;
@@ -550,16 +550,16 @@ h4, .h4 {
 	}
 }
 .calendar_event_global{
-	background-color:#a6d1ab;	
+	background-color:#a6d1ab;
 }
 .calendar_event_course{
-	background-color:#dba3c2;	
+	background-color:#dba3c2;
 }
 .calendar_event_group {
-	background-color:#ebdea6;	
+	background-color:#ebdea6;
 }
 .calendar_event_user {
-	background-color:#a6b3d1;	
+	background-color:#a6b3d1;
 }
 // ------------------------------------------------------------------------------
 // Kurslisten
@@ -579,7 +579,7 @@ h4, .h4 {
 		font-size:16px;
 	}
 }
-#page .panel {	
+#page .panel {
 	background-color:@brand-bg;
 	border:0px; border-left:2px solid @block-border;
 	-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
@@ -596,7 +596,7 @@ h4, .h4 {
 .pagelayout-frontpage {
 	.generalbox {
 		background-color:#fff;
-		padding:10px 0px 20px 0px; // vorher: padding:20px; 
+		padding:10px 0px 20px 0px; // vorher: padding:20px;
 	}
 	#page .panel{
 		background-color:#fff;
@@ -621,7 +621,7 @@ h4, .h4 {
 			background-image:url([[pix:core|i/course]]);
 			background-position: left 0.2em;
 			background-repeat: no-repeat;
-			padding: 3px 0px 5px 21px;	
+			padding: 3px 0px 5px 21px;
 			font-size:13px;
 		}
 	}
@@ -632,17 +632,17 @@ h4, .h4 {
 		background-image:url([[pix:core|i/course]]);
 		background-position: left 0.2em;
 		background-repeat: no-repeat;
-		padding: 3px 0px 5px 21px;	
+		padding: 3px 0px 5px 21px;
 		font-size:13px;
 	}
 	.activity_info {
 		margin-left:20px;
 		font-size: 12px;
-	} 
+	}
 
 }
 .block_course_overview .content {
-	margin:0px 10px;	
+	margin:0px 10px;
 }
 .coursebox .info .coursename {
 	margin-bottom: 10px;
@@ -657,9 +657,9 @@ h4, .h4 {
 		background-image:url([[pix:core|i/course]]);
 		background-position: left 0.2em;
 		background-repeat: no-repeat;
-		padding: 3px 0px 5px 21px;	
+		padding: 3px 0px 5px 21px;
 		font-size:13px;
-		
+
 	}
 }
 course_category_tree .category.with_children{
@@ -686,7 +686,7 @@ course_category_tree .category.with_children{
 		& .badge-image {
 			width:65px;
 			height:65px;
-		}		
+		}
 	}
 }
 // Webkonferenz-Block
@@ -710,7 +710,7 @@ course_category_tree .category.with_children{
 		background-image:url([[pix:core|i/group]]);
 		background-position: left 0.2em;
 		background-repeat: no-repeat;
-		padding: 3px 0px 5px 24px;	
+		padding: 3px 0px 5px 24px;
 		font-size:13px;
 		line-height: 22px;
 		margin-left: 25px;
@@ -731,7 +731,7 @@ ul.nav-tabs.nav-justified {
 	padding:0px;
 	.header {
 		visibility:hidden;
-		display:none;	
+		display:none;
 	}
 	.content {
 		padding:0px;
@@ -740,7 +740,7 @@ ul.nav-tabs.nav-justified {
 .editing .fullsize .block {
 	.header {
 		visibility:visible;
-		display:inline;	
+		display:inline;
 	}
 }
 // ------------------------------------------------------------------------------
@@ -835,10 +835,10 @@ ul.nav-tabs.nav-justified {
 // ------------------------------------------------------------------------------
 // Login-Block
 .fullsize .block_login, #block-region-side-top .block_login, #block-region-side-bottom .block_login, #block-region-content-top .block_login {
-	background-image:url(@loginbg); 
-	background-size:@loginareabgsize; 
+	background-image:url(@loginbg);
+	background-size:@loginareabgsize;
 	background-color:@loginareabg;
-	background-position:@loginareabgpos; 
+	background-position:@loginareabgpos;
 	background-repeat:@loginareabgrepeat;
 	border:none;
 	margin-top:-1px;
@@ -926,7 +926,7 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 	-webkit-border-radius: 0px;
 }
 .loginbox .loginform .form-input input[type="text"], .loginbox .loginform .form-input input[type="password"],
-#page-mod-forum-discuss .discussioncontrols .discussioncontrol .singleselect select.singleselect, 
+#page-mod-forum-discuss .discussioncontrols .discussioncontrol .singleselect select.singleselect,
 #page-mod-forum-discuss .discussioncontrols .discussioncontrol.movediscussion select.urlselect {
 	border-radius: 0px;
 	-moz-border-radius: 0px;
@@ -961,19 +961,19 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 // ------------------------------------------------------------------------------
 // Loginseite
 #page-login-index #page-wrapper {
-	background-image:url(@loginbg); 
-	background-position:top center; 
+	background-image:url(@loginbg);
+	background-position:top center;
 	background-repeat:no-repeat;
 	background-color:@loginareabg;
 	border:none;
-	background-size:100% auto; 
+	background-size:100% auto;
 	margin-bottom:-15px;
 	min-height:750px;
 	& #region-main-inner {
 		background-color:transparent;
 		padding:0px;
 	}
-	
+
 	& .loginbox.twocolumns .loginpanel, & .loginpanel {
 		border-radius: 0px 0px 0px 0px;
 		-moz-border-radius: 0px 0px 0px 0px;
@@ -984,7 +984,7 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 	& .signuppanel {
 		padding:20px;
 		background-color:@login-bg-color;
-	}	
+	}
 }
 #page-login-index #page-content #region-main-inner {
 	background: transparent;
@@ -1026,7 +1026,7 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 		}
 		& .gradingtable {
 			margin-bottom:20px;
-		} 
+		}
 	}
 }
 
@@ -1035,11 +1035,10 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 // ------------------------------------------------------------------------------
 //Grafikbanner
 .header-banner{
-	height:@headerhoehe; background-color: @headerbgcolor; 
-	background-image:url(@bannerbg); 
-	background-position:top left; background-repeat:no-repeat; 
-	background-size:cover; //100% auto;
-	/* @media (max-width:1717px) {background-size:cover;} // auto 100% */
+	height:@headerhoehe; background-color: @headerbgcolor;
+	background-image:url(@bannerbg);
+	background-position:top left; background-repeat:no-repeat;
+	background-size:cover; 
 	& h1 {
 		font-size: 26px;
 		color:#fff;
@@ -1049,13 +1048,13 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 	height:100%; width:100%; background-color: transparent; background-image:url(@bannerfront); background-repeat:no-repeat;
 	@media (max-width:@screen-xs-max) {background-position-x:-250px;}
 }
-.header-banner-main {background-image:url(@headercontent); background-size:@headercontentsize; background-repeat:@headercontentrepeat; 
+.header-banner-main {background-image:url(@headercontent); background-size:@headercontentsize; background-repeat:@headercontentrepeat;
 	background-position:@headercontentposition; height:@headerhoehe;}
 #site-bottom-footer{
   line-height:36px;
   background-color:@socialfooterbg;
   padding:5px auto 10px auto;
-  
+
   #socialmedia-bar {
 	font-size:22px;
 	.fa {
@@ -1079,7 +1078,7 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
  }
 
 // ------------------------------------------------------------------------------
-// Anpassung für Arabisch
+// Anpassung fï¿½r Arabisch
 // ------------------------------------------------------------------------------
 .dir-rtl #dockeditempanel {
     right: auto;
@@ -1122,7 +1121,7 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 .mform .felement.fstatic, .form-item .form-description{
 	margin-top:0px;
 }
-// Fragenteil Einrückung
+// Fragenteil Einrï¿½ckung
 .MsoListParagraph {
 	text-indent:0pt !important;
 }
@@ -1131,7 +1130,7 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 	text-align: left;
     width: 49%;
 }
-// Navigation Aufzählung
+// Navigation Aufzï¿½hlung
 .block_navigation .block_tree, .block_settings .block_tree {
 	margin:5px;
 	& li {
@@ -1156,7 +1155,7 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 .jsenabled .usermenu .moodle-actionmenu.show {
 	background-color:@navbarbghover;
 	padding:0px 0px 0px 0px;
-	
+
 	& .menu::before {
 		right:4px;
 	}
@@ -1166,7 +1165,7 @@ form select, form input[type="text"], form input[type="password"], form.atto_for
 	& .menu a:hover, & .menu a:focus {
 		background-image:none;
 		background-color:@brand-bg;
-	}  
+	}
 }
 .notloggedin .usermenu {
 	color: @navtext-color;
@@ -1193,7 +1192,7 @@ ul, ol {
 	padding:0px;
 }
 
-// Aufzählungen
+// Aufzï¿½hlungen
 th, td {
 	padding:1px;
 }
@@ -1246,7 +1245,7 @@ body.has_dock #page {padding-right:15px;}
 		margin-left:15px;
 	}
 }
-/* ------------------------------------------------ (04.05.2017)  */ 
+/* ------------------------------------------------ (04.05.2017)  */
 /*     Anpassung Wochenformat             */
 .course-content ul.weeks li.section {
 	background-color:#fff;
