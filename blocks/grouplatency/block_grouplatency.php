@@ -38,162 +38,16 @@ class block_grouplatency extends block_base {
         }
 
         $this->content = new stdClass;
+        $this->content->text = $OUTPUT->render_from_template('block_grouplatency/loading', []);
         $this->content->footer = '';
 
-        $prompts = array(
-            $this->config->prompt_1,
-            $this->config->prompt_2,
-            $this->config->prompt_3,
-            $this->config->prompt_4
-        );
+        $data = [
+            'courseid' => $this->page->course->id,
+            'userid' => $USER->id,
+            'instanceid' => $this->context->instanceid
+        ];
 
-        $courseid = $this->page->course->id;
-        $request = new grouplatency\request($courseid, $USER->id);
-        $role = $request->getrole();
-        $out = null;
-
-        switch ($role) {
-            case 'mgo':
-                //guiding
-                if ($request->showguiding()) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_grouplatency');
-                    $template_data['default'] = 1;
-                }
-
-                grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-
-                // mirroring
-                $data = $request->get_group_posts_data();
-                $template_data['mirroring'] = 1;
-
-                if ($courseid == 2) {
-                    $this->page->requires->js_call_amd('block_grouplatency/grouplatencynew', 'init', [$data]);
-                } else {
-                    $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                }
-
-                break;
-
-            case 'mgma':
-                //guiding
-                if ($request->showguiding()) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_grouplatency');
-                    $template_data['default'] = 1;
-                }
-
-                grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-
-                // mirroring
-                $data = $request->get_group_posts_data();
-                $template_data['mirroring'] = 1;
-
-                if ($courseid == 2) {
-                    $this->page->requires->js_call_amd('block_grouplatency/grouplatencynew', 'init', [$data]);
-                } else {
-                    $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                }
-
-                $out = $OUTPUT->render_from_template('block_grouplatency/mgma', $template_data);
-
-                break;
-
-            case 'mgmb':
-                //guiding
-                if ($request->showguiding()) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_grouplatency');
-                    $template_data['default'] = 1;
-                }
-
-                grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-
-                // mirroring
-                $data = $request->get_group_posts_data();
-                $template_data['mirroring'] = 1;
-
-                if ($courseid == 2) {
-                    $this->page->requires->js_call_amd('block_grouplatency/grouplatencynew', 'init', [$data]);
-                } else {
-                    $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                }
-
-                $out = $OUTPUT->render_from_template('block_grouplatency/mgmb', $template_data);
-
-                break;
-
-            case 'mirroring_guiding':
-                //guiding
-                if ($request->showguiding() && $request->activitycount() > 3) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                    grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_grouplatency');
-                    $template_data['default'] = 1;
-                    grouplatency\trigger_event($this->context->id, $this->instance->id, false, $template_data['text']);
-                }
-
-                // mirroring
-                if ($request->activitycount() > 3) {
-                    $data = $request->get_group_posts_data();
-
-                    $template_data['mirroring'] = 1;
-
-                    if ($courseid == 2) {
-                        $this->page->requires->js_call_amd('block_grouplatency/grouplatencynew', 'init', [$data]);
-                    } else {
-                        $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                    }
-                }
-                break;
-
-            case 'mirroring':
-                if ($request->activitycount() > 3) {
-                    $data = $request->get_group_posts_data();
-
-                    $template_data['mirroring'] = 1;
-
-                    if ($courseid == 2) {
-                        $this->page->requires->js_call_amd('block_grouplatency/grouplatencynew', 'init', [$data]);
-                    } else {
-                        $this->page->requires->js_call_amd('block_grouplatency/grouplatency', 'init', [$data]);
-                    }
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_grouplatency');
-                    $template_data['default'] = 1;
-                }
-                break;
-
-            case 'guiding':
-                if ($request->showguiding() && $request->activitycount() > 3) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                    grouplatency\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_grouplatency');
-                    $template_data['default'] = 1;
-                    grouplatency\trigger_event($this->context->id, $this->instance->id, false, $template_data['text']);
-                }
-                break;
-            default :
-                $template_data['nothing'] = 1;
-                break;
-        }
-
-        if ($out == null) {
-            $out = $OUTPUT->render_from_template('block_grouplatency/main', $template_data);
-        }
-
-        $this->content->text = $out;
-        $this->content->footer = '';
+        $this->page->requires->js_call_amd('block_grouplatency/grouplatency-lazy', 'init', [$data]);
 
         return $this->content;
     }

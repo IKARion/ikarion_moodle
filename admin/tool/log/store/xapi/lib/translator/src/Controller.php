@@ -68,6 +68,7 @@ class Controller extends PhpObj {
         '\mod_scorm\event\status_submitted' => 'ScormStatusSubmitted',
         '\block_grouplatency\event\grouplatency_prompt_viewed' => 'GrouplatencyViewed',
         '\block_groupactivity\event\groupactivity_prompt_viewed' => 'GroupactivityViewed',
+        '\block_groupactivity\event\groupactivity_selfassess_completed' => 'GroupactivitySelfAssessCompleted',
     ];
 
     /**

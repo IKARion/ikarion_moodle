@@ -1,0 +1,39 @@
+<form id="groupactivity-self-assess">
+    {{#items}}
+        <table class="self-assess-table">
+            <tbody>
+            <tr>
+                <td>
+                    {{counter}})
+                </td>
+                <td colspan="2">
+                    {{content}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <span class="smalltext">trifft <strong>nicht</strong> zu</span>
+                    {{#skala}}
+                        {{^notspecified}}
+                            <input type="radio" name="{{id}}" value="{{value}}">
+                        {{/notspecified}}
+                    {{/skala}}
+                    <span class="smalltext">trifft zu</span>
+                </td>
+                <!--
+                <td>
+                    {{#skala}}
+                        {{#notspecified}}
+                        <input type="radio" name="{{id}}" value="{{value}}">
+                        <span class="smalltext">{{label}}</span>
+                        {{/notspecified}}
+                    {{/skala}}
+                </td>
+                -->
+            </tr>
+            </tbody>
+        </table>
+    {{/items}}
+    <input type="hidden" name="instance" value="{{instance}}">
+</form>

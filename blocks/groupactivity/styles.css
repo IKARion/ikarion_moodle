@@ -38,43 +38,41 @@
     color: #444;
 }
 
-.block_groupactivity #dc-table-graph {
-    margin: 15px -15px 0 -15px;
-    width: inherit;
-    max-width: inherit;
-    font-size: 14px;
-}
-
-.block_groupactivity #dc-activity-chart {
-    margin-top: 15px;
-    position: relative;
-    height: 270px;
-    text-align: center;
-}
-
-.block_groupactivity #dc-activity-chart svg {
+.block_groupactivity #dc-activity-chart .bar-graph svg {
     border-bottom: 1px solid grey;
 }
 
-.block_groupactivity #dc-activity-chart .user-symbols {
-    position: absolute;
-    bottom: 0;
-    color: #003560;
-}
-
-.block_groupactivity #dc-table-graph th {
+.block_groupactivity #dc-activity-graph th {
     border-bottom: 2px solid;
     border-color: #808080;
+    padding: 0 3px 5px 0;
 }
 
-.block_groupactivity #dc-table-graph tbody tr:last-child {
+
+.block_groupactivity #dc-activity-graph tbody tr:last-child {
     border-top: 2px solid;
     border-color: #808080;
 }
 
+.block_groupactivity #dc-activity-graph tbody tr:last-child td {
+    padding-top: 5px;
+}
+
+.block_groupactivity #dc-activity-graph .fa.fa-times {
+    color: #AEAEAE;
+}
+
+.block_groupactivity #dc-activity-graph tr td {
+    padding: 0 5px 0 0;
+}
+
+.block_groupactivity #dc-activity-chart .user-symbols {
+    color: #003560;
+}
+
 .block_groupactivity .user-symbol {
     color: #003560;
-    padding-right: 10px;
+    font-weight: bold;
 }
 
 .block_groupactivity .choices {
@@ -84,4 +82,55 @@
 
 .block_groupactivity.block .content {
     padding: 15px;
+}
+
+/* New items */
+.block_groupactivity .groupactivity-wrapper .loading {
+    text-align: center;
+    font-size: 40px;
+}
+
+.block_groupactivity .btn.btn-secondary {
+    width: 100%;
+    margin: 0;
+}
+
+.block_groupactivity .btn.btn-secondary,
+.block_groupactivity p,
+.block_groupactivity .legend-graph,
+.block_groupactivity .user-symbols,
+.block_groupactivity #dc-activity-chart {
+    margin-bottom: 15px !important;
+}
+
+.block_groupactivity #dc-activity-graph {
+    margin-bottom: 0 !important;
+}
+
+table.self-assess-table {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+table.self-assess-table td {
+    vertical-align: top;
+}
+
+table.self-assess-table td:first-child {
+    width: 5%;
+}
+
+table.self-assess-table tr:not(:first-child) td {
+    padding-top: 10px;
+}
+
+.block_groupactivity #open-self-assess-modal {
+    background-color: #7E7E7F;
+    color: #fff;
+}
+
+.block_groupactivity .table-rect {
+    width: 11px;
+    height: 11px;
+    margin-top: 4px;
 }

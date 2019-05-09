@@ -27,28 +27,16 @@ class request {
     private $courseid;
     private $userid;
     private $groupid;
-    private $role;
-    private $showguiding;
-    private $showmirroring = 0;
-    private $activitycount = 0;
-    private $members_content;
+    private $roles;
 
     public function __construct($courseid, $userid) {
         $this->courseid = $courseid;
         $this->userid = $userid;
-        $this->role = $this->get_role();
+        $this->roles = $this->get_roles();
         $this->groupid = $this->get_group();
-
-        if (!empty($this->groupid)) {
-            $this->members_content = $this->get_activity_data();
-            $this->activitycount = $this->members_content['total'];
-            $this->showguiding = $this->show_guiding();
-        }
     }
 
-    private function get_role() {
-        global $DB;
-
+    private function get_roles() {
         $req = [
             'session' => '0',
             'query' => 'roles_member',
@@ -58,159 +46,222 @@ class request {
 
         $response = $this->curl_request($req);
         $data = $this->serialize($response);
+        $role_ids = [];
 
         foreach ($data as $item) {
-            $roleid = $item->role->id;
-            $role = $DB->get_record('role', array('id' => $roleid));
-
-            if ($role->shortname == 'mgma' || $role->shortname == 'mgmb') {
-                break;
-            }
+            array_push($role_ids, $item->role->id);
         }
 
-        return $role->shortname;
+        return $role_ids;
     }
 
     private function get_group() {
         $req = [
             'session' => '0',
-            'query' => 'groups_member',
+            'query' => 'groups!member',
             'course' => $this->courseid,
             'id' => $this->anonymize($this->userid)
         ];
 
         $response = $this->curl_request($req);
         $data = $this->serialize($response);
-        $groupid = '';
-        $temp_group = 0;
 
-        foreach ($data as $item) {
-            if ($item->group->id > $temp_group) {
-                $groupid = $temp_group = $item->group->id;
-            }
-        }
-
-        return $groupid;
+        return $data[1]->group->id;
     }
 
-    private function show_guiding() {
-        $req = [
-            'session' => '0',
-            'query' => 'participation',
-            'course' => $this->courseid,
-            'id' => $this->groupid
-        ];
-
-        $response = $this->curl_request($req);
-        $data = $this->serialize($response);
-
-        if ($data[1]->participation->value != 1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    private function get_activity_data() {
-        $req = [
-            'session' => '0',
-            'query' => 'contents_group',
-            'course' => $this->courseid,
-            'id' => $this->groupid
-        ];
-
-        $response = $this->curl_request($req);
-        $data = $this->serialize($response);
-        $total_activities = 0;
-        $members_content = array();
-
-        foreach ($data as $item) {
-            if (isset($item->post)) {
-                foreach ($item->post->members as $pm) {
-                    if (isset($members_content[$pm->member->id]['forum'])) {
-                        $members_content[$pm->member->id]['forum'] += $pm->words->insert;
-                    } else {
-                        $members_content[$pm->member->id]['forum'] = $pm->words->insert;
-                    }
-
-                    if (isset($members_content[$pm->member->id]['total'])) {
-                        $members_content[$pm->member->id]['total'] += $pm->words->insert;
-                    } else {
-                        $members_content[$pm->member->id]['total'] = $pm->words->insert;
-                    }
-
-                    $patches = count($pm->patches);
-                    $total_activities += $patches;
-                }
-            }
-            if (isset($item->page)) {
-                foreach ($item->page->members as $pm) {
-                    if (isset($members_content[$pm->member->id]['wiki'])) {
-                        $members_content[$pm->member->id]['wiki'] += $pm->words->insert;
-                    } else {
-                        $members_content[$pm->member->id]['wiki'] = $pm->words->insert;
-                    }
-
-                    if (isset($members_content[$pm->member->id]['total'])) {
-                        $members_content[$pm->member->id]['total'] += $pm->words->insert;
-                    } else {
-                        $members_content[$pm->member->id]['total'] = $pm->words->insert;
-                    }
-
-                    $patches = count($pm->patches);
-                    $total_activities += $patches;
-                }
-            }
-        }
-
-        return [
-            'totalactivities' => $total_activities,
-            'memberscontent' => $members_content
-        ];
-    }
-
-    public function get_group_activity_data() {
+    public function get_group_activity_data($blockinstance) {
         global $DB;
 
         $members = $this->get_group_members();
-        $data = array();
+        $hascapability = $this->has_capability($blockinstance);
+
+        $data = $useritems = array();
         $all_mails = '';
-        $symbols = [9632, 9733, 9650, 10010, 9670];
-        $symbolid = 1;
+        $counter = 1;
+        $colors = ['#A71680', '#1D71B8', '#EFC22F', '#9DBE3A', '#59297F'];
+
+        if ($hascapability['selfassess']) {
+            $assessments = $this->get_group_assessments();
+            $items = $DB->get_records('groupactivity_items', ['blockinstance' => $blockinstance, 'deleted' => 0], '', 'id, shortname');
+            $items = array_values($items);
+            $maxvalue = $assessments['maxvalue'];
+            $type = 'assessments';
+        }
+
+        if ($hascapability['participation']) {
+            $hascapability['selfassess'] = false;
+            $participations = $this->get_group_participations();
+            $items = [];
+            $forum = new \stdClass();
+            $forum->shortname = 'Forum';
+            $items[] = $forum;
+
+            $wiki = new \stdClass();
+            $wiki->shortname = 'Wiki';
+            $items[] = $wiki;
+
+            $maxvalue = $participations['maxvalue'];
+            $type = 'participations';
+        }
 
         foreach ($members as $member) {
-            $words = $this->members_content['memberscontent'][$member];
             $user = $DB->get_record('user', array('id' => $this->deanonymize($member)));
+            $online = ($user->lastaccess > (time() - 5 * 60)) ? 1 : 0;
+            $color = array_shift($colors);
+            $itemscount = 3;
 
-            if ($user->lastaccess > (time() - 5 * 60)) {
-                $online = 1;
-            } else {
-                $online = 0;
+            if ($hascapability['selfassess']) {
+                $useritem = [];
+                if (isset($assessments['items'][$member])) {
+                    $useritem['id'] = $counter;
+                    $useritem['color'] = $color;
+                    foreach ($assessments['items'][$member] as $key => $mitem) {
+                        $useritem['item' . ($key + 1)] = $mitem;
+                    }
+                    array_push($useritems, $useritem);
+                } else {
+                    $useritem['id'] = $counter;
+                    $useritem['color'] = $color;
+                    for ($i = 0; $i < $itemscount; $i++) {
+                        $useritem['item' . ($i + 1)] = 0;
+                    }
+                    array_push($useritems, $useritem);
+                }
+            }
+
+            if ($hascapability['participation']) {
+                $useritem = [];
+                $useritem['id'] = $counter;
+                $useritem['color'] = $color;
+
+                foreach ($participations['items'][$member] as $key => $pitem) {
+                    $useritem['item' . ($key + 1)] = $pitem;
+                }
+
+                array_push($useritems, $useritem);
             }
 
             $user_data = [
-                'symbolid' => $symbolid,
+                'counter' => $counter,
+                'color' => $color,
                 'name' => $user->firstname . ' ' . $user->lastname,
                 'mailto' => $user->email,
                 'chatto' => (new \moodle_url('/message/index.php?id=' . $user->id))->out(),
                 'online' => $online,
-                'usymbol' => '&#' . array_shift($symbols) . ';',
                 'profile' => (new \moodle_url('/user/view.php?id=' . $user->id . '&course=' . $this->courseid))->out(),
-                'words_total' => $words['total'],
-                'words_forum' => $words['forum'],
-                'words_wiki' => $words['wiki'],
             ];
 
             $all_mails .= $user->email . ';';
-
             array_push($data, $user_data);
-            $symbolid++;
+            $counter++;
         }
 
         return [
+            'showblock' => $hascapability['showblock'],
+            'hasdata' => (count($useritems) > 0) ? true : false,
+            'selfassess' => $hascapability['selfassess'],
+            'selfassessbutton' => ($hascapability['selfassess']) ? $this->show_selfassessment() : false,
+            'participation' => $hascapability['participation'],
             'usersdata' => $data,
-            'mailtogroup' => $all_mails
+            'items' => $items,
+            'useritems' => $useritems,
+            'maxvalue' => $maxvalue,
+            'type' => $type,
+            'mailtogroup' => $all_mails,
+            'canmanage' => \has_capability('block/groupactivity:addinstance', \context_block::instance($blockinstance))
         ];
+    }
+
+    private function get_group_participations() {
+        $req = [
+            'session' => '0',
+            'query' => 'group',
+            'course' => $this->courseid,
+            'id' => $this->groupid
+        ];
+
+        $response = $this->curl_request($req);
+        $data = $this->serialize($response);
+        $participation = array();
+        $max_value = 0;
+
+        foreach ($data as $group) {
+            foreach ($group->group->members as $member) {
+                $forum = $participation['items'][$member->member->id][] = ($member->member->other[0]->forum == null) ? 0 : $member->member->other[0]->forum;
+                $wiki = $participation['items'][$member->member->id][] = ($member->member->other[1]->wiki == null) ? 0 : $member->member->other[1]->wiki;
+
+                if (($new_val = $forum + $wiki) > $max_value) {
+                    $max_value = $new_val;
+                }
+            }
+        }
+
+        $participation['maxvalue'] = $max_value;
+
+        return $participation;
+    }
+
+    private function get_group_assessments() {
+        $req = [
+            'session' => '0',
+            'query' => 'assessments:group',
+            'course' => $this->courseid,
+            'id' => $this->groupid
+        ];
+
+        $response = $this->curl_request($req);
+        $data = $this->serialize($response);
+        $assessments = array();
+        $max_value = 0;
+
+        foreach ($data as $item) {
+            $max_value_temp = 0;
+
+            foreach ($item->assessment->items as $key => $val) {
+                $assessments['items'][$item->assessment->id->member->id][] = $val[1]->value;
+                $max_value_temp += $val[1]->value;
+            }
+            $max_value = ($max_value_temp > $max_value) ? $max_value_temp : $max_value;
+        }
+
+        $assessments['maxvalue'] = $max_value;
+
+        return $assessments;
+    }
+
+    private function has_capability($blockinstance) {
+        global $DB;
+
+        $block_record = $DB->get_record('block_instances', array('id' => $blockinstance), '*', MUST_EXIST);
+        $block_instance = block_instance('groupactivity', $block_record);
+
+        $data = [
+            'showblock' => false,
+            'participation' => false,
+            'selfassess' => false
+        ];
+
+        if (!empty($block_instance->config)) {
+            if (!empty($block_instance->config->roles_selfassess)) {
+                foreach ($this->roles as $roleid) {
+                    if (in_array($roleid, $block_instance->config->roles_selfassess)) {
+                        $data['selfassess'] = true;
+                        $data['showblock'] = true;
+                    }
+                }
+            }
+
+            if (!empty($block_instance->config->roles_mirroring)) {
+                foreach ($this->roles as $roleid) {
+                    if (in_array($roleid, $block_instance->config->roles_mirroring)) {
+                        $data['participation'] = true;
+                        $data['showblock'] = true;
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 
     private function get_group_members() {
@@ -232,6 +283,24 @@ class request {
         }
 
         return $members;
+    }
+
+    private function show_selfassessment() {
+        $req = [
+            'session' => 0,
+            'query' => 'display',
+            'course' => $this->courseid,
+            'id' => $this->anonymize($this->userid)
+        ];
+
+        $response = $this->curl_request($req);
+        $data = $this->serialize($response);
+
+        if (isset($data[1]->display->assessment)) {
+            $assessment = $data[1]->display->assessment;
+        }
+
+        return (isset($assessment)) ? $assessment : 0.5;
     }
 
     private function curl_request($data) {
@@ -305,21 +374,5 @@ class request {
         }
 
         return $data;
-    }
-
-    public function showguiding() {
-        return $this->showguiding;
-    }
-
-    public function showmirroring() {
-        return $this->showmirroring;
-    }
-
-    public function activitycount() {
-        return $this->activitycount;
-    }
-
-    public function getrole() {
-        return $this->role;
     }
 }

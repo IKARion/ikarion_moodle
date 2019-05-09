@@ -1,0 +1,48 @@
+<br>
+<a class="btn btn-default" href="{{{newurl}}}">Neues Item anlegen</a>
+
+{{#hasitems}}
+    <br><br>
+    <table class="table general">
+        <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Inhalt
+            </th>
+            <th>
+                Skala
+            </th>
+            <th>
+                Aktion
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#items}}
+            <tr>
+                <td>
+                    {{id}}
+                </td>
+                <td>
+                    {{content}}
+                </td>
+                <td>
+                    {{length}}
+                </td>
+                <td>
+                    {{#isactive}}{{#pix}}t/hide, core, Aktiv{{/pix}}{{/isactive}}
+                    {{^isactive}}{{#pix}}t/show, core, Nicht aktiv{{/pix}}{{/isactive}}
+                    <a href="{{{editurl}}}?id={{id}}">{{#pix}}t/edit, core, Bearbeiten{{/pix}}</a>
+                    <a href="{{{deleteurl}}}&id={{id}}">{{#pix}}t/delete, core, Löschen{{/pix}}</a>
+                </td>
+            </tr>
+        {{/items}}
+        </tbody>
+    </table>
+{{/hasitems}}
+
+<br>
+<a class="btn btn-default" href="{{{backurl}}}">Zum Kurs</a>

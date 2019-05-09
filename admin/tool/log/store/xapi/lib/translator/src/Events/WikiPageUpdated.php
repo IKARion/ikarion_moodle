@@ -5,6 +5,7 @@
  * Date: 18.01.2018
  * Time: 14:20
  */
+
 namespace MXTranslator\Events;
 
 defined('MOODLE_INTERNAL') || die();
@@ -22,12 +23,12 @@ class WikiPageUpdated extends ModuleViewed {
             'recipe' => 'page_updated',
 
             'page_url' => $opts['page']->url,
-            'page_name' =>  $opts['page']->title,
+            'page_name' => $opts['page']->title,
             'page_description' => "Test description",
             'page_type' => 'http://collide.info/moodle_wiki_page',
             'page_ext' => [
                 'content_raw' => $opts['page']->cachedcontent,
-                'content_clean' => html_entity_decode(strip_tags($opts['page']->cachedcontent))
+                'content_clean' => html_entity_decode(strip_tags(str_replace('<', ' <', $opts['page']->cachedcontent)))
             ],
             'page_ext_key' => 'http://collide.info/moodle_wiki_update'
         ])];

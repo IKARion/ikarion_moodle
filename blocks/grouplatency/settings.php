@@ -29,12 +29,6 @@ $settings->add(new admin_setting_heading(
 ));
 
 $settings->add(new admin_setting_configtext(
-    'grouplatency/intervall',
-    get_string('configlabel_intervall', 'block_grouplatency'),
-    get_string('configdesc_intervall', 'block_grouplatency'), ''
-));
-
-$settings->add(new admin_setting_configtext(
 	'grouplatency/curl_url',
 	get_string('configlabel_curl_url', 'block_grouplatency'),
 	get_string('configdesc_curl_url', 'block_grouplatency'), ''

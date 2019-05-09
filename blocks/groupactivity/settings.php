@@ -29,12 +29,6 @@ $settings->add(new admin_setting_heading(
 ));
 
 $settings->add(new admin_setting_configtext(
-    'groupactivity/intervall',
-    get_string('configlabel_intervall', 'block_groupactivity'),
-    get_string('configdesc_intervall', 'block_groupactivity'), ''
-));
-
-$settings->add(new admin_setting_configtext(
 	'groupactivity/curl_url',
 	get_string('configlabel_curl_url', 'block_groupactivity'),
 	get_string('configdesc_curl_url', 'block_groupactivity'), ''

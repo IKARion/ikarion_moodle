@@ -1,52 +1,48 @@
-// https://bl.ocks.org/bricedev/0d95074b6d83a77dc3ad
+define(['jquery', 'core/ajax', 'core/templates'], function ($, ajax, Templates) {
 
-define(['jquery', 'block_groupactivity/d3'], function ($, d3) {
+        getPluginData = function (data) {
+            var promises = ajax.call([
+                {methodname: 'block_groupactivity_get_data', args: data}
+            ]);
 
-        buildChart = function (data) {
-            var svg = d3.select("#dc-activity-chart svg#forum-wiki-chart"),
-                margin = {top: 0, right: 0, bottom: 0, left: 0},
-                width = +svg.attr("width") - margin.left - margin.right,
-                height = +svg.attr("height") - margin.top - margin.bottom,
-                center = 0,
-                g = svg.append("g").attr("transform", "translate(" + center + "," + margin.top + ")");
-
-            var x = d3.scaleBand().rangeRound([0, 120], 1);
-            var y = d3.scaleLinear().rangeRound([height, 0]);
-
-            x.domain(data.map(function (d) {
-                return d.name;
-            }));
-
-            y.domain([0, d3.max(data, function (d) {
-                return d.words_total;
-            })]);
-
-            g.selectAll(".bar")
-                .data(data)
-                .enter().append("rect")
-                .attr("class", "bar")
-                .attr("x", function (d) {
-                    return x(d.name);
-                })
-                .attr("y", function (d) {
-                    return y(d.words_total);
-                })
-                .attr("width", 25)
-                .attr("height", function (d) {
-                    if (d.words_total == 0) {
-                        return 1;
+            promises[0].done(function (response) {
+                var responsedata = JSON.parse(response.data);
+                
+                if (responsedata.showblock || responsedata.canmanage) {
+                    if (responsedata.participation && !responsedata.maxvalue) {
+                        $('.block_groupactivity').hide();
                     } else {
-                        return height - y(d.words_total);
+                        Templates.render('block_groupactivity/main', responsedata).then(function (html, js) {
+                            Templates.replaceNodeContents('.groupactivity-wrapper', html, js);
+
+                            if (responsedata.selfassessbutton > 0) {
+                                responsedata.selfassessbutton == 1 ? showModal = 1 : showModal = 0;
+
+                                require(['block_groupactivity/modal'], function (modal) {
+                                    modal.init(data.instanceid, showModal);
+                                });
+                            }
+
+                            if (responsedata.useritems.length && responsedata.maxvalue) {
+                                require(['block_groupactivity/graph'], function (graph) {
+                                    graph.init(responsedata.items, responsedata.maxvalue, responsedata.useritems);
+                                });
+                            }
+                        }).fail(function (ex) {
+                            Templates.replaceNodeContents('.groupactivity-wrapper', 'rendering failed');
+                        });
                     }
-                })
-                .attr('fill', '#003560').attr('data-symbol-id', function (d) {
-                return d.symbolid;
+                } else {
+                    $('.block_groupactivity').hide();
+                }
+            }).fail(function (ex) {
+                Templates.replaceNodeContents('.groupactivity-wrapper', 'request failed');
             });
-        }
+        };
 
         return {
             init: function (data) {
-                buildChart(data);
+                getPluginData(data);
             }
         };
     }

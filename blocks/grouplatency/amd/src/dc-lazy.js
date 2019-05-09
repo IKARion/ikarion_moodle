@@ -13060,7 +13060,7 @@ dc.crossfilter = crossfilter;
 
 return dc;}
     if(typeof define === "function" && define.amd) {
-        define(["block_grouplatency/d3", "block_grouplatency/crossfilter"], _dc);
+        define(["block_grouplatency/d3-lazy", "block_grouplatency/crossfilter-lazy"], _dc);
     } else if(typeof module === "object" && module.exports) {
         var _d3 = require('d3');
         var _crossfilter = require('crossfilter');

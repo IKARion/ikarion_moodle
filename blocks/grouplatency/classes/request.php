@@ -28,22 +28,15 @@ class request {
     private $userid;
     private $groupid;
     private $role;
-    private $showguiding;
-    private $showmirroring;
-    private $activitycount;
 
     public function __construct($courseid, $userid) {
         $this->courseid = $courseid;
         $this->userid = $userid;
-        $this->role = $this->get_role();
+        $this->roles = $this->get_roles();
         $this->groupid = $this->get_group();
-        $this->activitycount = $this->get_activity_count();
-        $this->showguiding = $this->show_guiding();
     }
 
-    private function get_role() {
-        global $DB;
-
+    private function get_roles() {
         $req = [
             'session' => '0',
             'query' => 'roles_member',
@@ -53,127 +46,107 @@ class request {
 
         $response = $this->curl_request($req);
         $data = $this->serialize($response);
+        $role_ids = [];
 
         foreach ($data as $item) {
-            $roleid = $item->role->id;
-
-            $role = $DB->get_record('role', array('id' => $roleid));
-
-            if($role->shortname == 'mgma' || $role->shortname == 'mgmb') {
-                break;
-            }
+            array_push($role_ids, $item->role->id);
         }
 
-        return $role->shortname;
+        return $role_ids;
     }
 
     private function get_group() {
         $req = [
             'session' => '0',
-            'query' => 'groups_member',
+            'query' => 'groups!member',
             'course' => $this->courseid,
             'id' => $this->anonymize($this->userid)
         ];
 
         $response = $this->curl_request($req);
         $data = $this->serialize($response);
-        $groupid = '';
-        $temp_group = 0;
 
-        foreach ($data as $item) {
-            if ($item->group->id > $temp_group) {
-                $groupid = $temp_group = $item->group->id;
-            }
-        }
-
-        return $groupid;
-    }
-
-    private function show_guiding() {
-        $req = [
-            'session' => '0',
-            'query' => 'response',
-            'course' => $this->courseid,
-            'id' => $this->groupid
-        ];
-
-        $response = $this->curl_request($req);
-        $data = $this->serialize($response);
-
-        if ($data[1]->response->value != 1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    private function get_activity_count() {
-        $total = 0;
-
-        $req = [
-            'session' => '0',
-            'query' => 'contents_group',
-            'course' => $this->courseid,
-            'id' => $this->groupid
-        ];
-
-        $response = $this->curl_request($req);
-        $data = $this->serialize($response);
-
-        foreach ($data as $item) {
-            if (isset($item->post)) {
-                foreach ($item->post->members as $pm) {
-                    $patches = count($pm->patches);
-                    $total += $patches;
-                }
-            }
-            if (isset($item->page)) {
-                foreach ($item->page->members as $pm) {
-                    $patches = count($pm->patches);
-                    $total += $patches;
-                }
-            }
-        }
-
-        return $total;
+        return $data[1]->group->id;
     }
 
     public function get_group_posts_data() {
-        global $DB;
-
+        global $USER;
         $posts = $this->get_group_posts();
         $data = array();
-        $counter = 0;
-
-        ksort($posts, SORT_NUMERIC);
+        $counter = 1;
+        $userid = $this->anonymize($USER->id);
 
         foreach ($posts as $post) {
-            $userid = $this->deanonymize($post->post->members[0]->member->id);
-            $user = $DB->get_record('user', array('id' => $userid), 'id, firstname, lastname');
-
             $postmsg = \html_to_text($post->post->value);
-            $postmsg = (strlen($postmsg) > 25) ? substr($postmsg, 0, 25) . '...' : $postmsg;
+            $postmsg = (strlen($postmsg) > 25) ? mb_substr($postmsg, 0, 25, 'UTF-8') . '...' : $postmsg;
+            $color = '#E63533';
+
+            if (isset($post->post->visitors)) {
+                if (($post->post->visitors != null) && is_array($post->post->visitors)) {
+                    foreach ($post->post->visitors as $visitor) {
+                        if ($visitor->member->id == $userid) {
+                            $color = '#17375D';
+                        }
+                    }
+                }
+            }
+
+            if ($post->post->members->member->id == $userid) {
+                $color = '#AEAEAE';
+            }
 
             $item = [
                 'id' => $counter,
-                'date' => $post->post->time,
-                'postid' => $post->post->id,
+                'date' => $post->post->created,
+                'postid' => $post->post->parent->discussion->id . '#p' . $post->post->id,
                 'postmsg' => $postmsg,
-                'discussionid' => $post->post->discussion->id,
-                'userid' => $userid,
-                'user' => $user->firstname . ' ' . $user->lastname,
-                'courseid' => $this->courseid
+                'discussionid' => $post->post->id,
+                'color' => $color
             ];
 
             array_push($data, $item);
             $counter++;
-
         }
 
-        $data = array_slice($data, -3, 3);
         $data = $this->format_date($data);
+        $preparation = $this->get_preparation();
 
-        return $data;
+        $return = [
+            'hasdata' => (count($data) > 0) ? true : false,
+            'posts' => $data,
+            'preparation' => ($preparation <= 0.5) ? 0 : $preparation,
+            'task_period' => $this->get_task_period()
+        ];
+
+        return $return;
+    }
+
+    private function get_task_period() {
+        $req = [
+            'session' => '0',
+            'query' => 'tasks_group',
+            'course' => $this->courseid,
+            'id' => $this->groupid
+        ];
+
+        $response = $this->curl_request($req);
+        $data = $this->serialize($response);
+
+        return $data[1]->task->period;
+    }
+
+    private function get_preparation() {
+        $req = [
+            'session' => '0',
+            'query' => 'preparation',
+            'course' => $this->courseid,
+            'id' => $this->groupid
+        ];
+
+        $response = $this->curl_request($req);
+        $data = $this->serialize($response);
+
+        return $data[1]->preparation->value;
     }
 
     private function get_group_posts() {
@@ -181,7 +154,7 @@ class request {
 
         $req = [
             'session' => '0',
-            'query' => 'posts_group',
+            'query' => 'posts!group',
             'course' => $this->courseid,
             'id' => $this->groupid
         ];
@@ -190,7 +163,7 @@ class request {
         $posts = $this->serialize($response);
 
         foreach ($posts as $post) {
-            $group_posts[$post->post->time] = $post;
+            $group_posts[$post->post->created] = $post;
         }
 
         return $group_posts;
@@ -275,31 +248,15 @@ class request {
             $data[$i]['date_formatted'] = date('d.m.', $timestamp);
 
             $timestamp_diff = time() - $timestamp;
-            $diff = round(($timestamp_diff / 3600));
+            $diff = round(($timestamp_diff / 3600 / 24));
 
             if ($diff < 1) {
-                $data[$i]['since'] = '+ ' . round(($timestamp_diff / 60)) . ' Min.';
+                $data[$i]['since'] = round(($timestamp_diff / 3600)) . 'Std.';
             } else {
-                $data[$i]['since'] = '+ ' . $diff . ' Std.';
+                $data[$i]['since'] = $diff . 'Tg.';
             }
         }
 
         return $data;
-    }
-
-    public function showguiding() {
-        return $this->showguiding;
-    }
-
-    public function showmirroring() {
-        return $this->showmirroring;
-    }
-
-    public function activitycount() {
-        return $this->activitycount;
-    }
-
-    public function getrole() {
-        return $this->role;
     }
 }

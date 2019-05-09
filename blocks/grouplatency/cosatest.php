@@ -1,54 +1,24 @@
 <?php
 
 require_once('../../config.php');
-
 global $CFG;
 
+require_login();
 
-$req = [
-    'session' => '0',
-    'query' => 'contents_group',
-    'course' => 11,
-    'id' => 255
-];
+if (is_siteadmin()) {
+    $req = [
+        'session' => '0',
+        'query' => 'groups_member',
+        'course' => 20,
+        //'id' => 398
+        'id' => test_anonymize(391)
+    ];
+    
+    $response = test_curl_request($req);
+    $data = test_serialize($response);
 
-
-
-/*
-$req = [
-    'session' => '0',
-    'query' => 'contents_member',
-    'course' => 11,
-    //'id' => test_anonymize(236)
-    'id' => 'ouFVSEQq09GEg6Z/713Cdw=='
-];*/
-
-/*
-$req = [
-    'session' => '0',
-    'query' => 'facts',
-    'course' => '2',
-    //'id' => groupactivity\anonymize('3')
-];
-*/
-
-/*
-$req = [
-    'session' => '0',
-    'query' => 'contents_group',
-    'course' => 11,
-    //'id' => groupactivity\anonymize('304')
-    'id' => 237
-];
-*/
-
-$response = test_curl_request($req);
-$data = test_serialize($response);
-
-print_object($data);
-
-
-
+    print_object($response);
+}
 
 function test_curl_request($data) {
     $data_string = json_encode($data);

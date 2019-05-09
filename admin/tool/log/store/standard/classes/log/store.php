@@ -52,6 +52,7 @@ class store implements \tool_log\log\writer, \core\log\sql_internal_table_reader
                 return true;
             }
         }
+
         return false;
     }
 

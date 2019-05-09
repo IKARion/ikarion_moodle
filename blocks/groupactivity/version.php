@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_groupactivity';
-$plugin->version = 2018281200;
+$plugin->version = 2019031900;
 $plugin->requires = 2013051403;
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '1.0';

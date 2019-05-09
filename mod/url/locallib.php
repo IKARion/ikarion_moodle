@@ -476,7 +476,7 @@ function url_get_variable_values($url, $cm, $course, $config) {
     );
 
     if (isloggedin()) {
-        $values['userid'] = base64_encode(openssl_encrypt($USER->id, $CFG->encryptmethod, $CFG->encryptkey)); // ILD mod
+        $values['userid'] = base64_encode(openssl_encrypt($USER->id, $CFG->encryptmethod, $CFG->encryptkey)); // oncampus mod
         $values['userusername'] = $USER->username;
         $values['useridnumber'] = $USER->idnumber;
         $values['userfirstname'] = $USER->firstname;

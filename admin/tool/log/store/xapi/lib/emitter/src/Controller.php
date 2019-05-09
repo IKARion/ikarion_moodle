@@ -46,7 +46,8 @@ class Controller extends PhpObj {
         'post_created' => 'ForumPostCreated',
         'page_updated' => 'WikiPageUpdated',
         'grouplatency_prompt_viewed' => 'GrouplatencyViewed',
-        'groupactivity_prompt_viewed' => 'GroupactivityViewed'
+        'groupactivity_prompt_viewed' => 'GroupactivityViewed',
+        'groupactivity_selfassess_completed' => 'GroupactivitySelfAssessCompleted'
     ];
 
     /**

@@ -13,28 +13,29 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * @package    block_groupactivity
+ * @package    block_grouplatency
  * @copyright  2018 ILD, Fachhoschule Lübeck (https://www.fh-luebeck.de/ild)
  * @author     Eugen Ebel (eugen.ebel@fh-luebeck.de)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Form for editing groupactivity block instances.
- */
-class block_groupactivity_edit_form extends block_edit_form {
-    protected function specific_definition($mform) {
-        global $DB, $COURSE;
-        // Fields for editing HTML block title and contents.
-        $mform->addElement('header', 'config_header', get_string('blocksettings', 'block'));
-
-        $roles = $DB->get_records_sql_menu('SELECT id, name FROM {role} WHERE archetype = ? AND name NOT LIKE ""', ['student']);
-
-        $select = $mform->addElement('select', 'config_roles_mirroring', 'Rollen Mirroring', $roles);
-        $select->setMultiple(true);
-
-        $select = $mform->addElement('select', 'config_roles_selfassess', 'Rollen Selbsteinschätzung', $roles);
-        $select->setMultiple(true);
-    }
-}
+$functions = array(
+    'block_grouplatency_get_data' => array(
+        'classname' => 'block_grouplatency_external',
+        'methodname' => 'get_data',
+        'classpath' => 'blocks/grouplatency/externallib.php',
+        'description' => 'Get grouplatency data',
+        'type' => 'read',
+        'ajax' => true
+    )
+);
+// We define the services to install as pre-build services. A pre-build service is not editable by administrator.
+$services = array(
+    'grouplatency_get_data' => array(
+        'functions' => array('block_grouplatency_get_data'),
+        'restrictedusers' => 0,
+        'enabled' => 1,
+    )
+);

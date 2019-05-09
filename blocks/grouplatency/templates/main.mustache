@@ -1,22 +1,36 @@
-{{^nothing}}
-    <strong>Die letzten Beiträge im Forum deiner Gruppe</strong>
-    {{#default}}
-        <div class="guide-wrapper">
-            <div class="guide-panel fullwidth">
-                <p>{{{text}}}</p>
-            </div>
-        </div>
-    {{/default}}
+<p><strong>Beiträge im Forum deiner aktuellen Gruppe</strong></p>
 
-    {{#guide}}
-        <div class="guide-wrapper">
-            <div class="guide-panel {{panel}} fullwidth">
-                <p>{{{text}}}</p>
-            </div>
+{{#preparation}}
+    <div class="prompt">
+        <div class="prompt-header" style="background-color: #7E7E7F; color: #fff;">
+            <i class="arrow fa fa-caret-down"></i> Hinweis für dich!
         </div>
-    {{/guide}}
+        <div class="prompt-content" style="background-color: #fff;border: 2px solid #7E7E7F">
+            Bisherige Analysen von Gruppenarbeiten haben ergeben, dass besonders frühe Koordination wichtig für ein
+            gutes Ergebnis (einschließlich einer fairen Arbeitsverteilung) ist.
+        </div>
+    </div>
+{{/preparation}}
 
-    {{#mirroring}}
-        <div class='bar-graph' id='dc-post-chart'></div>
-    {{/mirroring}}
-{{/nothing}}
+{{#hasdata}}
+    <div class="latency-label">
+        <div class="table-rect" style="background-color: #E63533;"></div>
+        <div class="clearfix">Nicht angesehene Beiträge</div>
+        <div class="table-rect" style="background-color: #17375D;"></div>
+        <div class="clearfix">Angesehene Beiträge</div>
+        <div class="table-rect" style="background-color: #AEAEAE;"></div>
+        <div class="clearfix">Eigene Beiträge</div>
+    </div>
+
+    <div id='dc-latency-chart'></div>
+
+    <table class='table table-hover' id='dc-latency-table'>
+        <thead>
+        <tr class='header'>
+            <th>Datum</th>
+            <th>Beitrag</th>
+            <th>vor</th>
+        </tr>
+        </thead>
+    </table>
+{{/hasdata}}

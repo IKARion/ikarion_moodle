@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * @package    block_groupactivity
  * @copyright  2018 ILD, Fachhoschule Lübeck (https://www.fh-luebeck.de/ild)
@@ -20,21 +21,40 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_groupactivity\event;
+
+defined('MOODLE_INTERNAL') || die();
+
 /**
- * Form for editing groupactivity block instances.
+ * The block_groupactivity user assessed self assessment.
  */
-class block_groupactivity_edit_form extends block_edit_form {
-    protected function specific_definition($mform) {
-        global $DB, $COURSE;
-        // Fields for editing HTML block title and contents.
-        $mform->addElement('header', 'config_header', get_string('blocksettings', 'block'));
+class groupactivity_selfassess_completed extends \core\event\base {
 
-        $roles = $DB->get_records_sql_menu('SELECT id, name FROM {role} WHERE archetype = ? AND name NOT LIKE ""', ['student']);
+    /**
+     * Init method.
+     *
+     * @return void
+     */
+    protected function init() {
+        $this->data['crud'] = 'c';
+        $this->data['edulevel'] = self::LEVEL_OTHER;
+    }
 
-        $select = $mform->addElement('select', 'config_roles_mirroring', 'Rollen Mirroring', $roles);
-        $select->setMultiple(true);
+    /**
+     * Returns description of what happened.
+     *
+     * @return string
+     */
+    public function get_description() {
+        return "The user with id '$this->userid' has created an self assessment at groupactivity block.";
+    }
 
-        $select = $mform->addElement('select', 'config_roles_selfassess', 'Rollen Selbsteinschätzung', $roles);
-        $select->setMultiple(true);
+    /**
+     * Return localised event name.
+     *
+     * @return string
+     */
+    public static function get_name() {
+        return get_string('eventselfassessmentcreated', 'block_groupactivity');
     }
 }

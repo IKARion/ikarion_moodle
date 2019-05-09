@@ -24,7 +24,8 @@
 $string['pluginname'] = 'IKARion Gruppenaktivität';
 $string['groupactivity'] = 'IKARion Gruppenaktivität';
 $string['groupactivity:addinstance'] = 'Einen neuen IKARion Gruppenaktivität Block hinzufügen';
-$string['eventusernotificationviewed'] = 'Grouplactivity-Prompt gesehen';
+$string['eventusernotificationviewed'] = 'Groupactivity-Prompt gesehen';
+$string['eventselfassessmentcreated'] = 'Groupactivity Selbseinschätzung erstellt';
 
 $string['headerconfig'] = 'IKARion Gruppenaktivität Konfiguration';
 $string['descconfig'] = 'Globale Konfiguration der Schnittstelle zum Expertensystem';
@@ -34,21 +35,6 @@ $string['configlabel_curl_port'] = 'CURL Port';
 $string['configdesc_curl_port'] = 'CURL Port';
 $string['configlabel_secret_token'] = 'Secret Token';
 $string['configdesc_secret_token'] = 'Secret Token zur Authentifizierung';
-$string['configlabel_intervall'] = 'Poll Interval';
-$string['configdesc_intervall'] = 'Polling Interval zum XPS';
-
-$string['edit'] = 'Tutor konfigurieren';
-$string['weak'] = 'Zurückhaltender Tutor';
-$string['average'] = 'Normaler Tutor';
-$string['hard'] = 'Strenger Tutor';
-$string['tutor-text'] = 'Tutor Konfiguration';
-
-$string['level_0'] = 'Guiding-Level-0 Wert';
-$string['level_0_text'] = 'Guiding-Level-0 Text';
-$string['level_1'] = 'Guiding-Level-1 Wert';
-$string['level_1_text'] = 'Guiding-Level-1 Text';
-$string['level_2'] = 'Guiding-Level-2 Wert';
-$string['level_2_text'] = 'Guiding-Level-2 Text';
 
 $string['mirroring'] = 'Grouping Mirroring';
 $string['guiding'] = 'Grouping Guiding';
@@ -56,3 +42,7 @@ $string['mirroring_guiding'] = 'Grouping Mirroring & Guiding';
 $string['nothing'] = 'Grouping Nothing to show';
 
 $string['noactivity'] = 'Derzeit gibt es keine neuen Hinweise zur Beteiligung in eurer Gruppe.';
+
+$string['self-assess-title'] = 'Bitte schätzen Sie Ihre bisherige Beteiligung (bis jetzt) an der Gruppenarbeit während der aktuellen Einreichaufgabe ein.';
+$string['self-assess-button'] = 'Beteiligung einschätzen';
+$string['not-specified'] = 'Keine Angabe';

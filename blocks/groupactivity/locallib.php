@@ -23,7 +23,7 @@
 
 namespace groupactivity;
 
-function trigger_event($contextid, $instance, $showguiding, $message) {
+function trigger_prompt_viewed($contextid, $instance, $showguiding, $message) {
     global $DB, $USER;
 
     $record = $DB->get_record('groupactivity', array('blockinstance' => $instance, 'userid' => $USER->id));

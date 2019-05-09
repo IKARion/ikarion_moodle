@@ -1,64 +1,71 @@
-{{^nothing}}
-    <strong>Aktuelle Gruppenbeteiligung</strong>
-    {{#default}}
-        <div class="guide-wrapper">
-            <div class="guide-panel fullwidth">
-                <p>{{{text}}}</p>
-            </div>
-        </div>
-    {{/default}}
+{{#selfassess}}
+    <p><strong>Selbsteingeschätzte Beteiligung innerhalb deiner Gruppenarbeit</strong></p>
+    {{#selfassessbutton}}
+        <button id="open-self-assess-modal" class="btn btn-secondary" type="button">
+            <i class="fa fa-pencil" style="margin-right: .3em;"></i>
+            {{#str}}self-assess-button, block_groupactivity{{/str}}
+        </button>
+    {{/selfassessbutton}}
+{{/selfassess}}
 
-    {{#guide}}
-        <div class="guide-wrapper">
-            <div class="guide-panel {{panel}} fullwidth">
-                <p>{{{text}}}</p>
-            </div>
-        </div>
-    {{/guide}}
+{{#participation}}
+    <p><strong>Vom System eingeschätzte Beteiligung (Menge & Qualität) innerhalb deiner Gruppenarbeit (in
+        Prozent)</strong></p>
+{{/participation}}
 
-    {{#mirroring}}
-        <div class="choices">
-            <input id="forum_chkbox" type="checkbox" name="forum" value="forum" checked> Forum
-            <input id="wiki_chkbox" type="checkbox" name="wiki" value="wiki" checked> Wiki
-        </div>
-
-        <div class='bar-graph' id='dc-activity-chart'>
-            <svg id="forum-chart" width="100%" height="250" style="display:none"></svg>
-            <svg id="wiki-chart" width="100%" height="250" style="display:none"></svg>
-            <svg id="forum-wiki-chart" width="100%" height="250"></svg>
-            <div class="user-symbols">
-                {{#usersdata}}
-                    <span data-symbol-id="{{symbolid}}">{{{usymbol}}}</span>
-                {{/usersdata}}
-            </div>
-        </div>
-
-        <table class='table table-hover' id='dc-table-graph'>
-            <thead>
-            <tr class='header'>
-                <th colspan="2">Name</th>
-                <th>Online</th>
-                <th>Kontakt</th>
-            </tr>
-            </thead>
+{{#maxvalue}}
+    <div id='dc-activity-chart'>
+        <div class="legend-graph"></div>
+        <div class='bar-graph'></div>
+        <div class="user-symbols">
             {{#usersdata}}
-                <tr data-id="{{id}}">
-                    <td><span class="user-symbol">{{{usymbol}}}</span></td>
-                    <td><a href="{{profile}}">{{name}}</a></td>
-                    <td style="text-align: center;">
-                        {{#online}}<span style="color:#003560;"><i class="fa fa-check"></i></span>{{/online}}
-                        {{^online}}<span style="color:#003560;"><i class="fa fa-times"></i></span>{{/online}}
-                    </td>
-                    <td style="text-align:center;">
-                        <a href="mailto:{{mailto}}"><i class="fa fa-envelope"></i></a>&nbsp;
-                        <a href="{{chatto}}"><i class="fa fa-comment"></i></a>
-                    </td>
-                </tr>
+                <span data-symbol-id="{{counter}}"><strong>{{counter}}</strong></span>
             {{/usersdata}}
-            <tr>
-                <td colspan="3">Gruppe kontaktieren</td>
-                <td style="padding-left:16px;"><a href="mailto:{{mailtogroup}}"><i class="fa fa-envelope"></i></a></td>
+        </div>
+    </div>
+
+    <table class='table table-hover' id='dc-activity-graph'>
+        <thead>
+        <tr class='header'>
+            <th colspan="3">Name</th>
+            <th>Online</th>
+            <th colspan="2">Kontakt</th>
+        </tr>
+        </thead>
+        {{#usersdata}}
+            <tr data-id="{{counter}}">
+                <td>
+                    <div class="table-rect" style="background-color:{{color}}"></div>
+                </td>
+                <td><span class="user-symbol">{{counter}}</span></td>
+                <td><a href="{{profile}}">{{name}}</a></td>
+                <td style="text-align: center">
+                    {{#online}}<span style="color:#003560;"><i class="fa fa-check"></i></span>{{/online}}
+                    {{^online}}<span style="color:#003560;"><i class="fa fa-times"></i></span>{{/online}}
+                </td>
+                <td>
+                    <a href="mailto:{{mailto}}"><i class="fa fa-envelope"></i></a>&nbsp;
+                </td>
+                <td><a href="{{chatto}}"><i class="fa fa-comment"></i></a>
+                </td>
             </tr>
-        </table>
-    {{/mirroring}}
-{{/nothing}}
+        {{/usersdata}}
+        <tr>
+            <td colspan="4">Gruppe kontaktieren</td>
+            <td><a href="mailto:{{mailtogroup}}"><i class="fa fa-envelope"></i></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <svg height="1" width="1" xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <pattern id="horzLines" width="18" height="3" patternUnits="userSpaceOnUse">
+                <rect height="1" width="18" fill="#7E7E7F"></rect>
+            </pattern>
+            <pattern id="vertLines" width="18" height="3" patternUnits="userSpaceOnUse"
+                     patternTransform="rotate(90)">
+                <rect height="1" width="18" fill="#7E7E7F"></rect>
+            </pattern>
+        </defs>
+    </svg>
+{{/maxvalue}}

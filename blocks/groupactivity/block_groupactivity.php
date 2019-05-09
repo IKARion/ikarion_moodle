@@ -38,190 +38,22 @@ class block_groupactivity extends block_base {
         }
 
         $this->content = new stdClass;
-        $this->content->footer = '';
+        $this->content->text = $OUTPUT->render_from_template('block_groupactivity/loading', []);
 
-        $prompts = array(
-            $this->config->prompt_1,
-            $this->config->prompt_2,
-            $this->config->prompt_3,
-            $this->config->prompt_4
-        );
-
-        $courseid = $this->page->course->id;
-        $request = new groupactivity\request($courseid, $USER->id);
-        $role = $request->getrole();
-        $out = null;
-
-        switch ($role) {
-            case 'mgo':
-                //guiding
-                if ($request->showguiding()) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
-                    $template_data['default'] = 1;
-                }
-
-                groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-
-                //mirroring
-                $data = $request->get_group_activity_data();
-                $template_data['mirroring'] = 1;
-                $template_data['usersdata'] = $data['usersdata'];
-                $template_data['mailtogroup'] = $data['mailtogroup'];
-
-                if ($courseid == 2) {
-                    $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
-                } else {
-                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
-                }
-
-                $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
-                $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
-                $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
-
-                break;
-
-            case 'mgma':
-                //guiding
-                if ($request->showguiding()) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
-                    $template_data['default'] = 1;
-                }
-
-                groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-
-                //mirroring
-                $data = $request->get_group_activity_data();
-                $template_data['mirroring'] = 1;
-                $template_data['usersdata'] = $data['usersdata'];
-                $template_data['mailtogroup'] = $data['mailtogroup'];
-
-                if ($courseid == 2) {
-                    $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
-                } else {
-                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
-                }
-
-                $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
-                $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
-                $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
-
-                $out = $OUTPUT->render_from_template('block_groupactivity/mgma', $template_data);
-
-                break;
-
-            case 'mgmb':
-                //guiding
-                if ($request->showguiding()) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
-                    $template_data['default'] = 1;
-                }
-
-                groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-
-                //mirroring
-                $data = $request->get_group_activity_data();
-                $template_data['mirroring'] = 1;
-                $template_data['usersdata'] = $data['usersdata'];
-                $template_data['mailtogroup'] = $data['mailtogroup'];
-
-                if ($courseid == 2) {
-                    $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
-                } else {
-                    $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
-                }
-
-                $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
-                $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
-                $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
-
-                $out = $OUTPUT->render_from_template('block_groupactivity/mgmb', $template_data);
-
-                break;
-
-            case 'mirroring_guiding':
-                //guiding
-                if ($request->showguiding() && $request->activitycount() > 3) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                    groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
-                    $template_data['default'] = 1;
-                    groupactivity\trigger_event($this->context->id, $this->instance->id, false, $template_data['text']);
-                }
-
-                //mirroring
-                if ($request->activitycount() > 3) {
-                    $data = $request->get_group_activity_data();
-                    $template_data['mirroring'] = 1;
-                    $template_data['usersdata'] = $data['usersdata'];
-                    $template_data['mailtogroup'] = $data['mailtogroup'];
-
-                    if ($courseid == 2) {
-                        $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
-                    } else {
-                        $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
-                    }
-
-                    $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
-                    $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
-                    $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
-                }
-                break;
-
-            case 'mirroring':
-                if ($request->activitycount() > 3) {
-                    $data = $request->get_group_activity_data();
-                    $template_data['mirroring'] = 1;
-                    $template_data['usersdata'] = $data['usersdata'];
-                    $template_data['mailtogroup'] = $data['mailtogroup'];
-
-                    if ($courseid == 2) {
-                        $this->page->requires->js_call_amd('block_groupactivity/groupactivitynew', 'init', [$data['usersdata']]);
-                    } else {
-                        $this->page->requires->js_call_amd('block_groupactivity/groupactivity', 'init', [$data['usersdata']]);
-                    }
-
-                    $this->page->requires->js_call_amd('block_groupactivity/forumactivity', 'init', [$data['usersdata']]);
-                    $this->page->requires->js_call_amd('block_groupactivity/wikiactivity', 'init', [$data['usersdata']]);
-                    $this->page->requires->js_call_amd('block_groupactivity/charthandler', 'init', []);
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
-                    $template_data['default'] = 1;
-                }
-                break;
-
-            case 'guiding':
-                if ($request->showguiding() && $request->activitycount() > 3) {
-                    $template_data['text'] = $prompts[rand(0, 3)];
-                    $template_data['guide'] = 1;
-                    groupactivity\trigger_event($this->context->id, $this->instance->id, $request->showguiding(), $template_data['text']);
-                } else {
-                    $template_data['text'] = get_string('noactivity', 'block_groupactivity');
-                    $template_data['default'] = 1;
-                    groupactivity\trigger_event($this->context->id, $this->instance->id, false, $template_data['text']);
-                }
-                break;
-            default:
-                $template_data['nothing'] = 1;
-                break;
+        if (has_capability('block/groupactivity:addinstance', context_block::instance($this->context->instanceid))) {
+            $items_button_data = [
+                'link' => (new moodle_url('/blocks/groupactivity/items/view.php', ['blockinstance' => $this->instance->id]))->out()
+            ];
+            $this->content->footer = $OUTPUT->render_from_template('block_groupactivity/itemsbutton', $items_button_data);
         }
 
-        if ($out == null) {
-            $out = $OUTPUT->render_from_template('block_groupactivity/main', $template_data);
-        }
+        $data = [
+            'courseid' => $this->page->course->id,
+            'userid' => $USER->id,
+            'instanceid' => $this->context->instanceid,
+        ];
 
-        $this->content->text = $out;
-        $this->content->footer = '';
+        $this->page->requires->js_call_amd('block_groupactivity/groupactivity-lazy', 'init', [$data]);
 
         return $this->content;
     }

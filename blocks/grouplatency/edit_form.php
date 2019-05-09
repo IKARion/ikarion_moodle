@@ -26,66 +26,7 @@
  */
 class block_grouplatency_edit_form extends block_edit_form {
     protected function specific_definition($mform) {
-        global $DB, $COURSE;
-
         // Fields for editing HTML block title and contents.
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
-
-        /*
-        // Level 0
-        $mform->addElement('text', 'config_level_0', get_string('level_0', 'block_grouplatency'));
-        $mform->setDefault('config_level_0', 0.33);
-        $mform->setType('config_level_0', PARAM_TEXT);
-
-        $mform->addElement('textarea', 'config_level_0_text', get_string('level_0_text', 'block_grouplatency'));
-        $mform->setType('config_level_0_text', PARAM_RAW);
-
-        // Level 1
-        $mform->addElement('text', 'config_level_1', get_string('level_1', 'block_grouplatency'));
-        $mform->setDefault('config_level_1', 0.66);
-        $mform->setType('config_level_1', PARAM_TEXT);
-
-        $mform->addElement('textarea', 'config_level_1_text', get_string('level_1_text', 'block_grouplatency'));
-        $mform->setType('config_level_1_text', PARAM_RAW);
-
-        // Level 2
-        $mform->addElement('text', 'config_level_2', get_string('level_2', 'block_grouplatency'));
-        $mform->setDefault('config_level_2', 1);
-        $mform->setType('config_level_2', PARAM_TEXT);
-
-        $mform->addElement('textarea', 'config_level_2_text', get_string('level_2_text', 'block_grouplatency'));
-        $mform->setType('config_level_2_text', PARAM_RAW);
-        */
-
-        $mform->addElement('textarea', 'config_prompt_1', 'Prompt 1');
-        $mform->setType('config_prompt_1', PARAM_RAW);
-
-        $mform->addElement('textarea', 'config_prompt_2', 'Prompt 2');
-        $mform->setType('config_prompt_2', PARAM_RAW);
-
-        $mform->addElement('textarea', 'config_prompt_3', 'Prompt 3');
-        $mform->setType('config_prompt_3', PARAM_RAW);
-
-        $mform->addElement('textarea', 'config_prompt_4', 'Prompt 4');
-        $mform->setType('config_prompt_4', PARAM_RAW);
-
-        /*
-        $groupings_raw = groups_get_all_groupings($COURSE->id);
-        $groupings = array();
-
-        if (!empty($groupings_raw)) {
-            foreach ($groupings_raw as $grouping) {
-                $groupings[$grouping->id] = $grouping->name;
-            }
-        } else {
-            $groupings[0] = 'No Groupings';
-        }
-
-        $mform->addElement('select', 'config_mirroring', get_string('mirroring', 'block_grouplatency'), $groupings);
-        $mform->addElement('select', 'config_guiding', get_string('guiding', 'block_grouplatency'), $groupings);
-        $mform->addElement('select', 'config_mirroring_guiding', get_string('mirroring_guiding', 'block_grouplatency'),
-            $groupings);
-        $mform->addElement('select', 'config_nothing', get_string('nothing', 'block_grouplatency'), $groupings);
-        */
     }
 }

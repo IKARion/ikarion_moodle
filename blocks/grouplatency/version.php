@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_grouplatency';
-$plugin->version = 2018281202;
+$plugin->version = 2019030400;
 $plugin->requires = 2013051403;
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '1.0';
