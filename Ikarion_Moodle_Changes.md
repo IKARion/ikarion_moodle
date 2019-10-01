@@ -4,6 +4,7 @@ Documentation of Changes made to moodle to support the specific needs of ikarion
 folder: /group
 
 Added files for task management:
+
     group_task_edit.php
     group_task_edit_form.php
     group_task_mapping.php
