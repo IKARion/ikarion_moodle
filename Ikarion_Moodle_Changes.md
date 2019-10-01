@@ -2,14 +2,15 @@ Documentation of Changes made to moodle to support the specific needs of ikarion
 
 
 folder: /group
-	Added files for task management:
-		group_task_edit.php
-		group_task_edit_form.php
-		group_task_mapping.php
-		group_task_mapping_edit.php
-		group_task_mapping_form.php
-		group_task_select.php
-		group_task_select_form.php
+
+Added files for task management:
+    group_task_edit.php
+    group_task_edit_form.php
+    group_task_mapping.php
+    group_task_mapping_edit.php
+    group_task_mapping_form.php
+    group_task_select.php
+    group_task_select_form.php
 		
 The files contain the necessary code to modify the group creation and management to
 be able to create a mapping from groups to tasks and create/delete tasks.
