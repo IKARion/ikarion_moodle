@@ -15,15 +15,18 @@ The files contain the necessary code to modify the group creation and management
 be able to create a mapping from groups to tasks and create/delete tasks.
 
 file: index.php:
-    Modified this to have links to the task editing pages.
-    Changes are marked with comments containing the word "ikarion"
+
+Modified this to have links to the task editing pages.
+Changes are marked with comments containing the word "ikarion"
 
 files: autogroup.php, autogroup_form.php
-    Code added for the groupal plugin, to generate groups in a smart way.
-    There is also form code and db acess code here for defining a task that the created groups are going to be connected to.
+
+Code added for the groupal plugin, to generate groups in a smart way.
+There is also form code and db acess code here for defining a task that the created groups are going to be connected to.
 	
 file: groupal.php
-    Implementation of the groupal algorithms.
+
+Implementation of the groupal algorithms.
 
 folder: /blocks/groupassign/
 	
@@ -33,7 +36,8 @@ The tables are defined in db/install.xml and are created when the plugin is inst
 	
 
 file: /lang/en/groups
-	Added strings for various html elemnts as labels. Go here if you want to add support for a specific language
+
+Added strings for various html elemnts as labels. Go here if you want to add support for a specific language
 
 
 files: /mod/wiki/view.php, /mod/wiki/create.php, lib/grouplib.php
